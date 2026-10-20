@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actualités & Événements — SODEXAM</title>
+<meta name="description" content="Toute l'actualité officielle de la SODEXAM : développement aéroportuaire, prévisions météorologiques, coopération internationale et vie de l'entreprise.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<style>
+/* ============================================================
+   DESIGN SYSTEM & VARIABLES — SODEXAM ACTUALITÉS
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-dark: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #34A853;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #0284C7;
+  --blue-navy: #0F172A;
+  
+  --bg-page: #FCFCFC;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F8FAFC;
+  
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --text-light: #94A3B8;
+  
+  --border-light: rgba(226, 232, 240, 0.85);
+  --shadow-bezel: 0 16px 36px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-hover: 0 24px 48px -12px rgba(242, 106, 33, 0.15);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-page);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; transition: color var(--dur-fast) var(--ease-spring); }
+img { max-width: 100%; display: block; }
+.container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+/* ============================================================
+   TOP BAR ALERTES FLASH
+   ============================================================ */
+.flash-bar {
+  background: #111827;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #DC2626;
+  color: white;
+  padding: 0 22px;
+  height: 100%;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  z-index: 10;
+}
+.flash-pulse {
+  width: 7px; height: 7px;
+  background: white;
+  border-radius: 50%;
+  animation: flashPulse 1.4s infinite;
+}
+@keyframes flashPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  white-space: nowrap;
+  animation: flashMarquee 45s linear infinite;
+  flex: 1;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #E2E8F0;
+}
+@keyframes flashMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   HEADER PRINCIPAL AVEC LOGO OFFICIEL
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -8px rgba(15, 23, 42, 0.05);
+}
+.header-inner {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.header-logo-img:hover {
+  transform: scale(1.02);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-link {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 18px 40px -10px rgba(0,0,0,0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all var(--dur-base) var(--ease-spring);
+  z-index: 1010;
+}
+.dropdown-panel a {
+  display: block;
+  padding: 9px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-main);
+  border-radius: 8px;
+}
+.dropdown-panel a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(4px);
+}
+
+.header-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(30, 122, 60, 0.25);
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.header-cta-btn:hover {
+  transform: translateY(-2px);
+  color: white;
+}
+.header-cta-btn .btn-arrow {
+  width: 24px;
+  height: 24px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+/* ============================================================
+   BREADCRUMB / HERO BANNER (Awwwards Style)
+   ============================================================ */
+.actu-hero {
+  background: linear-gradient(135deg, #0B192C 0%, #1E3A8A 55%, #0B192C 100%);
+  color: white;
+  padding: 72px 0 80px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.actu-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(242, 106, 33, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(52, 168, 83, 0.15) 0%, transparent 40%);
+  pointer-events: none;
+}
+.actu-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.actu-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  padding: 6px 18px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #F8FAFC;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+}
+.actu-hero-title {
+  font-size: clamp(32px, 4.5vw, 50px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.actu-hero-title span {
+  background: linear-gradient(90deg, #FFFFFF 0%, #FED7AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.actu-breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 13.5px;
+  color: #CBD5E1;
+}
+.actu-breadcrumb a:hover { color: var(--orange); }
+
+/* ============================================================
+   ARTICLE À LA UNE (FEATURED STORY)
+   ============================================================ */
+.featured-section {
+  margin-top: -40px;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 56px;
+}
+.featured-card-bezel {
+  background: linear-gradient(135deg, rgba(242, 106, 33, 0.2) 0%, rgba(255,255,255,0.9) 40%, rgba(30, 122, 60, 0.15) 100%);
+  padding: 8px;
+  border-radius: 28px;
+  box-shadow: var(--shadow-bezel);
+}
+.featured-card-inner {
+  background: white;
+  border-radius: 22px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+}
+.featured-img-wrap {
+  position: relative;
+  height: 100%;
+  min-height: 380px;
+  overflow: hidden;
+  background: #0F172A;
+}
+.featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-spring);
+}
+.featured-card-inner:hover .featured-img {
+  transform: scale(1.03);
+}
+.featured-content {
+  padding: 44px;
+}
+.featured-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+.featured-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.featured-title {
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+  color: var(--blue-navy);
+  margin-bottom: 16px;
+}
+.featured-excerpt {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.featured-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--blue-navy);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.featured-btn:hover {
+  background: var(--orange);
+  transform: translateY(-2px);
+  color: white;
+}
+.featured-btn .btn-arrow-circle {
+  width: 26px;
+  height: 26px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+/* ============================================================
+   FILTRES & BARRE DE RECHERCHE
+   ============================================================ */
+.actu-controls {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+.filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--orange);
+  color: white;
+  border-color: var(--orange);
+  transform: translateY(-1px);
+}
+.search-box {
+  position: relative;
+  min-width: 280px;
+}
+.search-input {
+  width: 100%;
+  height: 42px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-subtle);
+  padding: 0 16px 0 40px;
+  font-size: 13.5px;
+  font-family: inherit;
+  outline: none;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.search-input:focus {
+  border-color: var(--orange);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(242, 106, 33, 0.12);
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+/* ============================================================
+   GRILLE D'ACTUALITÉS (GAPLESS BENTO / HIGH-END CARDS)
+   ============================================================ */
+.actu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 32px;
+  margin-bottom: 64px;
+}
+.actu-card {
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.actu-card.hidden {
+  display: none !important;
+}
+.actu-card-bezel {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 6px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.actu-card:hover .actu-card-bezel {
+  border-color: rgba(242, 106, 33, 0.4);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+.actu-card-inner {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.actu-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: #0F172A;
+}
+.actu-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-spring);
+}
+.actu-card:hover .actu-img {
+  transform: scale(1.05);
+}
+.actu-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  color: white;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+.badge-meteo { background: rgba(30, 122, 60, 0.9); }
+.badge-aero { background: rgba(242, 106, 33, 0.9); }
+.badge-social { background: rgba(225, 29, 72, 0.9); }
+.badge-pub { background: rgba(2, 132, 199, 0.9); }
+.badge-coop { background: rgba(79, 70, 229, 0.9); }
+.badge-gov { background: rgba(15, 23, 42, 0.9); }
+
+.actu-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.actu-date {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.actu-title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--blue-navy);
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.actu-title a:hover {
+  color: var(--orange);
+}
+.actu-excerpt {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.actu-footer {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.actu-read-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange);
+}
+.btn-circle-arrow {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--orange-subtle);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.actu-card:hover .btn-circle-arrow {
+  transform: translateX(3px);
+  background: var(--orange);
+  color: white;
+}
+
+/* ============================================================
+   NEWSLETTER & MAGAZINE SECTION
+   ============================================================ */
+.nl-mag-section {
+  background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+  color: white;
+  padding: 64px 0;
+  margin-bottom: 64px;
+  border-radius: 28px;
+}
+.nl-mag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.nl-form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.nl-input-row {
+  display: flex;
+  gap: 12px;
+}
+.nl-input-field {
+  flex: 1;
+  height: 48px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  padding: 0 20px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+.nl-input-field:focus {
+  border-color: var(--orange);
+  background: rgba(255,255,255,0.15);
+}
+.nl-btn-submit {
+  height: 48px;
+  padding: 0 28px;
+  border-radius: 9999px;
+  border: none;
+  background: var(--orange);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(242, 106, 33, 0.4);
+}
+
+/* ============================================================
+   FOOTER OFFICIEL SODEXAM
+   ============================================================ */
+.footer {
+  background: #0B132B;
+  color: #94A3B8;
+  padding: 64px 0 28px;
+  font-size: 14px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+  display: inline-block;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 991px) {
+  .featured-card-inner { grid-template-columns: 1fr; }
+  .featured-img-wrap { min-height: 260px; }
+  .nl-mag-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .main-nav { display: none; }
+}
+@media (max-width: 640px) {
+  .actu-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .nl-input-row { flex-direction: column; }
+}
+
+
+/* ============================================================
+   DESIGN SYSTEM & CHARTE GRAPHIQUE UNIFORME — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #2FA95B;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #0284C7;
+  --blue-navy: #0F172A;
+  
+  --bg-page: #FCFCFC;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F8FAFC;
+  
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --text-light: #94A3B8;
+  
+  --border-light: rgba(226, 232, 240, 0.85);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 16px 36px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
+}
+
+/* ============================================================
+   FLASH BAR UNIFORME
+   ============================================================ */
+.flash-bar {
+  background: #111827;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #DC2626;
+  color: white;
+  padding: 0 22px;
+  height: 100%;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  z-index: 10;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+}
+.flash-pulse {
+  width: 7px; height: 7px;
+  background: white;
+  border-radius: 50%;
+  animation: flashPulse 1.4s infinite;
+}
+@keyframes flashPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  white-space: nowrap;
+  animation: flashMarquee 48s linear infinite;
+  flex: 1;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #E2E8F0;
+}
+.flash-track:hover { animation-play-state: paused; }
+@keyframes flashMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   MAIN HEADER UNIFORME
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -8px rgba(15, 23, 42, 0.05);
+}
+.header-inner {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.header-logo-img:hover {
+  transform: scale(1.02);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-link {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-link .chev {
+  font-size: 10px;
+  opacity: 0.6;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.nav-item-dropdown:hover .chev {
+  transform: rotate(180deg);
+}
+
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 270px;
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 18px 40px -10px rgba(0,0,0,0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all var(--dur-base) var(--ease-spring);
+  z-index: 1010;
+}
+.dropdown-panel a {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-main);
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.dropdown-panel a:hover, .dropdown-panel a.active-item {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(4px);
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(30, 122, 60, 0.25);
+  transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-spring);
+}
+.header-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(30, 122, 60, 0.35);
+  color: white;
+}
+.header-cta-btn .btn-arrow {
+  width: 24px;
+  height: 24px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.burger-btn span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--blue-navy);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  height: 100vh;
+  background: white;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s var(--ease-spring);
+  padding: 24px;
+}
+.mobile-drawer.open {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.drawer-close {
+  background: var(--bg-subtle);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.drawer-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.drawer-links a.active, .drawer-links a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+
+/* ============================================================
+   FOOTER UNIFORME
+   ============================================================ */
+.footer {
+  background: #0B132B;
+  color: #94A3B8;
+  padding: 64px 0 28px;
+  font-size: 14px;
+  border-top: 3px solid var(--orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.footer-links a {
+  color: #94A3B8;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #64748B;
+}
+.footer-bottom a {
+  color: #94A3B8;
+  transition: color var(--dur-fast);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 991px) {
+  .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Top Bar Alertes Flash -->
+<div class="flash-bar">
+  <div class="flash-label">
+    <span class="flash-pulse"></span>
+    SODEXAM FLASH
+  </div>
+  <div class="flash-track">
+    <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
+    <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins quotidiens Vigiclim</span>
+    <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
+    <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
+  </div>
+</div>
+
+<!-- Header Principal -->
+<header class="main-header">
+  <div class="container header-inner">
+    <a href="Maquette_site_internet.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+      <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="Maquette_site_internet.html" class="nav-link">
+        <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
+      </a>
+      
+      <div class="nav-item-dropdown">
+        <a href="#" class="nav-link">
+          Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="Maquette_site_internet.html#presentation">Présentation générale</a>
+          <a href="mot-du-dg.html">Mot du Directeur Général</a>
+          <a href="Maquette_site_internet.html#missions">Nos missions & valeurs</a>
+          <a href="Maquette_site_internet.html#gouvernance">Conseil d'administration</a>
+          <a href="Maquette_site_internet.html#codir">Comité de direction</a>
+        </div>
+      </div>
+
+      <div class="nav-item-dropdown">
+        <a href="Maquette_site_internet.html#activites" class="nav-link">
+          Nos activités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="Maquette_site_internet.html#activites">Météorologie Nationale & Vigiclim</a>
+          <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
+          <a href="Maquette_site_internet.html#activites">Médecine Aéronautique (CERMA)</a>
+        </div>
+      </div>
+
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link active">
+          Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="actualites.html" class="active-item">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html">Magazine L'Aérien</a>
+          <a href="actualites.html#cooperation">Coopération & Partenariats</a>
+          <a href="actualites.html">Communiqués officiels</a>
+        </div>
+      </div>
+
+      <a href="magazine-aerien.html" class="nav-link">
+        Magazine L'Aérien
+      </a>
+
+      <a href="Maquette_site_internet.html#contact" class="nav-link">
+        Contact
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="burger-btn" id="burgerToggle" aria-label="Menu Mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html" class="active">Actualités & Presse</a>
+    <a href="magazine-aerien.html">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html" class="active">Actualités & Presse</a>
+    <a href="magazine-aerien.html">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html" class="active">Actualités & Presse</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html"><i class="fa-solid fa-user-tie"></i> Mot du Directeur Général</a>
+    <a href="actualites.html" class="active"><i class="fa-solid fa-newspaper"></i> Actualités & Presse</a>
+    <a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-cloud-sun"></i> Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-plane-up"></i> Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-suitcase-medical"></i> CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+
+<!-- Hero / Breadcrumb -->
+<section class="actu-hero">
+  <div class="container actu-hero-content">
+    <div class="actu-hero-eyebrow">
+      <i class="fa-solid fa-newspaper"></i> Espace Média & Presse
+    </div>
+    <h1 class="actu-hero-title">
+      Actualités & <span>Événements</span>
+    </h1>
+    <div class="actu-breadcrumb">
+      <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+      <span style="opacity:0.4;">/</span>
+      <span style="color:#F8FAFC; font-weight:600;">Toutes les actualités</span>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+
+  <!-- À LA UNE (FEATURED STORY) -->
+  <section class="featured-section">
+    <div class="featured-card-bezel">
+      <div class="featured-card-inner">
+        <div class="featured-img-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2026/09/IMG_3630.png" alt="Monsieur Abdul Adam SYLLA confirmé Directeur Général de la SODEXAM par le Conseil d&#x27;Administration" class="featured-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+        </div>
+        <div class="featured-content">
+          <span class="featured-badge">Gouvernance & Institutionnel</span>
+          <div class="featured-date"><i class="fa-regular fa-calendar-days"></i> 15 septembre 2026 • Direction Générale</div>
+          <h2 class="featured-title">Monsieur Abdul Adam SYLLA confirmé Directeur Général de la SODEXAM par le Conseil d&#x27;Administration</h2>
+          <p class="featured-excerpt">Monsieur Abdul Adam SYLLA confirmé Directeur Général de la SODEXAM par le Conseil d&#x27;Administration</p>
+          <a href="https://sodexam.com/monsieur-abdul-adam-sylla-confirme-directeur-general-de-la-sodexam-par-le-conseil-dadministration/" target="_blank" rel="noopener" class="featured-btn">
+            <span>Lire le communiqué officiel</span>
+            <div class="btn-arrow-circle"><i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTRES & RECHERCHE -->
+  <section class="actu-controls">
+    <div class="filter-pills">
+      <button class="filter-btn active" data-filter="all">Tous les articles (15)</button>
+      <button class="filter-btn" data-filter="aeroport">Aéroports & Pistes</button>
+      <button class="filter-btn" data-filter="meteo">Météorologie & Climat</button>
+      <button class="filter-btn" data-filter="social">Bourses & RSE</button>
+      <button class="filter-btn" data-filter="publication">Publications (L'Aérien)</button>
+      <button class="filter-btn" data-filter="cooperation">Coopération</button>
+    </div>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" id="searchInput" class="search-input" placeholder="Rechercher une actualité...">
+    </div>
+  </section>
+
+  <!-- GRILLE DES ARTICLES -->
+  <section class="actu-grid" id="actuGrid">
+
+      <article class="actu-card reveal-item" data-category="aeroport">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-09-at-10.50.33.jpeg" alt="VISITE DE TERRAIN | AÉROPORT DE SAN PEDRO" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-aero">Aéroports & Navigation</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 12 octobre 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/visite-de-terrain-aeroport-de-san-pedro/" target="_blank" rel="noopener">VISITE DE TERRAIN | AÉROPORT DE SAN PEDRO</a>
+              </h3>
+              <p class="actu-excerpt">Le Président du Conseil d’Administration de la SODEXAM, M. Joachim Beugré, a entamé sa tournée de visite des aéroports de l’intérieur du pays par celui de San Pedro, ce jeudi 08 oc...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/visite-de-terrain-aeroport-de-san-pedro/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="social">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-01-at-00.58.07.jpeg" alt="Excellent mois d’octobre, synonyme d’espoir, d’engagement et de solidarité collective." class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-social">Jeunesse & RSE</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 1 octobre 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/excellent-mois-doctobre-synonyme-despoir-dengagement-et-de-solidarite-collective/" target="_blank" rel="noopener">Excellent mois d’octobre, synonyme d’espoir, d’engagement et de solidarité collective.</a>
+              </h3>
+              <p class="actu-excerpt">La SODEXAM se mobilise pour la sensibilisation et la lutte contre les cancers du sein et du col de l’utérus. Parce que détecté tôt, le cancer peut être mieux pris en charge. Le bon...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/excellent-mois-doctobre-synonyme-despoir-dengagement-et-de-solidarite-collective/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="gouvernance">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/09/IMG_3630.png" alt="Monsieur Abdul Adam SYLLA confirmé Directeur Général de la SODEXAM par le Conseil d&#x27;Administration" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-gov">Gouvernance & Institutionnel</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 15 septembre 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/monsieur-abdul-adam-sylla-confirme-directeur-general-de-la-sodexam-par-le-conseil-dadministration/" target="_blank" rel="noopener">Monsieur Abdul Adam SYLLA confirmé Directeur Général de la SODEXAM par le Conseil d&#x27;Administration</a>
+              </h3>
+              <p class="actu-excerpt">Monsieur Abdul Adam SYLLA confirmé Directeur Général de la SODEXAM par le Conseil d&#x27;Administration</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/monsieur-abdul-adam-sylla-confirme-directeur-general-de-la-sodexam-par-le-conseil-dadministration/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="aeroport">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-11-at-14.47.09.jpeg" alt="Bourse d’excellence Dominique Ouattara/ la SODEXAM accompagne 20 nouvelles bachelières vers les métiers de l’aviation civile" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-aero">Aéroports & Navigation</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 13 septembre 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/bourse-dexcellence-dominique-ouattara-la-sodexam-accompagne-20-nouvelles-bachelieres-vers-les-metiers-de-laviation-civile/" target="_blank" rel="noopener">Bourse d’excellence Dominique Ouattara/ la SODEXAM accompagne 20 nouvelles bachelières vers les métiers de l’aviation civile</a>
+              </h3>
+              <p class="actu-excerpt">La SODEXAM a organisé la cérémonie de mise en route de la deuxième promotion de la Bourse d’excellence « Dominique Ouattara » pour les femmes dans l’aviation civile, une initiative...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/bourse-dexcellence-dominique-ouattara-la-sodexam-accompagne-20-nouvelles-bachelieres-vers-les-metiers-de-laviation-civile/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="publication">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/09/Capture-decran-2026-09-07-145408.png" alt="L’AÉRIEN N84" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-pub">Publication Officielle</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 7 septembre 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/laerien-n71-2/" target="_blank" rel="noopener">L’AÉRIEN N84</a>
+              </h3>
+              <p class="actu-excerpt">Télécharger</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/laerien-n71-2/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="aeroport">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-08-31-at-14.12.43-1.jpeg" alt="Aéroport de Kong, une piste de 1 900 mètres qui ouvre de nouvelles perspectives pour le nord ivoirien." class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-aero">Aéroports & Navigation</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 1 septembre 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/aeroport-de-kong-une-piste-de-1-900-metres-qui-ouvre-de-nouvelles-perspectives-pour-le-nord-ivoirien/" target="_blank" rel="noopener">Aéroport de Kong, une piste de 1 900 mètres qui ouvre de nouvelles perspectives pour le nord ivoirien.</a>
+              </h3>
+              <p class="actu-excerpt">Ce jeudi 27 août 2026, le Ministre des Infrastructures et de l&#x27;Équipement Routier, Monsieur Yacouba Hien Sié, a visité le chantier de l&#x27;aéroport de Kong afin de constater l&#x27;avancée...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/aeroport-de-kong-une-piste-de-1-900-metres-qui-ouvre-de-nouvelles-perspectives-pour-le-nord-ivoirien/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="aeroport">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-08-29-at-10.31.55.jpeg" alt="Aéroport de Korhogo, le Directeur Général par intérim effectue sa première visite de travail sur la plateforme." class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-aero">Aéroports & Navigation</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 1 septembre 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/aeroport-de-korhogo-le-directeur-general-par-interim-effectue-sa-premiere-visite-de-travail-sur-la-plateforme/" target="_blank" rel="noopener">Aéroport de Korhogo, le Directeur Général par intérim effectue sa première visite de travail sur la plateforme.</a>
+              </h3>
+              <p class="actu-excerpt">Dans le cadre de la poursuite de ses missions de terrain, le Directeur Général par intérim de la SODEXAM, Monsieur Abdul Sylla, s’est rendu à l’aéroport de Korhogo, ce mercredi 26 ...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/aeroport-de-korhogo-le-directeur-general-par-interim-effectue-sa-premiere-visite-de-travail-sur-la-plateforme/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="social">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-17-at-15.06.10.jpeg" alt="Le Programme de bourses d&#x27;excellence « Dominique OUATTARA » accueille sa Cohorte 2!" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-social">Jeunesse & RSE</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 31 août 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/le-programme-de-bourses-dexcellence-dominique-ouattara-accueille-sa-cohorte-2/" target="_blank" rel="noopener">Le Programme de bourses d&#x27;excellence « Dominique OUATTARA » accueille sa Cohorte 2!</a>
+              </h3>
+              <p class="actu-excerpt">La SODEXAM a présenté, le vendredi 14 août 2026, les 20 nouvelles bachelières de la Cohorte 2 du Programme de bourses d&#x27;excellence « Dominique OUATTARA » pour les femmes dans l&#x27;avi...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/le-programme-de-bourses-dexcellence-dominique-ouattara-accueille-sa-cohorte-2/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="meteo">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-11-at-10.42.31.jpeg" alt="Climat et agriculture : la SODEXAM et JooL International misent sur l’intelligence artificielle." class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-meteo">Météorologie & Climat</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 11 août 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/climat-et-agriculture-la-sodexam-et-jool-international-misent-sur-lintelligence-artificielle/" target="_blank" rel="noopener">Climat et agriculture : la SODEXAM et JooL International misent sur l’intelligence artificielle.</a>
+              </h3>
+              <p class="actu-excerpt">La SODEXAM et JooL International ont signé, lundi 10 août 2026, au siège de la SODEXAM, une convention de partenariat visant à mettre les données météorologiques, l’intelligence ar...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/climat-et-agriculture-la-sodexam-et-jool-international-misent-sur-lintelligence-artificielle/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="meteo">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-11-at-08.31.48.jpeg" alt="La SODEXAM au cœur de la 10ᵉ édition du Festival Êlê d’Adiaké" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-meteo">Météorologie & Climat</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 11 août 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/la-sodexam-au-coeur-de-la-10%e1%b5%89-edition-du-festival-ele-dadiake/" target="_blank" rel="noopener">La SODEXAM au cœur de la 10ᵉ édition du Festival Êlê d’Adiaké</a>
+              </h3>
+              <p class="actu-excerpt">La SODEXAM a pris part à la 10ᵉ édition du Festival Êlê d’Adiaké, organisée du 25 juillet au 1er août 2026 autour du thème : « Tourisme, Culture et Sport au service du développemen...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/la-sodexam-au-coeur-de-la-10%e1%b5%89-edition-du-festival-ele-dadiake/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="meteo">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-10-at-17.54.04.jpeg" alt="Man, La SODEXAM présente ses métiers au Salon National de l’Enseignement Technique." class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-meteo">Météorologie & Climat</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 11 août 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/man-la-sodexam-presente-ses-metiers-au-salon-national-de-lenseignement-technique/" target="_blank" rel="noopener">Man, La SODEXAM présente ses métiers au Salon National de l’Enseignement Technique.</a>
+              </h3>
+              <p class="actu-excerpt">La SODEXAM a pris part, ce dimanche 09 août 2026 à l’étape décentralisée du Salon National de l’Enseignement Technique (SNET) consacrée à la région du Tonkpi, à Man. À travers un s...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/man-la-sodexam-presente-ses-metiers-au-salon-national-de-lenseignement-technique/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="aeroport">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-10-at-11.01.48.jpeg" alt="Visite de suivi des boursières à NHV CI et SOLENTA" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-aero">Aéroports & Navigation</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 11 août 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/visite-de-suivi-des-boursieres-a-nhv-ci-et-solenta/" target="_blank" rel="noopener">Visite de suivi des boursières à NHV CI et SOLENTA</a>
+              </h3>
+              <p class="actu-excerpt">En présence du ministre délégué chargé de l&#x27;Enseignement technique, M. Jean Louis MOULOT, le Directeur Général par intérim de la SODEXAM a effectué, le mardi 4 août 2026, une visit...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/visite-de-suivi-des-boursieres-a-nhv-ci-et-solenta/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="cooperation">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-06-at-16.36.05.jpeg" alt="Coopération internationale, la SODEXAM et le Royaume-Uni explorent des perspectives de partenariat" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-coop">Coopération & Partenariats</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 10 août 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/cooperation-internationale-la-sodexam-et-le-royaume-uni-explorent-des-perspectives-de-partenariat/" target="_blank" rel="noopener">Coopération internationale, la SODEXAM et le Royaume-Uni explorent des perspectives de partenariat</a>
+              </h3>
+              <p class="actu-excerpt">Le Directeur Général par intérim de la Société d’Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique (SODEXAM), M. Abdul Sylla, a reçu en audience le jeu...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/cooperation-internationale-la-sodexam-et-le-royaume-uni-explorent-des-perspectives-de-partenariat/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="aeroport">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-06-at-07.48.06-1.jpeg" alt="La SODEXAM renforce les moyens opérationnels des aéroports domestiques" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-aero">Aéroports & Navigation</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 10 août 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/la-sodexam-renforce-les-moyens-operationnels-des-aeroports-domestiques/" target="_blank" rel="noopener">La SODEXAM renforce les moyens opérationnels des aéroports domestiques</a>
+              </h3>
+              <p class="actu-excerpt">Dans le cadre de sa politique de modernisation des aéroports domestiques, la Direction générale a doté les aéroports de Yamoussoukro, Bouaké, Korhogo, San Pedro, Odienné et Man de ...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/la-sodexam-renforce-les-moyens-operationnels-des-aeroports-domestiques/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+
+      <article class="actu-card reveal-item" data-category="meteo">
+        <div class="actu-card-bezel">
+          <div class="actu-card-inner">
+            <div class="actu-img-wrap">
+              <img src="https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-05-at-10.34.47-1.jpeg" alt="Coopération, la SODEXAM signe un mémorandum d’entente avec China Meteorological Administration (CMA)" class="actu-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+              <span class="actu-badge badge-meteo">Météorologie & Climat</span>
+            </div>
+            <div class="actu-content">
+              <div class="actu-date">
+                <i class="fa-regular fa-calendar-days"></i> 5 août 2026
+              </div>
+              <h3 class="actu-title">
+                <a href="https://sodexam.com/cooperation-la-sodexam-signe-un-memorandum-dentente-avec-china-meteorological-administration-cma/" target="_blank" rel="noopener">Coopération, la SODEXAM signe un mémorandum d’entente avec China Meteorological Administration (CMA)</a>
+              </h3>
+              <p class="actu-excerpt">Le Directeur Général de la SODEXAM par intérim, Abdul Sylla et le Directeur Général de la CMA, Dr. CHEN Zhenlin, ont signé un Mémorandum d&#x27;Entente, à l’occasion d’une visite de tra...</p>
+              <div class="actu-footer">
+                <a href="https://sodexam.com/cooperation-la-sodexam-signe-un-memorandum-dentente-avec-china-meteorological-administration-cma/" target="_blank" rel="noopener" class="actu-read-btn">
+                  <span>Lire l'article</span>
+                  <div class="btn-circle-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    
+  </section>
+
+  <!-- BANDEAU NEWSLETTER & MAGAZINE -->
+  <section class="nl-mag-section">
+    <div class="container nl-mag-grid">
+      <div class="nl-form-box">
+        <h3 style="font-size:24px; font-weight:800; margin-bottom:6px;">Ne manquez aucune publication officielle</h3>
+        <p style="color:#CBD5E1; font-size:14.5px;">Recevez les avis météo majeurs, les actualités aéroportuaires et le magazine L'Aérien directement par email.</p>
+        <form class="nl-input-row" onsubmit="event.preventDefault(); alert('Merci pour votre inscription à la newsletter !');">
+          <input type="email" class="nl-input-field" placeholder="Entrez votre adresse email..." required>
+          <button type="submit" class="nl-btn-submit">S'abonner</button>
+        </form>
+      </div>
+      <div style="background:rgba(255,255,255,0.06); padding:28px; border-radius:20px; border:1px solid rgba(255,255,255,0.12); display:flex; gap:20px; align-items:center;">
+        <div style="width:56px; height:56px; border-radius:14px; background:var(--orange); display:flex; align-items:center; justify-content:center; font-size:24px; color:white; flex-shrink:0;">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div>
+          <h4 style="font-size:17px; font-weight:800; margin-bottom:4px;">Magazine L'Aérien N°84 disponible</h4>
+          <p style="font-size:13px; color:#94A3B8; margin-bottom:10px;">Le magazine officiel de la SODEXAM retraçant les temps forts aéronautiques et climatologiques.</p>
+          <a href="https://sodexam.com/wp-content/uploads/2026/09/Capture-decran-2026-09-07-145408.png" target="_blank" style="font-size:13px; font-weight:700; color:#FDBA74;">Consulter l'édition →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<!-- FOOTER UNIFORME SODEXAM -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="margin-bottom:20px;">
+          <a href="Maquette_site_internet.html" title="SODEXAM — Retour à l'accueil">
+            <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
+          </a>
+        </div>
+        <p style="line-height:1.7; margin-bottom:20px; color:#94A3B8; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire. Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        </p>
+        <div style="display:flex; gap:12px; font-size:15px;">
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation Rapide</div>
+        <ul class="footer-links">
+          <li><a href="Maquette_site_internet.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Actualités & Presse</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météorologie Nationale</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Navigation Aérienne & Aéroports Régionaux</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Médecine Aéronautique (CERMA)</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Publications & Médias</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Toutes les actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien N°84</a></li>
+          <li><a href="actualites.html#cooperation"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Coopération Internationale</a></li>
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Communiqués officiels</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Direction Générale</div>
+        <p style="color:#94A3B8; margin-bottom:12px; line-height:1.6; font-size:13.5px;">
+          <i class="fa-solid fa-location-dot" style="color:var(--orange); margin-right:8px;"></i>
+          Siège Bâtiment Général Abdoulaye Coulibaly, Zone Aéroportuaire Félix Houphouët-Boigny, Abidjan - Côte d'Ivoire
+        </p>
+        <p style="color:#94A3B8; margin-bottom:8px; font-size:13.5px;">
+          <i class="fa-solid fa-phone" style="color:var(--orange); margin-right:8px;"></i> +225 27 21 58 87 00
+        </p>
+        <p style="color:#94A3B8; font-size:13.5px;">
+          <i class="fa-solid fa-envelope" style="color:var(--orange); margin-right:8px;"></i> contact@sodexam.ci
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="#">Mentions Légales</a>
+        <a href="#">Politique de Confidentialité</a>
+        <a href="#">Plan du site</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+<!-- SCRIPT FILTRES & RECHERCHE INTERACTIVE -->
+<script>
+// Filtres par catégorie
+const filterButtons = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.actu-card');
+const searchInput = document.getElementById('searchInput');
+
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  });
+});
+
+searchInput.addEventListener('input', applyFilters);
+// Hash routing
+function checkHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const targetBtn = document.querySelector('.filter-btn[data-filter="' + hash + '"]');
+    if (targetBtn) {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      targetBtn.classList.add('active');
+      applyFilters();
+      targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+}
+window.addEventListener('load', checkHash);
+window.addEventListener('hashchange', checkHash);
+
+
+function applyFilters() {
+  const activeBtn = document.querySelector('.filter-btn.active');
+  const cat = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+  const query = searchInput.value.toLowerCase().trim();
+
+  cards.forEach(card => {
+    const cardCat = card.getAttribute('data-category');
+    const title = card.querySelector('.actu-title').textContent.toLowerCase();
+    const excerpt = card.querySelector('.actu-excerpt').textContent.toLowerCase();
+
+    const matchesCat = (cat === 'all' || cardCat === cat);
+    const matchesSearch = (!query || title.includes(query) || excerpt.includes(query));
+
+    if (matchesCat && matchesSearch) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+</script>
+
+</body>
+</html>

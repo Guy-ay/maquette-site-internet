@@ -1,0 +1,3675 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SODEXAM — La météo et l'aéronautique au service du développement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+:root {
+  --orange: #F26A21;
+  --orange-light: #FFF1E8;
+  --orange-dark: #D4551A;
+  --green: #34A853;
+  --green-dark: #1E7A3C;
+  --green-light: #E8F5EC;
+  --blue: #2E86AB;
+  --blue-light: #E5F1F7;
+  --turquoise: #3AAFA9;
+  --red: #E63946;
+  --red-flash: #DC2626;
+  --dark: #0F172A;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-bezel: 0 16px 36px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --gray: #6B6B6B;
+  --gray-light: #F7F7F5;
+  --white: #FFFFFF;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.07);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,0.10);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+.container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+/* ============================================================
+   BANDEAU ALERTES FLASH
+   ============================================================ */
+.flash-bar {
+  background: #1A1A1A;
+  color: white;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid var(--red-flash);
+}
+.flash-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red-flash);
+  color: white;
+  padding: 0 22px;
+  height: 100%;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  white-space: nowrap;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.35);
+}
+.flash-pulse {
+  width: 7px; height: 7px;
+  background: white;
+  border-radius: 50%;
+  animation: flashPulse 1.2s infinite;
+}
+@keyframes flashPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  white-space: nowrap;
+  animation: flashMarquee 45s linear infinite;
+  flex: 1;
+  padding-left: 30px;
+  overflow: hidden;
+}
+.flash-track:hover { animation-play-state: paused; }
+.flash-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.flash-tag {
+  background: rgba(255,255,255,0.12);
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #FFD166;
+}
+.flash-tag.urgent { color: #FF8B8B; background: rgba(255,80,80,0.15); }
+.flash-tag.info { color: #8FD9FF; background: rgba(80,180,255,0.15); }
+.flash-text { color: #E5E5E5; }
+.flash-text strong { color: white; font-weight: 700; }
+.flash-link {
+  color: var(--orange);
+  font-weight: 700;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@keyframes flashMarquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ============================================================
+   HEADER — sans boutons Météo/Aéroports
+   ============================================================ */
+.header {
+  position: sticky;
+  top: 0;
+  height: 80px;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  transition: var(--transition);
+  border-bottom: 1px solid #F0F0F0;
+}
+.header.scrolled { box-shadow: var(--shadow-sm); }
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  gap: 20px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.logo:hover { transform: scale(1.03); }
+.logo img { height: 44px; width: auto; display: block; }
+.footer .logo img {
+  height: 48px;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+.nav { display: flex; align-items: center; gap: 2px; }
+.nav-item { position: relative; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+  border-radius: 8px;
+  transition: var(--transition);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.nav-link:hover { background: var(--orange-light); color: var(--orange-dark); }
+.nav-link .chev { font-size: 9px; transition: transform 0.3s; opacity: 0.6; }
+.nav-item:hover .chev { transform: rotate(180deg); }
+.submenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 240px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: var(--transition);
+  border: 1px solid #F0F0F0;
+  z-index: 100;
+}
+.nav-item:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.submenu a {
+  display: block;
+  padding: 11px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--dark);
+  border-radius: 8px;
+  transition: var(--transition);
+  position: relative;
+}
+.submenu a::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--orange);
+  border-radius: 2px;
+  transition: height 0.3s;
+}
+.submenu a:hover {
+  background: var(--gray-light);
+  color: var(--orange);
+  padding-left: 20px;
+}
+.submenu a:hover::before { height: 60%; }
+
+/* Header actions : plus que le burger */
+.header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.burger {
+  display: none;
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  border: none;
+  background: var(--gray-light);
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.burger span { width: 20px; height: 2px; background: var(--dark); border-radius: 2px; }
+
+/* ============================================================
+   HERO — hauteur augmentée à 620px
+   ============================================================ */
+.hero-section { position: relative; background: var(--dark); }
+.hero {
+  position: relative;
+  height: 620px;              /* ← augmenté (avant : 460px) */
+  min-height: 620px;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+.slide.active { opacity: 1; z-index: 1; }
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.15) 100%);
+}
+.slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920'); }
+.slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1544016768-982d1554f0b9?w=1920'); }
+.slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=1920'); }
+.slide-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  max-width: 680px;
+  padding: 0 24px;
+  margin-left: max(24px, calc((100vw - 1320px)/2 + 24px));
+}
+.slide-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--orange);
+  color: white;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.slide-tag .date { opacity: 0.85; font-weight: 500; text-transform: none; }
+.slide h1 {
+  font-size: clamp(28px, 3.6vw, 46px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+  margin-bottom: 18px;
+}
+.slide p {
+  font-size: clamp(14.5px, 1.2vw, 16px);
+  opacity: 0.9;
+  margin-bottom: 28px;
+  max-width: 560px;
+  line-height: 1.6;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.btn-primary {
+  background: var(--orange);
+  color: white;
+  box-shadow: 0 4px 14px rgba(242,106,33,0.35);
+}
+.btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+.btn-white { background: white; color: var(--orange); }
+.btn-white:hover { background: var(--dark); color: white; }
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: grid; place-items: center;
+}
+.slider-arrow:hover { background: var(--orange); border-color: var(--orange); }
+.arrow-prev { left: 20px; }
+.arrow-next { right: 340px; }
+.slider-dots {
+  position: absolute;
+  bottom: 28px;
+  left: calc(50% - 160px);
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+}
+.dot.active { background: var(--orange); width: 26px; border-radius: 10px; }
+
+/* Sidebar hero — repositionnée pour la nouvelle hauteur */
+.hero-sidebar {
+  position: absolute;
+  top: 28px;
+  right: 24px;
+  width: 320px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sidebar-title {
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  padding-left: 4px;
+}
+.sidebar-item {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  align-items: center;
+}
+.sidebar-item:hover { background: rgba(255,255,255,0.15); }
+.sidebar-item.active { background: rgba(242,106,33,0.9); border-color: var(--orange); }
+.sidebar-thumb {
+  width: 56px; height: 46px;
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+.sidebar-text { flex: 1; color: white; font-size: 12.5px; font-weight: 600; line-height: 1.35; }
+.sidebar-date { font-size: 10.5px; opacity: 0.75; margin-top: 4px; font-weight: 400; }
+
+/* ============================================================
+   SECTIONS GÉNÉRIQUES
+   ============================================================ */
+.section { padding: 48px 0; }
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.section-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+.section-head h2 {
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+}
+.section-head p { color: var(--gray); font-size: 15px; margin-top: 6px; }
+.section-link {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--orange);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+.section-link:hover { gap: 12px; }
+
+/* ACTIVITÉS */
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.activity-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  height: 280px;
+  cursor: pointer;
+  transition: var(--transition);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  color: white;
+}
+.activity-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.activity-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%);
+  transition: var(--transition);
+}
+.activity-card:hover::before {
+  background: linear-gradient(180deg, rgba(242,106,33,0.25) 0%, rgba(0,0,0,0.85) 100%);
+}
+.activity-card > * { position: relative; z-index: 2; }
+.activity-number {
+  align-self: flex-end;
+  font-size: 32px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -2px;
+  line-height: 1;
+  border-top: 2px solid var(--orange);
+  padding-top: 6px;
+  min-width: 40px;
+  text-align: right;
+}
+.activity-bottom h3 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+.activity-bottom p { font-size: 12.5px; opacity: 0.9; line-height: 1.4; margin-bottom: 14px; }
+.activity-link {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--orange);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+.activity-card:hover .activity-link { gap: 12px; }
+
+/* REALTIME */
+.realtime {
+  background: linear-gradient(120deg, var(--orange) 0%, #E85A1F 60%, #C94A15 100%);
+  color: white;
+  padding: 50px 0;
+}
+.realtime-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1.5fr;
+  gap: 40px;
+  align-items: center;
+}
+.realtime-text .section-tag { color: rgba(255,255,255,0.85); }
+.realtime-text h2 {
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  margin-bottom: 12px;
+}
+.realtime-text p { font-size: 15px; opacity: 0.9; margin-bottom: 22px; }
+.realtime-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.rt-card {
+  background: rgba(255,255,255,0.98);
+  border-radius: var(--radius);
+  padding: 16px;
+  color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 190px;
+}
+.rt-card h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gray);
+  border-bottom: 1px solid #EEE;
+  padding-bottom: 8px;
+}
+.rt-card .main { font-size: 24px; font-weight: 800; color: var(--orange); }
+.rt-card .sub { font-size: 12px; color: var(--gray); }
+.rt-rows { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; }
+.rt-row { display: flex; justify-content: space-between; }
+.rt-row span:first-child { color: var(--gray); }
+.rt-row span:last-child { font-weight: 700; }
+.rt-img {
+  border-radius: 8px;
+  height: 70px;
+  background: url('https://images.unsplash.com/photo-1611928482001-3f21b7e1c8e2?w=400') center/cover;
+  margin-top: auto;
+}
+.rt-link { font-size: 11.5px; font-weight: 700; color: var(--orange); margin-top: auto; }
+.rt-forecast { display: flex; justify-content: space-between; gap: 8px; margin-top: auto; }
+.rt-day { text-align: center; font-size: 10.5px; color: var(--gray); flex: 1; }
+.rt-day .day-label { font-weight: 700; color: var(--dark); font-size: 11px; display: block; margin-bottom: 4px; }
+.rt-alerts { display: flex; flex-direction: column; gap: 8px; }
+.rt-alert { display: flex; gap: 8px; align-items: flex-start; font-size: 11.5px; font-weight: 600; }
+.dot-warn {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+.rt-alert.warn .dot-warn { background: #F4A261; }
+.rt-alert.info .dot-warn { background: var(--blue); }
+
+/* STATS */
+.stats-section { background: var(--gray-light); padding: 44px 0; }
+.stats-head { margin-bottom: 30px; }
+.stats-head h2 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.stat-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  border-left: 4px solid var(--orange);
+  transition: var(--transition);
+}
+.stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.stat-num {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--orange);
+  letter-spacing: -1.5px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label { font-size: 13px; color: var(--gray); line-height: 1.4; }
+
+/* PUB */
+.ads-section { padding: 48px 0; }
+.pub-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%);
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  color: white;
+}
+.pub-card::before {
+  content: 'PUBLICITÉ';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.9);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+}
+.pub-card::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(242,106,33,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.pub-content {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+}
+.pub-tag {
+  display: inline-block;
+  background: var(--orange);
+  color: white;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.pub-content h3 {
+  font-size: clamp(24px, 2.8vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.pub-content p {
+  font-size: 15px;
+  opacity: 0.85;
+  line-height: 1.6;
+  margin-bottom: 26px;
+}
+.pub-logo-area {
+  position: relative;
+  z-index: 2;
+  align-self: flex-end;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+/* NEWS */
+.news-section { padding: 48px 0; background: var(--gray-light); }
+.news-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.news-carousel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.news-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #EFEFEF;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+.news-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--orange-light); }
+.news-img-wrap { overflow: hidden; }
+.news-img {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  transition: transform 0.5s;
+}
+.news-card:hover .news-img { transform: scale(1.05); }
+.news-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: var(--orange);
+  color: white;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.news-badge.green { background: var(--green-dark); }
+.news-badge.blue { background: var(--blue); }
+.news-badge.teal { background: var(--turquoise); }
+.news-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.news-date {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.news-body h3 {
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.45;
+  margin-bottom: 14px;
+  flex: 1;
+  transition: var(--transition);
+}
+.news-card:hover .news-body h3 { color: var(--orange); }
+.news-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+
+/* MEDIA */
+.media-section { padding: 48px 0; }
+.media-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+.media-col { display: flex; flex-direction: column; height: 100%; }
+.media-header { margin-bottom: 16px; }
+.media-header h3 { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+.media-header p { font-size: 13px; color: var(--gray); }
+.youtube-embed {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: black;
+  flex: 1;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}
+.youtube-embed iframe { width: 100%; height: 100%; border: none; display: block; min-height: 400px; }
+.aerien-card {
+  background: linear-gradient(135deg, var(--green-dark), #166030);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.aerien-badge {
+  display: inline-block;
+  background: var(--orange);
+  color: white;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  align-self: flex-start;
+}
+.aerien-card h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.aerien-card > p { font-size: 13.5px; opacity: 0.9; margin-bottom: 22px; line-height: 1.6; }
+.aerien-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; flex: 1; }
+.aerien-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255,255,255,0.1);
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  border-left: 3px solid transparent;
+}
+.aerien-item:hover { background: rgba(255,255,255,0.2); border-left-color: var(--orange); }
+.aerien-item .num {
+  width: 42px; height: 42px;
+  background: var(--orange);
+  color: white;
+  border-radius: 8px;
+  display: grid; place-items: center;
+  font-weight: 800;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.aerien-item .info { flex: 1; }
+.aerien-item .info strong { display: block; font-size: 13.5px; margin-bottom: 2px; }
+.aerien-item .info span { font-size: 11.5px; opacity: 0.75; }
+.aerien-item .pdf-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  padding: 3px 8px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 4px;
+}
+.aerien-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  color: var(--green-dark);
+  padding: 12px 22px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 13.5px;
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+}
+.aerien-btn:hover { background: var(--orange); color: white; gap: 14px; }
+
+/* MAPS */
+.maps-section { padding: 48px 0; background: var(--gray-light); }
+.maps-head { text-align: center; margin-bottom: 30px; }
+.maps-wrap {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  height: 420px;
+  background: #DDD;
+}
+.maps-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+.maps-info {
+  background: white;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-top: 20px;
+}
+.maps-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 16px;
+  border-left: 3px solid var(--orange);
+}
+.maps-info-item h4 {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 4px;
+}
+.maps-info-item p { font-size: 14px; color: var(--dark); line-height: 1.5; }
+.maps-info-item p a { color: var(--green-dark); font-weight: 600; }
+
+/* FOOTER */
+.footer { background: var(--dark); color: #BBB; padding: 60px 0 30px; }
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-brand .logo { margin-bottom: 16px; }
+.footer-brand p { font-size: 13.5px; color: #999; margin-bottom: 20px; line-height: 1.7; }
+.socials { display: flex; gap: 8px; flex-wrap: wrap; }
+.social {
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.08);
+  font-size: 12px;
+  font-weight: 600;
+  color: #BBB;
+  transition: var(--transition);
+}
+.social:hover { background: var(--orange); color: white; }
+.footer-col h4 { color: white; font-size: 14px; font-weight: 700; margin-bottom: 18px; }
+.footer-col a { display: block; font-size: 13.5px; color: #999; padding: 6px 0; transition: var(--transition); }
+.footer-col a:hover { color: var(--orange); padding-left: 4px; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 12.5px;
+  color: #777;
+}
+.back-to-top {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: white;
+  display: grid; place-items: center;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+}
+.back-to-top:hover { background: var(--orange-dark); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  .activities-grid { grid-template-columns: repeat(2, 1fr); }
+  .realtime-cards { grid-template-columns: repeat(2, 1fr); }
+  .news-carousel { grid-template-columns: repeat(2, 1fr); }
+  .media-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 992px) {
+  .nav { display: none; }
+  .burger { display: flex; }
+  .hero { height: 560px; min-height: 560px; }
+  .hero-sidebar { display: none; }
+  .arrow-next { right: 20px; }
+  .slider-dots { left: 50%; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .realtime-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .logo img { height: 36px; }
+  .header { height: 72px; }
+  .header-inner { height: 72px; }
+  .flash-label { font-size: 10px; padding: 0 14px; }
+  .hero { height: 480px; min-height: 480px; }
+  .slide h1 { font-size: 26px; }
+  .activities-grid { grid-template-columns: 1fr; }
+  .realtime-cards { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .news-carousel { grid-template-columns: 1fr; }
+  .maps-info { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .section, .ads-section, .news-section, .media-section, .maps-section { padding: 45px 0; }
+  .pub-card { padding: 28px; }
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 124px; left: 0; right: 0; bottom: 0;
+  background: white;
+  z-index: 999;
+  padding: 20px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a {
+  display: block;
+  padding: 15px 0;
+  font-size: 15.5px;
+  font-weight: 600;
+  border-bottom: 1px solid #EEE;
+}
+
+.reveal { opacity: 1 !important; transform: none !important; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+
+
+/* ============================================================
+   DESIGN SYSTEM & CHARTE GRAPHIQUE UNIFORME — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #2FA95B;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #0284C7;
+  --blue-navy: #0F172A;
+  
+  --bg-page: #FCFCFC;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F8FAFC;
+  
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --text-light: #94A3B8;
+  
+  --border-light: rgba(226, 232, 240, 0.85);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 16px 36px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
+}
+
+/* ============================================================
+   FLASH BAR UNIFORME
+   ============================================================ */
+.flash-bar {
+  background: #111827;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #DC2626;
+  color: white;
+  padding: 0 22px;
+  height: 100%;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  z-index: 10;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+}
+.flash-pulse {
+  width: 7px; height: 7px;
+  background: white;
+  border-radius: 50%;
+  animation: flashPulse 1.4s infinite;
+}
+@keyframes flashPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  white-space: nowrap;
+  animation: flashMarquee 48s linear infinite;
+  flex: 1;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #E2E8F0;
+}
+.flash-track:hover { animation-play-state: paused; }
+@keyframes flashMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   MAIN HEADER UNIFORME
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -8px rgba(15, 23, 42, 0.05);
+}
+.header-inner {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.header-logo-img:hover {
+  transform: scale(1.02);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-link {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-link .chev {
+  font-size: 10px;
+  opacity: 0.6;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.nav-item-dropdown:hover .chev {
+  transform: rotate(180deg);
+}
+
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 270px;
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 18px 40px -10px rgba(0,0,0,0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all var(--dur-base) var(--ease-spring);
+  z-index: 1010;
+}
+.dropdown-panel a {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-main);
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.dropdown-panel a:hover, .dropdown-panel a.active-item {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(4px);
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(30, 122, 60, 0.25);
+  transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-spring);
+}
+.header-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(30, 122, 60, 0.35);
+  color: white;
+}
+.header-cta-btn .btn-arrow {
+  width: 24px;
+  height: 24px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.burger-btn span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--blue-navy);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  height: 100vh;
+  background: white;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s var(--ease-spring);
+  padding: 24px;
+}
+.mobile-drawer.open {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.drawer-close {
+  background: var(--bg-subtle);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.drawer-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.drawer-links a.active, .drawer-links a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+
+/* ============================================================
+   FOOTER UNIFORME
+   ============================================================ */
+.footer {
+  background: #0B132B;
+  color: #94A3B8;
+  padding: 64px 0 28px;
+  font-size: 14px;
+  border-top: 3px solid var(--orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.footer-links a {
+  color: #94A3B8;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #64748B;
+}
+.footer-bottom a {
+  color: #94A3B8;
+  transition: color var(--dur-fast);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 991px) {
+  .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   AWWWARDS-TIER HOMEPAGE REFINEMENTS (gpt-taste & high-end-visual-design)
+   ============================================================ */
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: var(--bg-page);
+  overflow-x: hidden;
+}
+
+/* Button-in-Button Capsule */
+.btn-primary-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-hover) 100%);
+  color: white !important;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 10px 8px 24px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 20px rgba(242, 106, 33, 0.35);
+  transition: all var(--dur-fast) var(--ease-spring);
+  text-decoration: none;
+}
+.btn-primary-capsule:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(242, 106, 33, 0.45);
+}
+.btn-circle-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.btn-primary-capsule:hover .btn-circle-icon {
+  transform: translateX(3px);
+}
+
+.btn-secondary-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white !important;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  transition: all var(--dur-fast) var(--ease-spring);
+  text-decoration: none;
+}
+.btn-secondary-capsule:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Hero Section (Rock-Solid Fixed Dimensions & Zero Layout Shift) */
+.hero-section {
+  background: #0B132B;
+  position: relative;
+  overflow: hidden;
+  padding: 36px 0;
+}
+.hero-slider-wrap {
+  position: relative;
+  height: 520px;
+  min-height: 520px;
+  max-height: 520px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.35);
+  background: #070D1E;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  padding: 0 44px;
+  box-sizing: border-box;
+}
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(11, 19, 43, 0.94) 0%, rgba(11, 19, 43, 0.82) 55%, rgba(11, 19, 43, 0.45) 100%),
+              radial-gradient(circle at 80% 30%, rgba(242, 106, 33, 0.18) 0%, transparent 60%);
+}
+.slide-content {
+  position: relative;
+  z-index: 10;
+  max-width: 780px;
+  width: 100%;
+}
+.slide-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  color: white;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+.slide-content h1 {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.22;
+  letter-spacing: -0.6px;
+  margin-bottom: 14px;
+  min-height: 2.45em;
+  display: flex;
+  align-items: center;
+}
+.slide-content p {
+  font-size: 15px;
+  color: #CBD5E1;
+  line-height: 1.6;
+  max-width: 680px;
+  margin-bottom: 24px;
+  min-height: 3.2em;
+}
+/* Sidebar Items in Hero */
+.sidebar-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition: all var(--dur-fast) var(--ease-spring);
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.sidebar-item:hover, .sidebar-item.active {
+  background: rgba(242, 106, 33, 0.15);
+  border-color: rgba(242, 106, 33, 0.4);
+  transform: translateX(4px);
+}
+.sidebar-thumb {
+  width: 54px;
+  height: 54px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+.sidebar-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #F8FAFC;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sidebar-date {
+  font-size: 11px;
+  color: #94A3B8;
+  margin-top: 4px;
+}
+
+/* GAPLESS BENTO GRID (4 CORE ACTIVITIES) */
+.bento-section {
+  padding: 48px 0;
+  background: #FFFFFF;
+}
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: dense;
+  gap: 24px;
+}
+.bento-card-shell {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 8px;
+  box-shadow: var(--shadow-bezel);
+  transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base) var(--ease-spring);
+  display: flex;
+  flex-direction: column;
+}
+.bento-card-shell:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.12);
+}
+.bento-card-shell.col-span-2 {
+  grid-column: span 2;
+}
+.bento-card-shell.col-span-1 {
+  grid-column: span 1;
+}
+.bento-card-inner {
+  background: #FFFFFF;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  min-height: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+}
+.bento-bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.7s var(--ease-spring);
+}
+.bento-card-shell:hover .bento-bg-img {
+  transform: scale(1.05);
+}
+.bento-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(15, 23, 42, 0.95) 100%);
+}
+.bento-content {
+  position: relative;
+  z-index: 5;
+  color: white;
+}
+.bento-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(8px);
+}
+.bento-badge.orange { background: rgba(242, 106, 33, 0.9); }
+.bento-badge.green { background: rgba(30, 122, 60, 0.9); }
+.bento-badge.blue { background: rgba(2, 132, 199, 0.9); }
+.bento-content h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+.bento-content p {
+  font-size: 14px;
+  color: #E2E8F0;
+  line-height: 1.55;
+  margin-bottom: 16px;
+  max-width: 520px;
+}
+.bento-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-weight: 700;
+  font-size: 13.5px;
+  transition: gap 0.2s;
+}
+.bento-link i {
+  color: var(--orange);
+  transition: transform 0.2s;
+}
+.bento-card-shell:hover .bento-link i {
+  transform: translateX(4px);
+}
+
+/* REALTIME VIGICLIM WEATHER */
+.weather-cities-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.weather-tab-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.weather-tab-btn.active, .weather-tab-btn:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+
+/* NEWS CARDS DOUBLE-BEZEL */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.news-card-shell {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: var(--shadow-bezel);
+  transition: all var(--dur-base) var(--ease-spring);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.news-card-shell:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
+  border-color: rgba(242, 106, 33, 0.3);
+}
+.news-card-inner {
+  background: #FFFFFF;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.news-card-img-wrap {
+  height: 190px;
+  position: relative;
+  overflow: hidden;
+}
+.news-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-spring);
+}
+.news-card-shell:hover .news-card-img {
+  transform: scale(1.06);
+}
+.news-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.news-card-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.news-card-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text-main);
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.news-card-desc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.news-card-link {
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 991px) {
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-card-shell.col-span-2, .bento-card-shell.col-span-1 { grid-column: span 1; }
+  .news-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .news-grid { grid-template-columns: 1fr; }
+}
+
+
+
+/* ============================================================
+   NEW HERO 2/3 + 1/3 LAYOUT
+   ============================================================ */
+.hero-section-grid {
+  background: #0B132B;
+  padding: 32px 0 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-split-container {
+  display: grid;
+  grid-template-columns: 1.9fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+.hero-slider-main {
+  position: relative;
+  height: 490px;
+  min-height: 490px;
+  max-height: 490px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.4);
+  background: #070D1E;
+}
+.hero-slide-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+.hero-slide-item.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.hero-slide-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(11, 19, 43, 0.94) 0%, rgba(11, 19, 43, 0.8) 55%, rgba(11, 19, 43, 0.45) 100%),
+              radial-gradient(circle at 80% 30%, rgba(242, 106, 33, 0.2) 0%, transparent 60%);
+}
+.hero-slide-content {
+  position: relative;
+  z-index: 10;
+  max-width: 660px;
+  width: 100%;
+}
+.hero-slide-content h1 {
+  font-size: clamp(1.85rem, 2.6vw, 2.4rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.22;
+  letter-spacing: -0.6px;
+  margin-bottom: 12px;
+  min-height: 2.45em;
+  display: flex;
+  align-items: center;
+}
+.hero-slide-content p {
+  font-size: 14.5px;
+  color: #CBD5E1;
+  line-height: 1.55;
+  max-width: 580px;
+  margin-bottom: 22px;
+  min-height: 3.1em;
+}
+
+/* Hero Weather Widget (1/3 Right) */
+.hero-weather-widget {
+  background: linear-gradient(155deg, #0F172A 0%, #1E293B 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 24px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.35);
+  height: 490px;
+  box-sizing: border-box;
+}
+.widget-head-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.widget-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #4ADE80;
+  background: rgba(74, 222, 128, 0.12);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+.widget-cities-nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.widget-city-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #CBD5E1;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.widget-city-btn.active, .widget-city-btn:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+  transform: translateY(-1px);
+}
+.widget-main-weather {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.widget-temp-val {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1;
+  color: white;
+}
+.widget-desc-text {
+  font-size: 13.5px;
+  color: #93C5FD;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.widget-metrics-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 12px;
+  margin: 12px 0;
+}
+.widget-metric-cell {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+.widget-metric-cell span { color: #94A3B8; }
+.widget-metric-cell strong { color: white; }
+.widget-forecast-mini {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  text-align: center;
+}
+.widget-forecast-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 6px 4px;
+  font-size: 11px;
+}
+.widget-forecast-item .day { color: #94A3B8; display: block; margin-bottom: 2px; }
+.widget-forecast-item .temp { font-weight: 700; color: white; }
+
+/* ============================================================
+   REPLACED REALTIME SECTION -> GRANDS DOSSIERS CAROUSEL
+   ============================================================ */
+.dossiers-section {
+  padding: 56px 0;
+  background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 60%, #0F172A 100%);
+  color: white;
+  border-top: 3px solid var(--orange);
+  border-bottom: 3px solid var(--green);
+}
+.dossiers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+.dossier-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--dur-base) var(--ease-spring);
+  cursor: pointer;
+}
+.dossier-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(242, 106, 33, 0.5);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.35);
+}
+.dossier-img-wrap {
+  height: 160px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.dossier-tag-pill {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  color: white;
+  backdrop-filter: blur(8px);
+}
+.dossier-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.dossier-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: white;
+  margin-bottom: 8px;
+}
+.dossier-desc {
+  font-size: 12.5px;
+  color: #CBD5E1;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.dossier-link {
+  margin-top: auto;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #FDBA74;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ============================================================
+   YOUTUBE SECTION (ONE TO ONE COVER STYLE)
+   ============================================================ */
+.youtube-cover-section {
+  background: #F26A21;
+  padding: 56px 0;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+.youtube-cover-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 28px;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.youtube-cover-title span.quote {
+  font-size: 28px;
+  color: #FFE4D6;
+  font-family: Georgia, serif;
+}
+.youtube-layout-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.youtube-main-box {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+}
+.youtube-main-frame {
+  width: 100%;
+  height: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+}
+.youtube-main-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.youtube-main-info {
+  padding: 14px 6px 6px;
+}
+.youtube-main-heading {
+  font-size: 19px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.35;
+}
+.youtube-side-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.youtube-side-card {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.youtube-side-card:hover, .youtube-side-card.active {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(4px);
+  border-color: white;
+}
+.youtube-side-thumb {
+  width: 100%;
+  height: 84px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.youtube-side-thumb .play-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.youtube-side-text {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  align-self: center;
+}
+.youtube-all-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  color: white !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: 10px;
+  align-self: flex-end;
+  transition: transform var(--dur-fast);
+}
+.youtube-all-link:hover {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   L'AÉRIEN SECTION (3 COVERS DARK COVER STYLE)
+   ============================================================ */
+.aerien-cover-section {
+  background: #111827;
+  padding: 64px 0 72px;
+  color: white;
+  text-align: center;
+}
+.aerien-cover-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 36px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.aerien-cover-title span.quote {
+  color: var(--orange);
+  font-size: 24px;
+  font-family: Georgia, serif;
+}
+.aerien-covers-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  max-width: 1040px;
+  margin: 0 auto 36px;
+}
+.aerien-cover-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1E293B;
+  transition: all var(--dur-base) var(--ease-spring);
+  cursor: pointer;
+}
+.aerien-cover-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 26px 50px rgba(242, 106, 33, 0.3);
+  border-color: rgba(242, 106, 33, 0.6);
+}
+.aerien-cover-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+.aerien-cover-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+  padding: 16px;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: white;
+}
+
+@media (max-width: 991px) {
+  .hero-split-container { grid-template-columns: 1fr; }
+  .dossiers-grid { grid-template-columns: repeat(2, 1fr); }
+  .youtube-layout-grid { grid-template-columns: 1fr; }
+  .aerien-covers-row { grid-template-columns: 1fr; max-width: 320px; }
+  .hero-slider-main { height: 440px; min-height: 440px; }
+}
+@media (max-width: 640px) {
+  .dossiers-grid { grid-template-columns: 1fr; }
+}
+
+
+
+/* ============================================================
+   ANIMATIONS DES ICÔNES MÉTÉO DU WIDGET (60 FPS, GPU-ONLY)
+   ============================================================ */
+@keyframes sunSpinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes sunRaysGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.45)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.85)); transform: scale(1.06); }
+}
+@keyframes cloudHoverDrift {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-5px) translateX(3px); }
+}
+@keyframes lightningFlash {
+  0%, 86%, 100% { opacity: 1; filter: drop-shadow(0 0 0 transparent); }
+  90%, 94% { opacity: 0.8; filter: drop-shadow(0 0 16px rgba(250, 204, 21, 0.95)); color: #FEF08A; }
+}
+@keyframes rainDrip {
+  0% { transform: translateY(-2px); opacity: 0.6; }
+  50% { transform: translateY(3px); opacity: 1; filter: drop-shadow(0 2px 5px #38BDF8); }
+  100% { transform: translateY(-2px); opacity: 0.6; }
+}
+@keyframes metricPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+@keyframes windSway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+
+.w-anim-sun {
+  display: inline-block;
+  animation: sunSpinSlow 16s linear infinite, sunRaysGlow 3s ease-in-out infinite;
+  color: #FBBF24;
+}
+.w-anim-cloud-sun {
+  display: inline-block;
+  animation: cloudHoverDrift 4s ease-in-out infinite;
+  color: #FDBA74;
+}
+.w-anim-cloud {
+  display: inline-block;
+  animation: cloudHoverDrift 5s ease-in-out infinite;
+  color: #93C5FD;
+}
+.w-anim-thunder {
+  display: inline-block;
+  animation: lightningFlash 2.5s ease-in-out infinite, cloudHoverDrift 4s ease-in-out infinite;
+  color: #FCD34D;
+}
+.w-anim-rain {
+  display: inline-block;
+  animation: rainDrip 1.6s ease-in-out infinite;
+  color: #38BDF8;
+}
+
+.metric-anim-drop { display: inline-block; animation: metricPulse 2.5s ease-in-out infinite; }
+.metric-anim-wind { display: inline-block; animation: windSway 2s ease-in-out infinite; }
+.metric-anim-gauge { display: inline-block; animation: metricPulse 3s ease-in-out infinite; }
+.metric-anim-eye { display: inline-block; animation: metricPulse 4s ease-in-out infinite; }
+
+/* ============================================================
+   HERO LEFT : IMAGE RÉELLE SANS LIENS NI BOUTONS D'ARTICLE
+   ============================================================ */
+.hero-real-showcase {
+  position: relative;
+  height: 490px;
+  min-height: 490px;
+  max-height: 490px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.4);
+  background: #070D1E;
+}
+.hero-showcase-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 8s ease;
+}
+.hero-real-showcase:hover .hero-showcase-bg {
+  transform: scale(1.03);
+}
+.hero-showcase-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 19, 43, 0.2) 0%, rgba(11, 19, 43, 0.5) 45%, rgba(11, 19, 43, 0.94) 100%),
+              radial-gradient(circle at 20% 80%, rgba(242, 106, 33, 0.25) 0%, transparent 50%);
+}
+.hero-showcase-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 36px;
+  z-index: 10;
+  color: white;
+}
+.hero-caption-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #FDBA74;
+  background: rgba(242, 106, 33, 0.25);
+  border: 1px solid rgba(242, 106, 33, 0.4);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  margin-bottom: 14px;
+  backdrop-filter: blur(8px);
+}
+.hero-caption-heading {
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+.hero-caption-desc {
+  font-size: 14.5px;
+  color: #CBD5E1;
+  line-height: 1.55;
+  max-width: 620px;
+  margin-bottom: 16px;
+}
+.hero-caption-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: #94A3B8;
+  font-weight: 600;
+}
+.hero-caption-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ============================================================
+   BENTO GRID : 3 PÔLES HARMONISÉS (NAVIGATION + AÉROPORTS FUSIONNÉS)
+   ============================================================ */
+.bento-grid-3poles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ============================================================
+   YOUTUBE SECTION : MODÈLE EXACT DE CARDS & COULEURS DU SCREENSHOT
+   ============================================================ */
+.youtube-indigo-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #0B1028 0%, #151A44 50%, #0D1333 100%);
+  color: white;
+  border-top: 3px solid var(--orange);
+  border-bottom: 3px solid var(--green);
+}
+.yt-player-box {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 32px;
+}
+.yt-player-iframe-wrap {
+  width: 100%;
+  height: 440px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+}
+.yt-player-iframe-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.yt-player-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 8px 6px;
+}
+.yt-player-title-text {
+  font-size: 19px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.35;
+}
+.yt-player-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+.yt-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.yt-video-card {
+  background: #171E42;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--dur-base) var(--ease-spring);
+  cursor: pointer;
+  position: relative;
+}
+.yt-video-card:hover, .yt-video-card.active {
+  transform: translateY(-6px);
+  background: rgba(30, 38, 86, 0.95);
+  border-color: rgba(242, 106, 33, 0.7);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.45);
+}
+.yt-video-card.active {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 2px var(--orange), 0 20px 40px -10px rgba(242, 106, 33, 0.4);
+}
+.yt-card-img-wrap {
+  height: 160px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.yt-card-tag-pill {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  color: white;
+  backdrop-filter: blur(8px);
+}
+.yt-card-play-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.92);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease;
+}
+.yt-video-card:hover .yt-card-play-btn {
+  transform: scale(1.1);
+  background: #DC2626;
+}
+.yt-card-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.yt-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: white;
+  margin-bottom: 8px;
+}
+.yt-card-desc {
+  font-size: 12.5px;
+  color: #CBD5E1;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.yt-card-link {
+  margin-top: auto;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #FDBA74;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 991px) {
+  .bento-grid-3poles { grid-template-columns: 1fr; }
+  .yt-cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .yt-player-iframe-wrap { height: 320px; }
+}
+@media (max-width: 640px) {
+  .yt-cards-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- BANDEAU ALERTES FLASH -->
+<!-- Top Bar Alertes Flash -->
+<div class="flash-bar">
+  <div class="flash-label">
+    <span class="flash-pulse"></span>
+    SODEXAM FLASH
+  </div>
+  <div class="flash-track">
+    <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
+    <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins quotidiens Vigiclim</span>
+    <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
+    <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
+  </div>
+</div>
+
+<!-- Header Principal -->
+<header class="main-header">
+  <div class="container header-inner">
+    <a href="Maquette_site_internet.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+      <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="Maquette_site_internet.html" class="nav-link active">
+        <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
+      </a>
+      
+      <div class="nav-item-dropdown">
+        <a href="#" class="nav-link">
+          Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="Maquette_site_internet.html#presentation">Présentation générale</a>
+          <a href="mot-du-dg.html">Mot du Directeur Général</a>
+          <a href="Maquette_site_internet.html#missions">Nos missions & valeurs</a>
+          <a href="Maquette_site_internet.html#gouvernance">Conseil d'administration</a>
+          <a href="Maquette_site_internet.html#codir">Comité de direction</a>
+        </div>
+      </div>
+
+      <div class="nav-item-dropdown">
+        <a href="Maquette_site_internet.html#activites" class="nav-link">
+          Nos activités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="Maquette_site_internet.html#activites">Météorologie Nationale & Vigiclim</a>
+          <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
+          <a href="Maquette_site_internet.html#activites">Médecine Aéronautique (CERMA)</a>
+        </div>
+      </div>
+
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link">
+          Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="actualites.html">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html">Magazine L'Aérien</a>
+          <a href="actualites.html#cooperation">Coopération & Partenariats</a>
+          <a href="actualites.html">Communiqués officiels</a>
+        </div>
+      </div>
+
+      <a href="magazine-aerien.html" class="nav-link">
+        Magazine L'Aérien
+      </a>
+
+      <a href="Maquette_site_internet.html#contact" class="nav-link">
+        Contact
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="burger-btn" id="burgerToggle" aria-label="Menu Mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html" class="active"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html" class="active"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html" class="active"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html" class="active"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html" class="active"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html" class="active"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html" class="active"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html"><i class="fa-solid fa-user-tie"></i> Mot du Directeur Général</a>
+    <a href="actualites.html"><i class="fa-solid fa-newspaper"></i> Actualités & Presse</a>
+    <a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-cloud-sun"></i> Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-plane-up"></i> Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-suitcase-medical"></i> CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#">Accueil</a>
+  <a href="#">Qui sommes-nous</a>
+  <a href="#">Nos activités</a>
+  <a href="#">Actualités</a>
+  <a href="#">Contact</a>
+</div>
+
+<!-- ============================================================
+     HERO — hauteur 620px
+     ============================================================ -->
+<!-- HERO SECTION : 2/3 IMAGE RÉELLE SHOWCASE + 1/3 WIDGET MÉTÉO CI AVEC ICÔNES ANIMÉES -->
+<section class="hero-section-grid">
+  <div class="container hero-split-container">
+    
+    <!-- Partie Gauche (2/3 de largeur) : Image Réelle Proposée (Aucun lien d'article, Aucun bouton) -->
+    <div class="hero-real-showcase">
+      <div class="hero-showcase-bg" style="background-image: url('https://sodexam.com/wp-content/uploads/2024/06/18-05-2024-Inauguration-de-lAeroport-de-Korhogo-61-scaled-1.jpg');"></div>
+      <div class="hero-showcase-gradient"></div>
+      
+      <div class="hero-showcase-caption">
+        <div class="hero-caption-pill">
+          <span class="flash-pulse" style="width:6px;height:6px;background:#4ADE80;"></span> INFRASTRUCTURE NATIONALE • CÔTE D'IVOIRE
+        </div>
+        <h1 class="hero-caption-heading">Plateformes Aéroportuaires & Surveillance Météorologique</h1>
+        <p class="hero-caption-desc">Garant régalien de la sécurité de la navigation aérienne, du développement des aéroports régionaux et de la vigie climatologique sur tout le territoire national.</p>
+        
+        <div class="hero-caption-meta">
+          <span><i class="fa-solid fa-location-dot" style="color:var(--orange);"></i> Port-Bouët, Abidjan & Aéroports Régionaux</span>
+          <span><i class="fa-solid fa-shield-halved" style="color:#4ADE80;"></i> Établissement Public de l'État</span>
+          <span><i class="fa-solid fa-clock" style="color:#38BDF8;"></i> Veille Opérationnelle 24h/24 • 7j/7</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partie Droite (1/3 de largeur) : Widget Météo Côte d'Ivoire avec Icônes Animées -->
+    <div class="hero-weather-widget">
+      <div>
+        <div class="widget-head-badge">
+          <span class="widget-live-pill"><span class="flash-pulse" style="width:6px;height:6px;background:#4ADE80;"></span> EN DIRECT • CÔTE D'IVOIRE</span>
+          <span style="font-size:11px; color:#94A3B8; font-weight:600;" id="heroLiveClock">GMT Abidjan</span>
+        </div>
+
+        <div class="widget-cities-nav">
+          <button class="widget-city-btn active" onclick="setWidgetCity('abidjan')">Abidjan</button>
+          <button class="widget-city-btn" onclick="setWidgetCity('yamoussoukro')">Yamoussoukro</button>
+          <button class="widget-city-btn" onclick="setWidgetCity('sanpedro')">San Pedro</button>
+          <button class="widget-city-btn" onclick="setWidgetCity('bouake')">Bouaké</button>
+          <button class="widget-city-btn" onclick="setWidgetCity('korhogo')">Korhogo</button>
+        </div>
+
+        <div class="widget-main-weather">
+          <div>
+            <div class="widget-temp-val" id="wTemp">28°C</div>
+            <div class="widget-desc-text" id="wDesc">Ciel peu nuageux</div>
+            <div style="font-size:11.5px; color:#94A3B8; margin-top:3px;" id="wCityLabel">Abidjan (Port-Bouët)</div>
+          </div>
+          <div style="font-size:42px;" id="wIcon">
+            <i class="fa-solid fa-cloud-sun w-anim-cloud-sun"></i>
+          </div>
+        </div>
+
+        <div class="widget-metrics-row">
+          <div class="widget-metric-cell">
+            <span><i class="fa-solid fa-droplet metric-anim-drop" style="color:#38BDF8; margin-right:4px;"></i> Humidité</span>
+            <strong id="wHum">78 %</strong>
+          </div>
+          <div class="widget-metric-cell">
+            <span><i class="fa-solid fa-wind metric-anim-wind" style="color:#94A3B8; margin-right:4px;"></i> Vent</span>
+            <strong id="wWind">14 km/h S-O</strong>
+          </div>
+          <div class="widget-metric-cell">
+            <span><i class="fa-solid fa-gauge-high metric-anim-gauge" style="color:#FBBF24; margin-right:4px;"></i> Pression</span>
+            <strong id="wPres">1013 hPa</strong>
+          </div>
+          <div class="widget-metric-cell">
+            <span><i class="fa-solid fa-eye metric-anim-eye" style="color:#4ADE80; margin-right:4px;"></i> Visibilité</span>
+            <strong id="wVis">10 km</strong>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:11px; font-weight:700; color:#94A3B8; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.8px;">Prévisions 72h</div>
+        <div class="widget-forecast-mini">
+          <div class="widget-forecast-item">
+            <span class="day">Aujourd'hui</span>
+            <div id="wF1Icon" style="font-size:14px; margin:2px 0;"><i class="fa-solid fa-cloud-sun w-anim-cloud-sun"></i></div>
+            <span class="temp" id="wF1">29° / 24°</span>
+          </div>
+          <div class="widget-forecast-item">
+            <span class="day">Demain</span>
+            <div id="wF2Icon" style="font-size:14px; margin:2px 0;"><i class="fa-solid fa-sun w-anim-sun"></i></div>
+            <span class="temp" id="wF2">28° / 23°</span>
+          </div>
+          <div class="widget-forecast-item">
+            <span class="day">Après-demain</span>
+            <div id="wF3Icon" style="font-size:14px; margin:2px 0;"><i class="fa-solid fa-cloud w-anim-cloud"></i></div>
+            <span class="temp" id="wF3">30° / 24°</span>
+          </div>
+        </div>
+
+        <div style="margin-top:12px; background:rgba(30,122,60,0.2); border:1px solid rgba(74,222,128,0.3); border-radius:8px; padding:6px 10px; font-size:11px; color:#86EFAC; display:flex; align-items:center; gap:8px;">
+          <i class="fa-solid fa-shield-halved" style="color:#4ADE80;"></i>
+          <span>Bulletin Vigiclim : Vigilance Verte</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BANDEAU PRESTIGE : MOT DU DIRECTEUR GÉNÉRAL -->
+<section id="presentation" style="background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 60%, #0F172A 100%); color: white; padding: 44px 0; position: relative; overflow: hidden; border-top: 3px solid var(--orange); border-bottom: 3px solid var(--green);">
+  <div class="container" style="display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center;">
+    <div style="background: linear-gradient(145deg, rgba(242,106,33,0.35), rgba(255,255,255,0.12)); padding: 6px; border-radius: 20px; box-shadow: 0 16px 36px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);">
+      <img src="images/dg_abdul_adam_sylla.jpeg" alt="Monsieur Abdul Adam SYLLA" style="width: 140px; height: 165px; object-fit: cover; border-radius: 14px; display: block;">
+    </div>
+    <div>
+      <span style="display: inline-flex; align-items:center; gap:8px; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #FDBA74; background: rgba(242,106,33,0.2); padding: 5px 14px; border-radius: 9999px; margin-bottom: 12px;">
+        <i class="fa-solid fa-award"></i> Vision Stratégique • Direction Générale
+      </span>
+      <h3 style="font-size: 24px; font-weight: 800; line-height: 1.3; margin-bottom: 8px;">« Positionner la SODEXAM comme le leader ouest-africain de l'exploitation aéroportuaire et météo »</h3>
+      <p style="font-size: 14.5px; color: #CBD5E1; line-height: 1.6; max-width: 740px;">
+        Retrouvez les orientations stratégiques de Monsieur <strong>Abdul Adam SYLLA</strong>, les accomplissements du nouveau siège « Général Abdoulaye Coulibaly » et notre engagement citoyen pour la sécurité des vols et des populations.
+      </p>
+    </div>
+    <div>
+      <a href="mot-du-dg.html" class="btn-primary-capsule">
+        <span>Lire le Mot du DG</span>
+        <span class="btn-circle-icon"><i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- NOS ACTIVITÉS (3 PÔLES HARMONISÉS : NAVIGATION ET AÉROPORTS FUSIONNÉS) -->
+<section class="bento-section" id="activites">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); background:var(--orange-subtle); padding:4px 14px; border-radius:9999px; margin-bottom:10px;">
+          Pôles d'Excellence
+        </span>
+        <h2 style="font-size:32px; font-weight:800; color:var(--blue-navy); line-height:1.2;">Nos Activités & Domaines d'Expertise</h2>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-top:6px; max-width:680px;">Les trois missions régaliennes garantissant la sécurité aéroportuaire, aéronautique et météorologique de Côte d'Ivoire :</p>
+      </div>
+      <a href="actualites.html" style="font-weight:700; color:var(--orange); display:inline-flex; align-items:center; gap:6px;">
+        <span>Explorer nos réalisations</span> <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="bento-grid-3poles">
+      <!-- Pôle 1 : Météorologie & Climat -->
+      <div class="bento-card-shell">
+        <div class="bento-card-inner">
+          <div class="bento-bg-img" style="background-image: url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1200&auto=format&fit=crop&q=80');"></div>
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <span class="bento-badge orange"><i class="fa-solid fa-cloud-sun"></i> Pôle Climat & Météo</span>
+            <h3>Météorologie Nationale & Vigiclim</h3>
+            <p>Réseau national d'observation, radars Doppler, prévisions quotidiennes 24h/24, alertes orageuses précoces et assistance agrométéorologique aux producteurs.</p>
+            <a href="actualites.html" class="bento-link">Consulter les bulletins <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pôle 2 : Navigation Aérienne & Aéroports Régionaux (FUSIONNÉS) -->
+      <div class="bento-card-shell">
+        <div class="bento-card-inner">
+          <div class="bento-bg-img" style="background-image: url('https://sodexam.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-09-at-10.50.33.jpeg');"></div>
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <span class="bento-badge green"><i class="fa-solid fa-plane-departure"></i> Pôle Navigation & Plateformes</span>
+            <h3>Navigation Aérienne & Aéroports Régionaux</h3>
+            <p>Surveillance radar de l'espace aérien, sécurité des vols avec l'ASECNA, entretien des pistes et exploitation des aéroports intérieurs (San Pedro, Korhogo, Bouaké, Man, Odienné, Kong).</p>
+            <a href="actualites.html" class="bento-link">Découvrir les plateformes <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pôle 3 : CERMA / Santé Aéronautique -->
+      <div class="bento-card-shell">
+        <div class="bento-card-inner">
+          <div class="bento-bg-img" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&auto=format&fit=crop&q=80');"></div>
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <span class="bento-badge blue"><i class="fa-solid fa-notes-medical"></i> Pôle Santé Opérationnelle</span>
+            <h3>CERMA — Centre Médical Aéronautique</h3>
+            <p>Expertise médicale du personnel navigant, examens d'aptitude physique et mentale des pilotes et contrôleurs, laboratoire d'analyses et médecine préventive agréée OACI.</p>
+            <a href="mot-du-dg.html" class="bento-link">Consulter les services CERMA <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRANDS DOSSIERS & RÉALISATIONS (Anciennes slides du Hero) -->
+<section class="dossiers-section" id="dossiers">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+      <div>
+        <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:#FDBA74; background:rgba(242,106,33,0.25); padding:4px 14px; border-radius:9999px; margin-bottom:10px;">
+          Grands Dossiers & Réalisations
+        </span>
+        <h2 style="font-size:30px; font-weight:800; line-height:1.2;">Les Réalisations Phares de la SODEXAM</h2>
+        <p style="color:#CBD5E1; font-size:14.5px; margin-top:6px; max-width:700px;">Découvrez les grands chantiers d'infrastructure, accords technologiques et projets d'avenir portés par la SODEXAM :</p>
+      </div>
+      <a href="actualites.html" class="btn-primary-capsule">
+        <span>Toutes les réalisations</span>
+        <span class="btn-circle-icon"><i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+
+    <div class="dossiers-grid">
+      <!-- Dossier 1 : Siège Abdoulaye Coulibaly -->
+      <div class="dossier-card" onclick="window.location.href='mot-du-dg.html'">
+        <div class="dossier-img-wrap" style="background-image: url('images/dg_abdul_adam_sylla.jpeg');">
+          <span class="dossier-tag-pill" style="background: var(--orange);">Siège Social</span>
+        </div>
+        <div class="dossier-body">
+          <h3 class="dossier-title">Bâtiment Général Abdoulaye Coulibaly</h3>
+          <p class="dossier-desc">Inauguration de notre joyau architectural moderne à Abidjan, consacrant 28 ans d'excellence aéroportuaire.</p>
+          <div class="dossier-link">Lire le Mot du DG <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+
+      <!-- Dossier 2 : Aéroport San Pedro -->
+      <div class="dossier-card" onclick="window.location.href='actualites.html'">
+        <div class="dossier-img-wrap" style="background-image: url('https://sodexam.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-09-at-10.50.33.jpeg');">
+          <span class="dossier-tag-pill" style="background: var(--green);">Plateformes</span>
+        </div>
+        <div class="dossier-body">
+          <h3 class="dossier-title">Modernisation de l'Aéroport de San Pedro</h3>
+          <p class="dossier-desc">Visite opérationnelle du Directeur Général pour accélérer la mise aux normes et stimuler le développement régional.</p>
+          <div class="dossier-link">Consulter le dossier <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+
+      <!-- Dossier 3 : IA & Climat SODEXAM & JooL -->
+      <div class="dossier-card" onclick="window.location.href='actualites.html'">
+        <div class="dossier-img-wrap" style="background-image: url('https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-11-at-10.42.31.jpeg');">
+          <span class="dossier-tag-pill" style="background: var(--blue-sky);">Innovation IA</span>
+        </div>
+        <div class="dossier-body">
+          <h3 class="dossier-title">Climat & IA : Partenariat SODEXAM & JooL</h3>
+          <p class="dossier-desc">Modélisation climatique par intelligence artificielle pour sécuriser les rendements des filières agricoles ivoiriennes.</p>
+          <div class="dossier-link">Découvrir l'accord <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+
+      <!-- Dossier 4 : Bourse Dominique Ouattara -->
+      <div class="dossier-card" onclick="window.location.href='actualites.html'">
+        <div class="dossier-img-wrap" style="background-image: url('https://sodexam.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-11-at-14.47.09.jpeg');">
+          <span class="dossier-tag-pill" style="background: #E11D48;">Jeunesse & RSE</span>
+        </div>
+        <div class="dossier-body">
+          <h3 class="dossier-title">Bourse d'Excellence Dominique Ouattara</h3>
+          <p class="dossier-desc">La SODEXAM accompagne 20 nouvelles bachelières vers les métiers d'élite de l'aviation civile.</p>
+          <div class="dossier-link">Voir la promotion <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CHIFFRES CLÉS (100% Visibles & Calibrés) -->
+<section class="stats-section" id="missions" style="padding: 48px 0; background: var(--bg-subtle);">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); background:var(--orange-subtle); padding:4px 14px; border-radius:9999px; margin-bottom:10px;">
+        Performance & Impact
+      </span>
+      <h2 style="font-size:30px; font-weight:800; color:var(--blue-navy);">La SODEXAM en Quelques Chiffres Repères</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card" style="box-shadow: var(--shadow-bezel); border: 1px solid var(--border-light);">
+        <div class="stat-num" data-target="28" data-suffix=" ans">28 ans</div>
+        <div class="stat-label">D'excellence aéroportuaire & météorologique nationale</div>
+      </div>
+      <div class="stat-card" style="box-shadow: var(--shadow-bezel); border: 1px solid var(--border-light);">
+        <div class="stat-num" data-target="10" data-suffix="+">10+</div>
+        <div class="stat-label">Aéroports régionaux et plateformes aéroportuaires gérés</div>
+      </div>
+      <div class="stat-card" style="box-shadow: var(--shadow-bezel); border: 1px solid var(--border-light);">
+        <div class="stat-num" data-target="100" data-suffix=" %">100 %</div>
+        <div class="stat-label">Couverture et sécurisation de l'espace aérien FIR ivoirien</div>
+      </div>
+      <div class="stat-card" style="box-shadow: var(--shadow-bezel); border: 1px solid var(--border-light);">
+        <div class="stat-num" data-target="24" data-suffix="/7">24/7</div>
+        <div class="stat-label">Surveillance météorologique continue et alertes Vigiclim</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTUALITÉS AUTHENTIQUES SODEXAM -->
+<section class="news-section" id="actualites" style="padding: 48px 0; background: var(--bg-page);">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); background:var(--orange-subtle); padding:4px 14px; border-radius:9999px; margin-bottom:10px;">
+          Presse & Médias
+        </span>
+        <h2 style="font-size:32px; font-weight:800; color:var(--blue-navy); line-height:1.2;">Dernières Actualités Officielles</h2>
+      </div>
+      <a href="actualites.html" class="btn-primary-capsule">
+        <span>Toutes les actualités (15)</span>
+        <span class="btn-circle-icon"><i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+
+    <div class="news-grid">
+      <!-- Article 1 -->
+      <div class="news-card-shell" onclick="window.location.href='actualites.html'">
+        <div class="news-card-inner">
+          <div class="news-card-img-wrap">
+            <img src="https://sodexam.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-09-at-10.50.33.jpeg" alt="Aéroport San Pedro" class="news-card-img">
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 12 Octobre 2026</div>
+            <h3 class="news-card-title">VISITE DE TERRAIN | AÉROPORT DE SAN PEDRO</h3>
+            <p class="news-card-desc">Le Directeur Général a entamé sa tournée des aéroports intérieurs pour inspecter les équipements d'assistance et les pistes de la cité balnéaire.</p>
+            <div class="news-card-link">Consulter l'article <i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="news-card-shell" onclick="window.location.href='actualites.html'">
+        <div class="news-card-inner">
+          <div class="news-card-img-wrap">
+            <img src="https://sodexam.com/wp-content/uploads/2026/09/IMG_3630.png" alt="Abdul Adam SYLLA" class="news-card-img">
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 15 Septembre 2026</div>
+            <h3 class="news-card-title">M. Abdul Adam SYLLA confirmé Directeur Général</h3>
+            <p class="news-card-desc">Le Conseil d'Administration confirme officiellement Monsieur Abdul Adam SYLLA à la tête de la SODEXAM pour piloter la modernisation institutionnelle.</p>
+            <div class="news-card-link">Consulter l'article <i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="news-card-shell" onclick="window.location.href='actualites.html'">
+        <div class="news-card-inner">
+          <div class="news-card-img-wrap">
+            <img src="https://sodexam.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-11-at-14.47.09.jpeg" alt="Bourses Dominique Ouattara" class="news-card-img">
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 13 Septembre 2026</div>
+            <h3 class="news-card-title">Bourse Dominique Ouattara : 20 bachelières accompagnées</h3>
+            <p class="news-card-desc">La SODEXAM soutient activement la formation et l'excellence des jeunes filles ivoiriennes dans les métiers techniques de l'aviation civile.</p>
+            <div class="news-card-link">Consulter l'article <i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 4 -->
+      <div class="news-card-shell" onclick="window.location.href='actualites.html'">
+        <div class="news-card-inner">
+          <div class="news-card-img-wrap">
+            <img src="https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-11-at-10.42.31.jpeg" alt="Climat et IA" class="news-card-img">
+          </div>
+          <div class="news-card-body">
+            <div class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 11 Août 2026</div>
+            <h3 class="news-card-title">Climat et Agriculture : Partenariat SODEXAM & JooL</h3>
+            <p class="news-card-desc">Alliance stratégique combinant modélisation climatique par intelligence artificielle et alertes météo précoces pour l'agriculture ivoirienne.</p>
+            <div class="news-card-link">Consulter l'article <i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- YOUTUBE SECTION (MODÈLE DE CARDS ET COULEURS IDENTIQUES AU SCREENSHOT FOURNI) -->
+<section class="youtube-indigo-section" id="youtube">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:32px;">
+      <div>
+        <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:#FDBA74; background:rgba(242,106,33,0.25); padding:4px 14px; border-radius:9999px; margin-bottom:10px;">
+          SODEXAM TV • CHAÎNE OFFICIELLE
+        </span>
+        <h2 style="font-size:32px; font-weight:800; line-height:1.2;">Vidéos Officielles & Reportages Exclusifs '</h2>
+        <p style="color:#CBD5E1; font-size:14.5px; margin-top:6px; max-width:700px;">Suivez nos reportages de terrain, inaugurations de plateformes aéroportuaires et émissions d'information aéronautique et météorologique :</p>
+      </div>
+      <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener" class="btn-primary-capsule">
+        <span>Toute la chaîne YouTube</span>
+        <span class="btn-circle-icon"><i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+
+    <!-- Lecteur Vidéo Principal en Format Cinéma -->
+    <div class="yt-player-box">
+      <div class="yt-player-iframe-wrap">
+        <iframe id="mainYtFrame" src="https://www.youtube.com/embed/Xh4aBXvAwMQ?rel=0" title="Terre d'Impact - SODEXAM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="yt-player-footer">
+        <div>
+          <div class="yt-player-live-badge"><span class="flash-pulse" style="width:6px;height:6px;background:#EF4444;"></span> EN LECTURE</div>
+          <h3 class="yt-player-title-text" id="mainYtTitle" style="margin-top:6px;">Terre d'Impact : Émission Spéciale SODEXAM</h3>
+        </div>
+        <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener" style="color:#FDBA74; font-size:13px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+          <span>S'abonner à la chaîne</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Grille des Vidéos au Modèle de Card Exact du Screenshot -->
+    <div class="yt-cards-grid">
+      <!-- Card 1 -->
+      <div class="yt-video-card active" onclick="changeYtVideo('Xh4aBXvAwMQ', 'Terre d’Impact : Émission Spéciale SODEXAM', this)">
+        <div class="yt-card-img-wrap" style="background-image: url('https://img.youtube.com/vi/Xh4aBXvAwMQ/hqdefault.jpg');">
+          <span class="yt-card-tag-pill" style="background: var(--orange);">Émission Spéciale</span>
+          <div class="yt-card-play-btn"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="yt-card-body">
+          <h3 class="yt-card-title">Terre d'Impact : Grand Format SODEXAM</h3>
+          <p class="yt-card-desc">Immersion exclusive au cœur des activités aéroportuaires et météorologiques nationales.</p>
+          <div class="yt-card-link">Regarder la vidéo <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="yt-video-card" onclick="changeYtVideo('8oMf93bXIx0', 'Bourse d’excellence Dominique Ouattara pour les femmes dans l’aviation civile', this)">
+        <div class="yt-card-img-wrap" style="background-image: url('https://img.youtube.com/vi/8oMf93bXIx0/hqdefault.jpg');">
+          <span class="yt-card-tag-pill" style="background: #E11D48;">Jeunesse & RSE</span>
+          <div class="yt-card-play-btn"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="yt-card-body">
+          <h3 class="yt-card-title">Bourse d'Excellence Dominique Ouattara</h3>
+          <p class="yt-card-desc">Accompagnement de 20 bachelières d'élite vers les métiers de l'aviation civile.</p>
+          <div class="yt-card-link">Regarder la vidéo <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="yt-video-card" onclick="changeYtVideo('AIYBv5UbwSQ', 'À la découverte de l’Aéroport International de Korhogo rénové', this)">
+        <div class="yt-card-img-wrap" style="background-image: url('https://img.youtube.com/vi/AIYBv5UbwSQ/hqdefault.jpg');">
+          <span class="yt-card-tag-pill" style="background: var(--green);">Plateformes</span>
+          <div class="yt-card-play-btn"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="yt-card-body">
+          <h3 class="yt-card-title">Aéroport International de Korhogo</h3>
+          <p class="yt-card-desc">Visite opérationnelle des nouvelles pistes, aérogares et équipements de sécurité.</p>
+          <div class="yt-card-link">Regarder la vidéo <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="yt-video-card" onclick="changeYtVideo('Ju3-oSNIr_0', 'Mesures de prévention de la SODEXAM face aux risques de la saison des pluies', this)">
+        <div class="yt-card-img-wrap" style="background-image: url('https://img.youtube.com/vi/Ju3-oSNIr_0/hqdefault.jpg');">
+          <span class="yt-card-tag-pill" style="background: var(--blue-sky);">Sécurité Météo</span>
+          <div class="yt-card-play-btn"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="yt-card-body">
+          <h3 class="yt-card-title">Prévention Saison des Pluies</h3>
+          <p class="yt-card-desc">Dispositif d'alerte météorologique et consignes de vigilance face aux crues et orages.</p>
+          <div class="yt-card-link">Regarder la vidéo <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTENARIATS STRATÉGIQUES & RSE (Placée entre YouTube et L'Aérien) -->
+<section style="padding: 48px 0; background: var(--bg-page);" id="partenariats">
+  <div class="container">
+    <div style="background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 60%, #0F172A 100%); border-radius: 24px; padding: 44px; color: white; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; border: 1px solid rgba(255,255,255,0.15); box-shadow: var(--shadow-bezel);">
+      <div>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #FDBA74; background: rgba(242,106,33,0.25); padding: 5px 14px; border-radius: 9999px; margin-bottom: 12px;">
+          <i class="fa-solid fa-handshake"></i> Partenariats Stratégiques & RSE
+        </span>
+        <h3 style="font-size: 25px; font-weight: 800; line-height: 1.25; margin-bottom: 10px;">Acteurs de l'Aérien et du Climat : Bâtissons Ensemble l'Avenir</h3>
+        <p style="font-size: 14.5px; color: #CBD5E1; line-height: 1.6; max-width: 680px;">Compagnies aériennes, filières agro-industrielles, exploitants aéroportuaires et collectivités : découvrez nos offres de données météorologiques certifiées, nos espaces d'assistance et nos opportunités de coopération.</p>
+      </div>
+      <div>
+        <a href="#contact" class="btn-primary-capsule">
+          <span>Contacter la Direction</span>
+          <span class="btn-circle-icon"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- L'AÉRIEN SECTION (STYLE COVER 3 MAGAZINES DU MODÈLE SIKA FINANCE) -->
+<section class="aerien-cover-section" id="aerien">
+  <div class="container">
+    <div class="aerien-cover-title">
+      TÉLÉCHARGEZ LES MAGAZINES L'AÉRIEN <span class="quote">'</span>
+    </div>
+
+    <!-- Rangée des 3 Couvertures (Chaque clic mène vers magazine-aerien.html) -->
+    <div class="aerien-covers-row">
+      <!-- Cover 1 : L'Aérien N°84 -->
+      <div class="aerien-cover-item" onclick="window.location.href='magazine-aerien.html'" title="Consulter L'Aérien N°84">
+        <img src="https://sodexam.com/wp-content/uploads/2026/09/Capture-decran-2026-09-07-145408.png" alt="Magazine L'Aérien N°84" class="aerien-cover-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+        <div class="aerien-cover-caption">L'Aérien N°84 • Septembre - Octobre 2026</div>
+      </div>
+
+      <!-- Cover 2 : L'Aérien N°71 -->
+      <div class="aerien-cover-item" onclick="window.location.href='magazine-aerien.html'" title="Consulter L'Aérien N°71">
+        <img src="https://sodexam.com/wp-content/uploads/2024/12/A_71DEF.png" alt="Magazine L'Aérien N°71" class="aerien-cover-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+        <div class="aerien-cover-caption">L'Aérien N°71 • Décembre 2024</div>
+      </div>
+
+      <!-- Cover 3 : L'Aérien N°70 -->
+      <div class="aerien-cover-item" onclick="window.location.href='magazine-aerien.html'" title="Consulter L'Aérien N°70">
+        <img src="https://sodexam.com/wp-content/uploads/2024/10/A_70DEF.png" alt="Magazine L'Aérien N°70" class="aerien-cover-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+        <div class="aerien-cover-caption">L'Aérien N°70 • Octobre 2024</div>
+      </div>
+    </div>
+
+    <div>
+      <a href="magazine-aerien.html" class="btn-primary-capsule">
+        <span>Consulter toutes les éditions du magazine L'Aérien</span>
+        <span class="btn-circle-icon"><i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- LOCALISATION ET DIRECTION GÉNÉRALE (100% Visible & Calibré) -->
+<section class="maps-section" id="contact" style="padding: 48px 0; background: var(--bg-subtle);">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); background:var(--orange-subtle); padding:4px 14px; border-radius:9999px; margin-bottom:10px;">
+        Nous Rencontrer
+      </span>
+      <h2 style="font-size:30px; font-weight:800; color:var(--blue-navy);">Direction Générale & Siège Social</h2>
+      <p style="color:var(--text-muted); font-size:14.5px; margin-top:6px;">Zone Aéroportuaire Internationale Félix Houphouët-Boigny, Abidjan - Côte d'Ivoire</p>
+    </div>
+
+    <div style="background: white; border-radius: 20px; padding: 12px; border: 1px solid var(--border-light); box-shadow: var(--shadow-bezel); margin-bottom: 24px;">
+      <div style="border-radius: 14px; overflow: hidden; height: 360px;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.0103677746925!2d-3.9349535!3d5.2582708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ee4d0f6a18b3%3A0x5139cc0a5225a9b!2sSODEXAM!5e0!3m2!1sfr!2sci!4v1699999999999" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localisation Siège SODEXAM" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+      </div>
+    </div>
+
+    <div class="maps-info" style="border-radius: 16px; border: 1px solid var(--border-light); box-shadow: var(--shadow-card);">
+      <div class="maps-info-item">
+        <h4 style="font-size: 15px; font-weight: 700; color: var(--blue-navy);"><i class="fa-solid fa-location-dot" style="color: var(--orange); margin-right: 6px;"></i> Adresse Postale</h4>
+        <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5;">Siège Bâtiment Général Abdoulaye Coulibaly<br>Zone Aéroportuaire Félix Houphouët-Boigny, Port-Bouët</p>
+      </div>
+      <div class="maps-info-item">
+        <h4 style="font-size: 15px; font-weight: 700; color: var(--blue-navy);"><i class="fa-solid fa-phone" style="color: var(--green); margin-right: 6px;"></i> Standard Téléphonique</h4>
+        <p style="font-size: 14px; font-weight: 600; color: var(--text-main);"><a href="tel:+2252721588700" style="color:inherit;">+225 27 21 58 87 00</a></p>
+        <span style="font-size: 12px; color: var(--text-light);">Lundi - Vendredi : 07h30 - 16h30</span>
+      </div>
+      <div class="maps-info-item">
+        <h4 style="font-size: 15px; font-weight: 700; color: var(--blue-navy);"><i class="fa-solid fa-envelope" style="color: var(--blue-sky); margin-right: 6px;"></i> Courrier Électronique</h4>
+        <p style="font-size: 14px; font-weight: 600; color: var(--orange);"><a href="mailto:contact@sodexam.ci" style="color:var(--orange);">contact@sodexam.ci</a></p>
+        <span style="font-size: 12px; color: var(--text-light);">Permanence Opérationnelle 24h/24</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER UNIFORME SODEXAM -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="margin-bottom:20px;">
+          <a href="Maquette_site_internet.html" title="SODEXAM — Retour à l'accueil">
+            <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
+          </a>
+        </div>
+        <p style="line-height:1.7; margin-bottom:20px; color:#94A3B8; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire. Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        </p>
+        <div style="display:flex; gap:12px; font-size:15px;">
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation Rapide</div>
+        <ul class="footer-links">
+          <li><a href="Maquette_site_internet.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Actualités & Presse</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météorologie Nationale</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Navigation Aérienne & Aéroports Régionaux</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Médecine Aéronautique (CERMA)</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Publications & Médias</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Toutes les actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien N°84</a></li>
+          <li><a href="actualites.html#cooperation"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Coopération Internationale</a></li>
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Communiqués officiels</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Direction Générale</div>
+        <p style="color:#94A3B8; margin-bottom:12px; line-height:1.6; font-size:13.5px;">
+          <i class="fa-solid fa-location-dot" style="color:var(--orange); margin-right:8px;"></i>
+          Siège Bâtiment Général Abdoulaye Coulibaly, Zone Aéroportuaire Félix Houphouët-Boigny, Abidjan - Côte d'Ivoire
+        </p>
+        <p style="color:#94A3B8; margin-bottom:8px; font-size:13.5px;">
+          <i class="fa-solid fa-phone" style="color:var(--orange); margin-right:8px;"></i> +225 27 21 58 87 00
+        </p>
+        <p style="color:#94A3B8; font-size:13.5px;">
+          <i class="fa-solid fa-envelope" style="color:var(--orange); margin-right:8px;"></i> contact@sodexam.ci
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="#">Mentions Légales</a>
+        <a href="#">Politique de Confidentialité</a>
+        <a href="#">Plan du site</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+<script>
+
+// Menu Mobile Drawer
+const burgerToggle = document.getElementById('burgerToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerClose = document.getElementById('drawerClose');
+
+if (burgerToggle && mobileDrawer) {
+  burgerToggle.addEventListener('click', () => {
+    mobileDrawer.classList.add('open');
+  });
+}
+if (drawerClose && mobileDrawer) {
+  drawerClose.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+  });
+}
+// Fermer sur clic en dehors
+document.addEventListener('click', (e) => {
+  if (mobileDrawer && mobileDrawer.classList.contains('open')) {
+    if (!mobileDrawer.contains(e.target) && !burgerToggle.contains(e.target)) {
+      mobileDrawer.classList.remove('open');
+    }
+  }
+});
+
+
+// Hero Right Weather Widget Data & Switcher with Animated Weather Icons
+const ciWeatherData = {
+  abidjan: { 
+    label: 'Abidjan (Port-Bouët)', 
+    temp: '28°C', 
+    desc: 'Ciel peu nuageux', 
+    hum: '78 %', 
+    wind: '14 km/h S-O', 
+    pres: '1013 hPa', 
+    vis: '10 km', 
+    iconClass: 'fa-solid fa-cloud-sun w-anim-cloud-sun', 
+    f1: '29° / 24°', f1Icon: 'fa-solid fa-cloud-sun w-anim-cloud-sun',
+    f2: '28° / 23°', f2Icon: 'fa-solid fa-sun w-anim-sun',
+    f3: '30° / 24°', f3Icon: 'fa-solid fa-cloud w-anim-cloud'
+  },
+  yamoussoukro: { 
+    label: 'Yamoussoukro Aéroport', 
+    temp: '31°C', 
+    desc: 'Ensoleillé et chaud', 
+    hum: '68 %', 
+    wind: '10 km/h N-E', 
+    pres: '1014 hPa', 
+    vis: '> 10 km', 
+    iconClass: 'fa-solid fa-sun w-anim-sun', 
+    f1: '32° / 23°', f1Icon: 'fa-solid fa-sun w-anim-sun',
+    f2: '31° / 22°', f2Icon: 'fa-solid fa-cloud-sun w-anim-cloud-sun',
+    f3: '33° / 24°', f3Icon: 'fa-solid fa-sun w-anim-sun'
+  },
+  sanpedro: { 
+    label: 'San Pedro Aéroport', 
+    temp: '29°C', 
+    desc: 'Averses orageuses', 
+    hum: '86 %', 
+    wind: '18 km/h S', 
+    pres: '1012 hPa', 
+    vis: '8 km', 
+    iconClass: 'fa-solid fa-cloud-bolt w-anim-thunder', 
+    f1: '29° / 24°', f1Icon: 'fa-solid fa-cloud-showers-heavy w-anim-rain',
+    f2: '28° / 23°', f2Icon: 'fa-solid fa-cloud-bolt w-anim-thunder',
+    f3: '29° / 24°', f3Icon: 'fa-solid fa-cloud-sun w-anim-cloud-sun'
+  },
+  bouake: { 
+    label: 'Bouaké Aéroport', 
+    temp: '32°C', 
+    desc: 'Ciel voilé', 
+    hum: '64 %', 
+    wind: '12 km/h E', 
+    pres: '1013 hPa', 
+    vis: '> 10 km', 
+    iconClass: 'fa-solid fa-cloud w-anim-cloud', 
+    f1: '32° / 23°', f1Icon: 'fa-solid fa-cloud w-anim-cloud',
+    f2: '33° / 24°', f2Icon: 'fa-solid fa-sun w-anim-sun',
+    f3: '31° / 22°', f3Icon: 'fa-solid fa-cloud-sun w-anim-cloud-sun'
+  },
+  korhogo: { 
+    label: 'Korhogo Aéroport', 
+    temp: '33°C', 
+    desc: 'Beau temps sec', 
+    hum: '52 %', 
+    wind: '15 km/h N', 
+    pres: '1015 hPa', 
+    vis: '> 10 km', 
+    iconClass: 'fa-solid fa-sun w-anim-sun', 
+    f1: '34° / 22°', f1Icon: 'fa-solid fa-sun w-anim-sun',
+    f2: '33° / 21°', f2Icon: 'fa-solid fa-sun w-anim-sun',
+    f3: '35° / 23°', f3Icon: 'fa-solid fa-cloud-sun w-anim-cloud-sun'
+  }
+};
+
+function setWidgetCity(key) {
+  const d = ciWeatherData[key];
+  if (!d) return;
+
+  document.querySelectorAll('.widget-city-btn').forEach(b => b.classList.remove('active'));
+  if (event && event.target) event.target.classList.add('active');
+
+  const tempEl = document.getElementById('wTemp');
+  const descEl = document.getElementById('wDesc');
+  const cityEl = document.getElementById('wCityLabel');
+  const iconEl = document.getElementById('wIcon');
+  const humEl = document.getElementById('wHum');
+  const windEl = document.getElementById('wWind');
+  const presEl = document.getElementById('wPres');
+  const visEl = document.getElementById('wVis');
+  const f1El = document.getElementById('wF1');
+  const f2El = document.getElementById('wF2');
+  const f3El = document.getElementById('wF3');
+  const f1IconEl = document.getElementById('wF1Icon');
+  const f2IconEl = document.getElementById('wF2Icon');
+  const f3IconEl = document.getElementById('wF3Icon');
+
+  if (tempEl) tempEl.textContent = d.temp;
+  if (descEl) descEl.textContent = d.desc;
+  if (cityEl) cityEl.textContent = d.label;
+  if (humEl) humEl.textContent = d.hum;
+  if (windEl) windEl.textContent = d.wind;
+  if (presEl) presEl.textContent = d.pres;
+  if (visEl) visEl.textContent = d.vis;
+  if (f1El) f1El.textContent = d.f1;
+  if (f2El) f2El.textContent = d.f2;
+  if (f3El) f3El.textContent = d.f3;
+  if (iconEl) iconEl.innerHTML = `<i class="${d.iconClass}"></i>`;
+  if (f1IconEl) f1IconEl.innerHTML = `<i class="${d.f1Icon}"></i>`;
+  if (f2IconEl) f2IconEl.innerHTML = `<i class="${d.f2Icon}"></i>`;
+  if (f3IconEl) f3IconEl.innerHTML = `<i class="${d.f3Icon}"></i>`;
+}
+
+// Live Clock for Hero Weather Widget
+function updateLiveClock() {
+  const clockEl = document.getElementById('heroLiveClock');
+  if (clockEl) {
+    const now = new Date();
+    const h = String(now.getUTCHours()).padStart(2, '0');
+    const m = String(now.getUTCMinutes()).padStart(2, '0');
+    clockEl.textContent = `${h}:${m} GMT (Abidjan)`;
+  }
+}
+setInterval(updateLiveClock, 1000);
+updateLiveClock();
+
+// YouTube Player Video Switcher (Card Model Exact)
+function changeYtVideo(videoId, title, cardEl) {
+  const frame = document.getElementById('mainYtFrame');
+  const titleEl = document.getElementById('mainYtTitle');
+
+  if (frame) {
+    frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+  }
+  if (titleEl) {
+    titleEl.textContent = title;
+  }
+
+  document.querySelectorAll('.yt-video-card').forEach(c => c.classList.remove('active'));
+  if (cardEl) {
+    cardEl.classList.add('active');
+  }
+
+  const ytSec = document.getElementById('youtube');
+  if (ytSec) {
+    ytSec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+</script>
+
+
+
+
+
+</body>
+</html>

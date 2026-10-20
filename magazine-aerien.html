@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magazine L'Aérien — SODEXAM | Téléchargez nos éditions officielles</title>
+<meta name="description" content="Revue officielle de l'aéronautique, du développement aéroportuaire et de la météorologie nationale en Côte d'Ivoire. Téléchargez gratuitement tous nos numéros.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<style>
+
+/* ============================================================
+   DESIGN SYSTEM & CHARTE GRAPHIQUE UNIFORME — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #2FA95B;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #0284C7;
+  --blue-navy: #0F172A;
+  
+  --bg-page: #FCFCFC;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F8FAFC;
+  
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --text-light: #94A3B8;
+  
+  --border-light: rgba(226, 232, 240, 0.85);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 16px 36px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
+}
+
+/* ============================================================
+   FLASH BAR UNIFORME
+   ============================================================ */
+.flash-bar {
+  background: #111827;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #DC2626;
+  color: white;
+  padding: 0 22px;
+  height: 100%;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  z-index: 10;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+}
+.flash-pulse {
+  width: 7px; height: 7px;
+  background: white;
+  border-radius: 50%;
+  animation: flashPulse 1.4s infinite;
+}
+@keyframes flashPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  white-space: nowrap;
+  animation: flashMarquee 48s linear infinite;
+  flex: 1;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #E2E8F0;
+}
+.flash-track:hover { animation-play-state: paused; }
+@keyframes flashMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   MAIN HEADER UNIFORME (SANS BOUTON VIGICLIM, SANS ICONES AUTRES)
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -8px rgba(15, 23, 42, 0.05);
+}
+.header-inner {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.header-logo-img:hover {
+  transform: scale(1.02);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav-link {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-link .chev {
+  font-size: 10px;
+  opacity: 0.6;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.nav-item-dropdown:hover .chev {
+  transform: rotate(180deg);
+}
+
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 260px;
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 18px 40px -10px rgba(0,0,0,0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all var(--dur-base) var(--ease-spring);
+  z-index: 1010;
+}
+.dropdown-panel a {
+  display: block;
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-main);
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.dropdown-panel a:hover, .dropdown-panel a.active-item {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(4px);
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.burger-btn span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--blue-navy);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  height: 100vh;
+  background: white;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s var(--ease-spring);
+  padding: 24px;
+}
+.mobile-drawer.open {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.drawer-close {
+  background: var(--bg-subtle);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.drawer-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.drawer-links a.active, .drawer-links a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+
+/* ============================================================
+   FOOTER UNIFORME
+   ============================================================ */
+.footer {
+  background: #0B132B;
+  color: #94A3B8;
+  padding: 64px 0 28px;
+  font-size: 14px;
+  border-top: 3px solid var(--orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.footer-links a {
+  color: #94A3B8;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #64748B;
+}
+.footer-bottom a {
+  color: #94A3B8;
+  transition: color var(--dur-fast);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 991px) {
+  .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+/* Styles inspirés de Sika Finance Magazine & Charte SODEXAM */
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: #FCFCFC;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Hero Banner */
+.mag-hero {
+  background: linear-gradient(135deg, #0B132B 0%, #1E3A8A 60%, #0B132B 100%);
+  color: white;
+  padding: 64px 0 56px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.mag-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(242, 106, 33, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(30, 122, 60, 0.15) 0%, transparent 40%);
+  pointer-events: none;
+}
+.mag-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto;
+}
+.mag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  padding: 6px 18px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #FDBA74;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 16px;
+}
+.mag-hero h1 {
+  font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.mag-hero p {
+  font-size: 16px;
+  color: #CBD5E1;
+  line-height: 1.6;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Featured Magazine Box (Sika Finance style) */
+.mag-featured-wrap {
+  padding: 60px 0 40px;
+}
+.mag-featured-card {
+  background: white;
+  border-radius: 24px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.08);
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 40px;
+  transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base) var(--ease-spring);
+}
+.mag-featured-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -12px rgba(15, 23, 42, 0.14);
+}
+.mag-cover-frame {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(0,0,0,0.1);
+  background: #F1F5F9;
+  cursor: pointer;
+}
+.mag-cover-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s var(--ease-spring);
+}
+.mag-cover-frame:hover .mag-cover-img {
+  transform: scale(1.04);
+}
+.mag-featured-info h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--blue-navy);
+  line-height: 1.28;
+  margin-bottom: 16px;
+}
+.mag-featured-info p {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.mag-meta-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 24px;
+}
+.mag-btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-hover) 100%);
+  color: white !important;
+  font-weight: 700;
+  font-size: 14.5px;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 20px rgba(242, 106, 33, 0.35);
+  transition: all var(--dur-fast) var(--ease-spring);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+.mag-btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(242, 106, 33, 0.45);
+}
+.mag-btn-reader {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-subtle);
+  color: var(--blue-navy) !important;
+  font-weight: 700;
+  font-size: 14.5px;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-light);
+  margin-left: 14px;
+  transition: all var(--dur-fast) var(--ease-spring);
+  cursor: pointer;
+}
+.mag-btn-reader:hover {
+  background: white;
+  border-color: var(--orange);
+  color: var(--orange) !important;
+}
+
+/* Sika Finance Style Archive Grid (#magszone) */
+.mag-archive-section {
+  padding: 60px 0 80px;
+  background: white;
+  border-top: 1px solid var(--border-light);
+}
+.archive-title-wrap {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.archive-title-wrap h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--blue-navy);
+}
+.mag-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+.mag-grid-item {
+  background: var(--bg-subtle);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-bezel);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all var(--dur-base) var(--ease-spring);
+}
+.mag-grid-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
+  border-color: rgba(242, 106, 33, 0.4);
+}
+.mag-grid-thumb-wrap {
+  width: 100%;
+  max-width: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+  margin-bottom: 20px;
+  background: #FFF;
+}
+.mag-grid-thumb {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease-spring);
+}
+.mag-grid-item:hover .mag-grid-thumb {
+  transform: scale(1.05);
+}
+.mag-grid-name {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 6px;
+}
+.mag-grid-date {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+.mag-grid-btn {
+  width: 100%;
+  max-width: 240px;
+  padding: 10px;
+  background: var(--blue-navy);
+  color: white !important;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+  text-decoration: none;
+}
+.mag-grid-btn:hover {
+  background: var(--orange);
+  transform: translateY(-2px);
+}
+
+/* Modal Viewer */
+.mag-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.mag-modal.open {
+  display: flex;
+}
+.mag-modal-box {
+  background: white;
+  border-radius: 20px;
+  max-width: 880px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 36px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+}
+.mag-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 991px) {
+  .mag-featured-card { grid-template-columns: 1fr; gap: 28px; }
+  .mag-cover-frame { max-width: 320px; margin: 0 auto; }
+  .mag-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .mag-grid { grid-template-columns: 1fr; }
+  .mag-btn-reader { margin-left: 0; margin-top: 10px; width: 100%; justify-content: center; }
+  .mag-btn-download { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar Alertes Flash -->
+<div class="flash-bar">
+  <div class="flash-label">
+    <span class="flash-pulse"></span>
+    SODEXAM FLASH
+  </div>
+  <div class="flash-track">
+    <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
+    <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins quotidiens Vigiclim</span>
+    <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
+    <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
+  </div>
+</div>
+
+<!-- Header Principal -->
+<header class="main-header">
+  <div class="container header-inner">
+    <a href="Maquette_site_internet.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+      <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="Maquette_site_internet.html" class="nav-link">
+        <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
+      </a>
+      
+      <div class="nav-item-dropdown">
+        <a href="#" class="nav-link">
+          Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="Maquette_site_internet.html#presentation">Présentation générale</a>
+          <a href="mot-du-dg.html">Mot du Directeur Général</a>
+          <a href="Maquette_site_internet.html#missions">Nos missions & valeurs</a>
+          <a href="Maquette_site_internet.html#gouvernance">Conseil d'administration</a>
+          <a href="Maquette_site_internet.html#codir">Comité de direction</a>
+        </div>
+      </div>
+
+      <div class="nav-item-dropdown">
+        <a href="Maquette_site_internet.html#activites" class="nav-link">
+          Nos activités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="Maquette_site_internet.html#activites">Météorologie Nationale & Vigiclim</a>
+          <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
+          <a href="Maquette_site_internet.html#activites">Médecine Aéronautique (CERMA)</a>
+        </div>
+      </div>
+
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link">
+          Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="actualites.html">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html" class="active-item">Magazine L'Aérien</a>
+          <a href="actualites.html#cooperation">Coopération & Partenariats</a>
+          <a href="actualites.html">Communiqués officiels</a>
+        </div>
+      </div>
+
+      <a href="magazine-aerien.html" class="nav-link active">
+        Magazine L'Aérien
+      </a>
+
+      <a href="Maquette_site_internet.html#contact" class="nav-link">
+        Contact
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="burger-btn" id="burgerToggle" aria-label="Menu Mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html" class="active">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html" class="active">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html" class="active">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- HERO BANNER -->
+<section class="mag-hero">
+  <div class="container mag-hero-content">
+    <div class="mag-badge">
+      <i class="fa-solid fa-book-open"></i> Publications Officielles SODEXAM
+    </div>
+    <h1>Magazine L'Aérien</h1>
+    <p>La revue institutionnelle de référence consacrée à l'aviation civile, aux infrastructures aéroportuaires et à la météorologie en Côte d'Ivoire et en Afrique de l'Ouest. Téléchargez librement tous les numéros au format PDF.</p>
+  </div>
+</section>
+
+<!-- DERNIERS NUMÉROS À LA UNE (Inspiré Sika Finance) -->
+<section class="mag-featured-wrap">
+  <div class="container">
+    
+    <!-- Numéro 84 (Flagship) -->
+    <div class="mag-featured-card">
+      <div class="mag-cover-frame" onclick="openModal('N84')">
+        <img src="https://sodexam.com/wp-content/uploads/2026/09/Capture-decran-2026-09-07-145408.png" alt="L'Aérien N°84" class="mag-cover-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+      </div>
+      <div class="mag-featured-info">
+        <div class="mag-meta-date"><i class="fa-regular fa-calendar-days"></i> Édition Septembre - Octobre 2026 • N° 84</div>
+        <h2>L'Aérien N°84 : Spécial Nouveau Siège « Général Abdoulaye Coulibaly »</h2>
+        <p>Cette 84ᵉ édition dresse le grand panorama des 28 ans d'excellence aéroportuaire et météorologique de la SODEXAM, couronnée par l'inauguration de son joyau architectural moderne à Abidjan.</p>
+        <p><strong>À la Une :</strong> Grand entretien exclusif avec le Directeur Général Abdul Adam SYLLA sur la vision stratégique 2026-2030, l'accréditation carbone des 6 aéroports domestiques, les avancées du projet VIGICLIMM et le programme de bourses Dominique Ouattara pour les femmes dans l'aviation civile.</p>
+        <div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="https://sodexam.com/wp-content/uploads/2026/09/Capture-decran-2026-09-07-145408.png" target="_blank" class="mag-btn-download">
+            <i class="fa-solid fa-download"></i> Télécharger l'édition PDF
+          </a>
+          <button class="mag-btn-reader" onclick="openModal('N84')">
+            <i class="fa-solid fa-eye"></i> Aperçu du sommaire
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Numéro 71 (Hors-série) -->
+    <div class="mag-featured-card">
+      <div class="mag-cover-frame" onclick="openModal('N71')">
+        <img src="https://sodexam.com/wp-content/uploads/2024/12/A_71DEF.png" alt="L'Aérien N°71" class="mag-cover-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+      </div>
+      <div class="mag-featured-info">
+        <div class="mag-meta-date"><i class="fa-regular fa-calendar-days"></i> Édition Décembre 2024 • N° 71</div>
+        <h2>L'Aérien N°71 : La SODEXAM sur la Scène Internationale de l'OACI à Montréal</h2>
+        <p>Dossier spécial consacré à la 14ᵉ Conférence mondiale de Navigation Aérienne organisée par l'OACI à Montréal. Analyse des technologies de pointe en gestion de l'espace aérien et sécurité des vols.</p>
+        <p>Retrouvez également le reportage sur l'exercice général de gestion de crise à l'Aéroport de Bouaké et les perspectives de renforcement de la résilience aéroportuaire régionale.</p>
+        <div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="https://sodexam.com/wp-content/uploads/2024/12/A_71DEF.png" target="_blank" class="mag-btn-download">
+            <i class="fa-solid fa-download"></i> Télécharger ce numéro (PDF)
+          </a>
+          <button class="mag-btn-reader" onclick="openModal('N71')">
+            <i class="fa-solid fa-eye"></i> Aperçu du sommaire
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ARCHIVES & ANCIENNES PUBLICATIONS (#magszone Sika Finance Style) -->
+<section class="mag-archive-section">
+  <div class="container">
+    <div class="archive-title-wrap">
+      <span style="font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); display:inline-block; margin-bottom:8px;">Archives Disponibles</span>
+      <h2>Toutes les Publications Antérieures</h2>
+      <p style="color:var(--text-muted); font-size:15px; margin-top:6px;">Consultez et téléchargez gratuitement l'intégralité de la collection institutionnelle L'Aérien :</p>
+    </div>
+
+    <div class="mag-grid">
+      <!-- N°70 -->
+      <div class="mag-grid-item">
+        <div class="mag-grid-thumb-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2024/10/A_70DEF.png" alt="L'Aérien N°70" class="mag-grid-thumb" loading="lazy">
+        </div>
+        <div class="mag-grid-name">L'Aérien N°70</div>
+        <div class="mag-grid-date">Octobre 2024 • Sécurité & Pistes</div>
+        <a href="https://sodexam.com/wp-content/uploads/2024/10/A_70DEF.png" target="_blank" class="mag-grid-btn">
+          <i class="fa-solid fa-download"></i> Télécharger (PDF)
+        </a>
+      </div>
+
+      <!-- N°69 -->
+      <div class="mag-grid-item">
+        <div class="mag-grid-thumb-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2024/09/A-69.png" alt="L'Aérien N°69" class="mag-grid-thumb" loading="lazy">
+        </div>
+        <div class="mag-grid-name">L'Aérien N°69</div>
+        <div class="mag-grid-date">Septembre 2024 • Météo & Climat</div>
+        <a href="https://sodexam.com/wp-content/uploads/2024/09/A-69.png" target="_blank" class="mag-grid-btn">
+          <i class="fa-solid fa-download"></i> Télécharger (PDF)
+        </a>
+      </div>
+
+      <!-- N°68 -->
+      <div class="mag-grid-item">
+        <div class="mag-grid-thumb-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2024/08/A-68.png" alt="L'Aérien N°68" class="mag-grid-thumb" loading="lazy">
+        </div>
+        <div class="mag-grid-name">L'Aérien N°68</div>
+        <div class="mag-grid-date">Août 2024 • Aéroports Régionaux</div>
+        <a href="https://sodexam.com/wp-content/uploads/2024/08/A-68.png" target="_blank" class="mag-grid-btn">
+          <i class="fa-solid fa-download"></i> Télécharger (PDF)
+        </a>
+      </div>
+
+      <!-- N°64 -->
+      <div class="mag-grid-item">
+        <div class="mag-grid-thumb-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2024/02/WhatsApp-Image-2023-10-02-a-13.26.21.jpg" alt="L'Aérien N°64" class="mag-grid-thumb" loading="lazy">
+        </div>
+        <div class="mag-grid-name">L'Aérien N°64</div>
+        <div class="mag-grid-date">Mars 2024 • Infrastructures</div>
+        <a href="https://sodexam.com/laerien-n64/" target="_blank" class="mag-grid-btn">
+          <i class="fa-solid fa-download"></i> Télécharger (PDF)
+        </a>
+      </div>
+
+      <!-- N°63 -->
+      <div class="mag-grid-item">
+        <div class="mag-grid-thumb-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2024/01/aerien_63.png" alt="L'Aérien N°63" class="mag-grid-thumb" loading="lazy">
+        </div>
+        <div class="mag-grid-name">L'Aérien N°63</div>
+        <div class="mag-grid-date">Janvier 2024 • CAN 2023 Météo</div>
+        <a href="https://sodexam.com/laerien-n63/" target="_blank" class="mag-grid-btn">
+          <i class="fa-solid fa-download"></i> Télécharger (PDF)
+        </a>
+      </div>
+
+      <!-- N°62 -->
+      <div class="mag-grid-item">
+        <div class="mag-grid-thumb-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2024/01/aerien_62.png" alt="L'Aérien N°62" class="mag-grid-thumb" loading="lazy">
+        </div>
+        <div class="mag-grid-name">L'Aérien N°62</div>
+        <div class="mag-grid-date">Janvier 2024 • Navigation Aérienne</div>
+        <a href="https://sodexam.com/laerien-n62/" target="_blank" class="mag-grid-btn">
+          <i class="fa-solid fa-download"></i> Télécharger (PDF)
+        </a>
+      </div>
+
+      <!-- N°61 -->
+      <div class="mag-grid-item">
+        <div class="mag-grid-thumb-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2023/11/image_l_aerien_61.png" alt="L'Aérien N°61" class="mag-grid-thumb" loading="lazy">
+        </div>
+        <div class="mag-grid-name">L'Aérien N°61</div>
+        <div class="mag-grid-date">Novembre 2023 • Santé & CERMA</div>
+        <a href="https://sodexam.com/laerien-n61-2/" target="_blank" class="mag-grid-btn">
+          <i class="fa-solid fa-download"></i> Télécharger (PDF)
+        </a>
+      </div>
+
+      <!-- N°60 -->
+      <div class="mag-grid-item">
+        <div class="mag-grid-thumb-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2023/11/image_l_aerien_60.png" alt="L'Aérien N°60" class="mag-grid-thumb" loading="lazy">
+        </div>
+        <div class="mag-grid-name">L'Aérien N°60</div>
+        <div class="mag-grid-date">Novembre 2023 • Veille Climat</div>
+        <a href="https://sodexam.com/laerien-n60/" target="_blank" class="mag-grid-btn">
+          <i class="fa-solid fa-download"></i> Télécharger (PDF)
+        </a>
+      </div>
+
+      <!-- N°59 -->
+      <div class="mag-grid-item">
+        <div class="mag-grid-thumb-wrap">
+          <img src="https://sodexam.com/wp-content/uploads/2023/11/image_l_aerien_59-1.png" alt="L'Aérien N°59" class="mag-grid-thumb" loading="lazy">
+        </div>
+        <div class="mag-grid-name">L'Aérien N°59</div>
+        <div class="mag-grid-date">Novembre 2023 • Équipements Radar</div>
+        <a href="https://sodexam.com/laerien-n59/" target="_blank" class="mag-grid-btn">
+          <i class="fa-solid fa-download"></i> Télécharger (PDF)
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL SOMMAIRE INTERACTIF -->
+<div class="mag-modal" id="magModal">
+  <div class="mag-modal-box">
+    <button class="mag-modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    <div style="display: flex; gap: 24px; align-items: center; margin-bottom: 24px;">
+      <span class="mag-badge" style="margin-bottom:0;" id="modalBadge">Édition N°84</span>
+      <span style="color:var(--text-muted); font-size:13px;" id="modalDate">Septembre - Octobre 2026</span>
+    </div>
+    <h3 style="font-size: 22px; font-weight: 800; color: var(--blue-navy); margin-bottom: 14px;" id="modalTitle">L'Aérien N°84</h3>
+    <div style="color: var(--text-muted); line-height: 1.6; font-size: 14.5px; margin-bottom: 24px;" id="modalDesc">
+      Découvrez l'intégralité du sommaire et les dossiers thématiques exclusifs.
+    </div>
+    <div style="background: var(--bg-subtle); padding: 16px; border-radius: 12px; margin-bottom: 24px;">
+      <strong style="color:var(--blue-navy); display:block; margin-bottom:8px;">Sommaire Exclusif :</strong>
+      <ul style="list-style:disc; padding-left:20px; font-size:13.5px; color:var(--text-main); display:flex; flex-direction:column; gap:6px;">
+        <li>Édito du Directeur Général M. Abdul Adam SYLLA</li>
+        <li>Inauguration du nouveau siège « Général Abdoulaye Coulibaly »</li>
+        <li>Modernisation des aéroports de San Pedro et Korhogo</li>
+        <li>Projet VIGICLIMM & transition agroclimatique en Côte d'Ivoire</li>
+        <li>CERMA : certification et accompagnement des équipages</li>
+      </ul>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:12px;">
+      <button class="mag-btn-reader" onclick="closeModal()">Fermer</button>
+      <a href="https://sodexam.com" target="_blank" class="mag-btn-download" id="modalDownloadBtn">
+        <i class="fa-solid fa-download"></i> Télécharger le PDF complet
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER UNIFORME SODEXAM -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="margin-bottom:20px;">
+          <a href="Maquette_site_internet.html" title="SODEXAM — Retour à l'accueil">
+            <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
+          </a>
+        </div>
+        <p style="line-height:1.7; margin-bottom:20px; color:#94A3B8; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire. Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        </p>
+        <div style="display:flex; gap:12px; font-size:15px;">
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation Rapide</div>
+        <ul class="footer-links">
+          <li><a href="Maquette_site_internet.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Actualités & Presse</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météorologie Nationale</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Navigation Aérienne & Aéroports Régionaux</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Médecine Aéronautique (CERMA)</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Publications & Médias</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Toutes les actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien N°84</a></li>
+          <li><a href="actualites.html#cooperation"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Coopération Internationale</a></li>
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Communiqués officiels</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Direction Générale</div>
+        <p style="color:#94A3B8; margin-bottom:12px; line-height:1.6; font-size:13.5px;">
+          <i class="fa-solid fa-location-dot" style="color:var(--orange); margin-right:8px;"></i>
+          Siège Bâtiment Général Abdoulaye Coulibaly, Zone Aéroportuaire Félix Houphouët-Boigny, Abidjan - Côte d'Ivoire
+        </p>
+        <p style="color:#94A3B8; margin-bottom:8px; font-size:13.5px;">
+          <i class="fa-solid fa-phone" style="color:var(--orange); margin-right:8px;"></i> +225 27 21 58 87 00
+        </p>
+        <p style="color:#94A3B8; font-size:13.5px;">
+          <i class="fa-solid fa-envelope" style="color:var(--orange); margin-right:8px;"></i> contact@sodexam.ci
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="#">Mentions Légales</a>
+        <a href="#">Politique de Confidentialité</a>
+        <a href="#">Plan du site</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script>
+
+// Menu Mobile Drawer
+const burgerToggle = document.getElementById('burgerToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerClose = document.getElementById('drawerClose');
+
+if (burgerToggle && mobileDrawer) {
+  burgerToggle.addEventListener('click', () => {
+    mobileDrawer.classList.add('open');
+  });
+}
+if (drawerClose && mobileDrawer) {
+  drawerClose.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+  });
+}
+// Fermer sur clic en dehors
+document.addEventListener('click', (e) => {
+  if (mobileDrawer && mobileDrawer.classList.contains('open')) {
+    if (!mobileDrawer.contains(e.target) && !burgerToggle.contains(e.target)) {
+      mobileDrawer.classList.remove('open');
+    }
+  }
+});
+
+
+function openModal(ed) {
+  const modal = document.getElementById('magModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBadge = document.getElementById('modalBadge');
+  const modalDate = document.getElementById('modalDate');
+
+  if (ed === 'N84') {
+    modalBadge.textContent = 'Édition N°84';
+    modalDate.textContent = 'Septembre - Octobre 2026';
+    modalTitle.textContent = 'L'Aérien N°84 — Spécial Nouveau Siège & Modernisation';
+  } else {
+    modalBadge.textContent = 'Édition N°71';
+    modalDate.textContent = 'Décembre 2024';
+    modalTitle.textContent = 'L'Aérien N°71 — Conférence OACI Montréal';
+  }
+  modal.classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('magModal').classList.remove('open');
+}
+
+window.addEventListener('click', (e) => {
+  const modal = document.getElementById('magModal');
+  if (e.target === modal) closeModal();
+});
+</script>
+
+</body>
+</html>

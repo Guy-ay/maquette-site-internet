@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mot du Directeur Général — SODEXAM</title>
+<meta name="description" content="Message officiel de Monsieur Abdul Adam SYLLA, Directeur Général de la SODEXAM. Vision, ambitions et inaugurations au service du développement aéroportuaire et météorologique en Côte d'Ivoire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<style>
+/* ============================================================
+   DESIGN SYSTEM & VARIABLES — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #34A853;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #0284C7;
+  --blue-navy: #0F172A;
+  
+  --bg-page: #FCFCFC;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F8FAFC;
+  
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --text-light: #94A3B8;
+  
+  --border-light: rgba(226, 232, 240, 0.8);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 20px 45px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+}
+
+/* Base reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-page);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Barre de progression de lecture */
+#reading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--green-light) 100%);
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--dur-fast) var(--ease-spring);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================================
+   TOP BAR ALERTES FLASH (Harmonisé avec SODEXAM)
+   ============================================================ */
+.flash-bar {
+  background: #111827;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #DC2626;
+  color: white;
+  padding: 0 22px;
+  height: 100%;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  z-index: 10;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+}
+.flash-pulse {
+  width: 7px;
+  height: 7px;
+  background: white;
+  border-radius: 50%;
+  animation: flashPulse 1.4s infinite;
+}
+@keyframes flashPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  white-space: nowrap;
+  animation: flashMarquee 48s linear infinite;
+  flex: 1;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #E2E8F0;
+}
+.flash-track:hover { animation-play-state: paused; }
+@keyframes flashMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   HEADER PRINCIPAL
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -8px rgba(15, 23, 42, 0.05);
+}
+.header-inner {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-icon-box {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-hover) 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  box-shadow: 0 6px 14px rgba(242, 106, 33, 0.35);
+}
+.brand-titles {
+  display: flex;
+  flex-direction: column;
+}
+.brand-name {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--blue-navy);
+  line-height: 1.1;
+}
+.brand-name span { color: var(--orange); }
+.brand-tagline {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav-link {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-link .chev {
+  font-size: 10px;
+  opacity: 0.6;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 250px;
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 18px 40px -10px rgba(0,0,0,0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all var(--dur-base) var(--ease-spring);
+  z-index: 1010;
+}
+.dropdown-panel a {
+  display: block;
+  padding: 9px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-main);
+  border-radius: 8px;
+}
+.dropdown-panel a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.dropdown-panel a.active-sub {
+  color: var(--orange);
+  font-weight: 700;
+  background: var(--orange-subtle);
+}
+
+.header-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(30, 122, 60, 0.25);
+  transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-spring);
+}
+.header-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(30, 122, 60, 0.35);
+  color: white;
+}
+.header-cta-btn .btn-arrow {
+  width: 24px;
+  height: 24px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+/* ============================================================
+   HERO / FIL D'ARIANE (Style CEPICI)
+   ============================================================ */
+.breadcrumb-hero {
+  position: relative;
+  background: linear-gradient(135deg, #0B192C 0%, #1E3A8A 55%, #0B192C 100%);
+  color: white;
+  padding: 72px 0 80px;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.breadcrumb-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(242, 106, 33, 0.18) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(52, 168, 83, 0.15) 0%, transparent 40%);
+  pointer-events: none;
+}
+/* Décoration géométrique aéronautique */
+.hero-deco-ring {
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,255,255,0.12);
+  pointer-events: none;
+}
+.hero-deco-plane {
+  position: absolute;
+  right: 15%;
+  bottom: 25px;
+  font-size: 80px;
+  color: rgba(255,255,255,0.03);
+  pointer-events: none;
+  transform: rotate(-25deg);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #F8FAFC;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+}
+.hero-eyebrow i { color: var(--orange); font-size: 10px; }
+.hero-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+.hero-title span {
+  background: linear-gradient(90deg, #FFFFFF 0%, #FED7AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.breadcrumb-trail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 13.5px;
+  color: #CBD5E1;
+}
+.breadcrumb-trail a:hover {
+  color: var(--orange);
+}
+.breadcrumb-trail .sep {
+  opacity: 0.4;
+  font-size: 11px;
+}
+.breadcrumb-trail .current {
+  color: #F8FAFC;
+  font-weight: 600;
+}
+
+/* ============================================================
+   CORPS PRINCIPAL : ARCHITECTURE 2 COLONNES (STICKY CEPICI)
+   ============================================================ */
+.section-main-dg {
+  padding: 64px 0 96px;
+  position: relative;
+}
+
+.dg-layout-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ============================================================
+   COLONNE GAUCHE (STICKY) — PHOTO DU DG & CARTOUCHES
+   ============================================================ */
+.sticky-dg {
+  position: sticky;
+  top: 108px;
+  z-index: 100;
+  transition: transform var(--dur-base) var(--ease-smooth);
+}
+
+/* Double-Bezel Architecture (Règles High-End Visual Design) */
+.dg-bezel-outer {
+  background: linear-gradient(160deg, rgba(242, 106, 33, 0.15) 0%, rgba(255,255,255,0.9) 35%, rgba(30, 122, 60, 0.12) 100%);
+  padding: 8px;
+  border-radius: 28px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: var(--shadow-bezel);
+}
+.dg-bezel-inner {
+  background: var(--bg-surface);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+/* Photo portrait DG */
+.dg-portrait-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.8;
+  overflow: hidden;
+  background: #0F172A;
+}
+.dg-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s var(--ease-spring);
+}
+.dg-bezel-outer:hover .dg-portrait-img {
+  transform: scale(1.03);
+}
+
+/* Écusson officiel flottant sur l'image */
+.dg-portrait-overlay-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 10px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.badge-flag-strip {
+  width: 4px;
+  height: 28px;
+  background: linear-gradient(to bottom, #F26A21 33%, #FFFFFF 33%, #FFFFFF 66%, #1E7A3C 66%);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.badge-label-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #FDBA74;
+}
+.badge-label-sub {
+  font-size: 12px;
+  font-weight: 600;
+  color: #F8FAFC;
+}
+
+/* Cartouche d'identité sous la photo */
+.dg-identity-card {
+  padding: 24px 20px;
+  text-align: center;
+  background: white;
+}
+.dg-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--blue-navy);
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.dg-title-role {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: var(--orange-subtle);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+}
+
+.dg-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+  margin: 16px 0;
+}
+
+/* Sommaire interactif rapide */
+.dg-quick-toc {
+  text-align: left;
+  margin-top: 14px;
+}
+.toc-head {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.toc-item a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.toc-item a i {
+  font-size: 10px;
+  color: var(--text-light);
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.toc-item a:hover {
+  background: var(--bg-subtle);
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.toc-item a:hover i {
+  color: var(--orange);
+  transform: translateX(2px);
+}
+
+/* Actions rapides */
+.dg-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.dg-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid var(--border-light);
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.dg-action-btn:hover {
+  background: white;
+  border-color: var(--orange);
+  color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(242, 106, 33, 0.12);
+}
+
+/* ============================================================
+   COLONNE DROITE : CONTENU DU MOT DU DIRECTEUR GÉNÉRAL
+   ============================================================ */
+.dg-article-content {
+  background: var(--bg-surface);
+  border-radius: 24px;
+  padding: 48px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+/* En-tête de l'article */
+.article-header {
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border-light);
+}
+.article-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-subtle);
+  color: var(--green);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 16px;
+}
+.article-main-heading {
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.3;
+  color: var(--blue-navy);
+  margin-bottom: 18px;
+}
+.article-lead {
+  font-size: 18px;
+  font-weight: 500;
+  color: #334155;
+  line-height: 1.8;
+  position: relative;
+}
+
+/* Lettrine (Drop Cap) */
+.drop-cap::first-letter {
+  float: left;
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  line-height: 56px;
+  padding-top: 4px;
+  padding-right: 14px;
+  padding-bottom: 4px;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* Blocs de citation d'honneur (Pull Quote) */
+.speech-quote-block {
+  margin: 36px 0;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, rgba(242, 106, 33, 0.05) 0%, rgba(30, 122, 60, 0.04) 100%);
+  border-left: 4px solid var(--orange);
+  border-radius: 0 16px 16px 0;
+  position: relative;
+}
+.speech-quote-block::before {
+  content: "“";
+  font-family: 'Playfair Display', serif;
+  font-size: 90px;
+  line-height: 1;
+  color: rgba(242, 106, 33, 0.18);
+  position: absolute;
+  top: 10px;
+  left: 18px;
+  pointer-events: none;
+}
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--blue-navy);
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 12px;
+}
+.quote-author {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* Sous-titres thématiques */
+.section-topic-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 44px 0 20px;
+  padding-top: 10px;
+}
+.topic-icon-pill {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--orange-subtle);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.topic-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--blue-navy);
+  letter-spacing: -0.4px;
+}
+
+/* Paragraphes de discours */
+.speech-paragraph {
+  font-size: 16.5px;
+  line-height: 1.85;
+  color: #334155;
+  margin-bottom: 22px;
+  text-align: justify;
+}
+
+/* Cartes de statistiques / Chiffres clés */
+.stats-grid-callout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 32px 0 40px;
+}
+.stat-item-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-spring);
+}
+.stat-item-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  border-color: var(--orange);
+}
+.stat-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--orange);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.stat-item-box:nth-child(2) .stat-number { color: var(--green); }
+.stat-item-box:nth-child(3) .stat-number { color: var(--blue-sky); }
+.stat-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* Liste des 3 axes du Pacte */
+.pacte-axes-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 24px 0 32px;
+}
+.pacte-axis-card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  transition: border-color var(--dur-fast) var(--ease-spring);
+}
+.pacte-axis-card:hover {
+  border-color: var(--green-light);
+}
+.axis-num {
+  width: 28px;
+  height: 28px;
+  background: var(--green-subtle);
+  color: var(--green);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.axis-text {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--blue-navy);
+}
+
+/* Encadré spécial Santé / UFACI */
+.health-callout-card {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 28px 0;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.health-icon-box {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #EF4444;
+  font-size: 22px;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+  flex-shrink: 0;
+}
+.health-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--blue-navy);
+  margin-bottom: 6px;
+}
+.health-desc {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* Bloc Signature DG */
+.dg-signature-section {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.signature-meta {
+  display: flex;
+  flex-direction: column;
+}
+.sig-thanks {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.sig-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--blue-navy);
+  letter-spacing: -0.3px;
+}
+.sig-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.sig-company {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.signature-seal-stamp {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-subtle);
+  border: 1px dashed var(--border-light);
+  padding: 12px 20px;
+  border-radius: 14px;
+}
+.seal-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+  font-size: 18px;
+}
+.seal-text-title {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--blue-navy);
+}
+.seal-text-date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   SECTION NEWSLETTER (Harmonisé CEPICI / SODEXAM)
+   ============================================================ */
+.newsletter-section {
+  background: linear-gradient(135deg, #111827 0%, #1E3A8A 100%);
+  color: white;
+  padding: 56px 0;
+  position: relative;
+  overflow: hidden;
+}
+.newsletter-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.nl-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.nl-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--orange);
+}
+.nl-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 4px;
+}
+.nl-sub {
+  font-size: 14px;
+  color: #94A3B8;
+}
+.nl-form {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  max-width: 480px;
+}
+.nl-input {
+  flex: 1;
+  height: 50px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  padding: 0 24px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.nl-input:focus {
+  border-color: var(--orange);
+  background: rgba(255,255,255,0.15);
+}
+.nl-btn {
+  height: 50px;
+  padding: 0 28px;
+  border-radius: 9999px;
+  border: none;
+  background: var(--orange);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(242, 106, 33, 0.4);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.nl-btn:hover {
+  background: var(--orange-hover);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   FOOTER (Charte SODEXAM)
+   ============================================================ */
+.footer {
+  background: #0B132B;
+  color: #94A3B8;
+  padding: 64px 0 28px;
+  font-size: 14px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+  display: inline-block;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Bouton Retour en haut */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(242, 106, 33, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all var(--dur-fast) var(--ease-spring);
+  z-index: 999;
+}
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.scroll-top-btn:hover {
+  background: var(--orange-hover);
+  transform: translateY(-3px);
+}
+
+/* ============================================================
+   ANIMATIONS & TRANSITIONS (GPU 60 FPS — /review-animations)
+   ============================================================ */
+.reveal-on-scroll {
+  opacity: 1 !important;
+  transform: none !important;
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+  will-change: opacity, transform;
+}
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect de prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-on-scroll {
+  opacity: 1 !important;
+  transform: none !important;
+
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (Tablette & Mobile)
+   ============================================================ */
+@media (max-width: 991px) {
+  .dg-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .sticky-dg {
+    position: static;
+    max-width: 480px;
+    margin: 0 auto 30px;
+  }
+  .dg-article-content {
+    padding: 32px 24px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .main-nav {
+    display: none; /* Mobile menu toggled */
+  }
+}
+
+@media (max-width: 640px) {
+  .stats-grid-callout, .pacte-axes-list {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .breadcrumb-hero {
+    padding: 48px 0 54px;
+  }
+  .dg-signature-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+/* ============================================================
+   DESIGN SYSTEM & CHARTE GRAPHIQUE UNIFORME — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #2FA95B;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #0284C7;
+  --blue-navy: #0F172A;
+  
+  --bg-page: #FCFCFC;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F8FAFC;
+  
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --text-light: #94A3B8;
+  
+  --border-light: rgba(226, 232, 240, 0.85);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 16px 36px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
+}
+
+/* ============================================================
+   FLASH BAR UNIFORME
+   ============================================================ */
+.flash-bar {
+  background: #111827;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #DC2626;
+  color: white;
+  padding: 0 22px;
+  height: 100%;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  z-index: 10;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+}
+.flash-pulse {
+  width: 7px; height: 7px;
+  background: white;
+  border-radius: 50%;
+  animation: flashPulse 1.4s infinite;
+}
+@keyframes flashPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  white-space: nowrap;
+  animation: flashMarquee 48s linear infinite;
+  flex: 1;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #E2E8F0;
+}
+.flash-track:hover { animation-play-state: paused; }
+@keyframes flashMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   MAIN HEADER UNIFORME
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -8px rgba(15, 23, 42, 0.05);
+}
+.header-inner {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.header-logo-img:hover {
+  transform: scale(1.02);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-link {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-link .chev {
+  font-size: 10px;
+  opacity: 0.6;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.nav-item-dropdown:hover .chev {
+  transform: rotate(180deg);
+}
+
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 270px;
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 18px 40px -10px rgba(0,0,0,0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all var(--dur-base) var(--ease-spring);
+  z-index: 1010;
+}
+.dropdown-panel a {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-main);
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.dropdown-panel a:hover, .dropdown-panel a.active-item {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(4px);
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(30, 122, 60, 0.25);
+  transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-spring);
+}
+.header-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(30, 122, 60, 0.35);
+  color: white;
+}
+.header-cta-btn .btn-arrow {
+  width: 24px;
+  height: 24px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.burger-btn span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--blue-navy);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  height: 100vh;
+  background: white;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s var(--ease-spring);
+  padding: 24px;
+}
+.mobile-drawer.open {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.drawer-close {
+  background: var(--bg-subtle);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.drawer-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.drawer-links a.active, .drawer-links a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+
+/* ============================================================
+   FOOTER UNIFORME
+   ============================================================ */
+.footer {
+  background: #0B132B;
+  color: #94A3B8;
+  padding: 64px 0 28px;
+  font-size: 14px;
+  border-top: 3px solid var(--orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.footer-links a {
+  color: #94A3B8;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #64748B;
+}
+.footer-bottom a {
+  color: #94A3B8;
+  transition: color var(--dur-fast);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 991px) {
+  .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Barre d'avancement de lecture -->
+<div id="reading-bar"></div>
+
+<!-- Top Bar Alertes Flash -->
+<div class="flash-bar">
+  <div class="flash-label">
+    <span class="flash-pulse"></span>
+    SODEXAM FLASH
+  </div>
+  <div class="flash-track">
+    <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
+    <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins quotidiens Vigiclim</span>
+    <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
+    <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
+  </div>
+</div>
+
+<!-- Header Principal -->
+<header class="main-header">
+  <div class="container header-inner">
+    <a href="Maquette_site_internet.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+      <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="Maquette_site_internet.html" class="nav-link">
+        <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
+      </a>
+      
+      <div class="nav-item-dropdown">
+        <a href="#" class="nav-link active">
+          Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="Maquette_site_internet.html#presentation">Présentation générale</a>
+          <a href="mot-du-dg.html" class="active-item">Mot du Directeur Général</a>
+          <a href="Maquette_site_internet.html#missions">Nos missions & valeurs</a>
+          <a href="Maquette_site_internet.html#gouvernance">Conseil d'administration</a>
+          <a href="Maquette_site_internet.html#codir">Comité de direction</a>
+        </div>
+      </div>
+
+      <div class="nav-item-dropdown">
+        <a href="Maquette_site_internet.html#activites" class="nav-link">
+          Nos activités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="Maquette_site_internet.html#activites">Météorologie Nationale & Vigiclim</a>
+          <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
+          <a href="Maquette_site_internet.html#activites">Médecine Aéronautique (CERMA)</a>
+        </div>
+      </div>
+
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link">
+          Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="actualites.html">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html">Magazine L'Aérien</a>
+          <a href="actualites.html#cooperation">Coopération & Partenariats</a>
+          <a href="actualites.html">Communiqués officiels</a>
+        </div>
+      </div>
+
+      <a href="magazine-aerien.html" class="nav-link">
+        Magazine L'Aérien
+      </a>
+
+      <a href="Maquette_site_internet.html#contact" class="nav-link">
+        Contact
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="burger-btn" id="burgerToggle" aria-label="Menu Mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html" class="active">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html" class="active">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="magazine-aerien.html">Magazine L'Aérien</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html" class="active">Mot du Directeur Général</a>
+    <a href="actualites.html">Actualités & Presse</a>
+    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites">Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact">Contact</a>
+  </div>
+</div>
+
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="mot-du-dg.html" class="active"><i class="fa-solid fa-user-tie"></i> Mot du Directeur Général</a>
+    <a href="actualites.html"><i class="fa-solid fa-newspaper"></i> Actualités & Presse</a>
+    <a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-cloud-sun"></i> Météorologie Nationale</a>
+    <a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-plane-up"></i> Navigation Aérienne</a>
+    <a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-suitcase-medical"></i> CERMA / Santé</a>
+    <a href="Maquette_site_internet.html#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+
+<!-- Hero / Fil d'Ariane (Style inspiré de CEPICI) -->
+<section class="breadcrumb-hero">
+  <div class="hero-deco-ring"></div>
+  <i class="fa-solid fa-plane-up hero-deco-plane"></i>
+  <div class="container hero-content">
+    <div class="hero-eyebrow">
+      <i class="fa-solid fa-shield-halved"></i> Direction Générale
+    </div>
+    <h1 class="hero-title">
+      Mot du <span>Directeur Général</span>
+    </h1>
+    <div class="breadcrumb-trail">
+      <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
+      <span class="sep">/</span>
+      <span>Qui sommes-nous</span>
+      <span class="sep">/</span>
+      <span class="current">Mot du DG</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CORPS DE PAGE (GRILLE 2 COLONNES AVEC STICKY CEPICI)
+     ============================================================ -->
+<main class="section-main-dg">
+  <div class="container">
+    <div class="dg-layout-grid">
+
+      <!-- ================= COLONNE GAUCHE (STICKY) ================= -->
+      <aside class="sticky-dg">
+        <div class="dg-bezel-outer">
+          <div class="dg-bezel-inner">
+
+            <!-- Photo officielle DG -->
+            <div class="dg-portrait-wrap">
+              <img src="images/dg_abdul_adam_sylla.jpeg" 
+                   alt="Monsieur Abdul Adam SYLLA, Directeur Général de la SODEXAM" 
+                   class="dg-portrait-img"
+                   onerror="this.src='https://sodexam.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-02-24-at-13.12.15.jpeg'">
+              
+              <!-- Badge officiel ivoirien -->
+              <div class="dg-portrait-overlay-badge">
+                <div class="badge-flag-strip"></div>
+                <div>
+                  <div class="badge-label-title">République de Côte d'Ivoire</div>
+                  <div class="badge-label-sub">SODEXAM • Direction Générale</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cartouche d'identité -->
+            <div class="dg-identity-card">
+              <h2 class="dg-name">Abdul Adam SYLLA</h2>
+              <div class="dg-title-role">Directeur Général</div>
+              <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+                Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique
+              </p>
+
+              <div class="dg-divider"></div>
+
+              <!-- Sommaire interactif avec ScrollSpy -->
+              <div class="dg-quick-toc">
+                <div class="toc-head"><i class="fa-solid fa-list-ul"></i> Sommaire du discours</div>
+                <ul class="toc-list">
+                  <li class="toc-item"><a href="#section-siege"><i class="fa-solid fa-chevron-right"></i> Nouveau Siège Social</a></li>
+                  <li class="toc-item"><a href="#section-hommage"><i class="fa-solid fa-chevron-right"></i> Hommage aux Pionniers</a></li>
+                  <li class="toc-item"><a href="#section-pacte"><i class="fa-solid fa-chevron-right"></i> Le Plan « Pacte » (2019)</a></li>
+                  <li class="toc-item"><a href="#section-vision"><i class="fa-solid fa-chevron-right"></i> Stratégie 2023-2025</a></li>
+                  <li class="toc-item"><a href="#section-sante"><i class="fa-solid fa-chevron-right"></i> Santé & Prévention</a></li>
+                  <li class="toc-item"><a href="#section-engagement"><i class="fa-solid fa-chevron-right"></i> Engagement d'Avenir</a></li>
+                </ul>
+              </div>
+
+              <!-- Actions rapides -->
+              <div class="dg-card-actions">
+                <button class="dg-action-btn" onclick="window.print()" title="Imprimer le discours">
+                  <i class="fa-solid fa-print"></i> Imprimer
+                </button>
+                <button class="dg-action-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Lien copié dans le presse-papier !');" title="Partager cette page">
+                  <i class="fa-solid fa-share-nodes"></i> Partager
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- ================= COLONNE DROITE (DISCOURS COMPLET) ================= -->
+      <article class="dg-article-content">
+
+        <!-- En-tête éditorial -->
+        <header class="article-header reveal-on-scroll">
+          <div class="article-meta-badge">
+            <i class="fa-solid fa-calendar-check"></i> Message Institutionnel
+          </div>
+          <h2 class="article-main-heading">
+            Positionner la SODEXAM comme le leader ouest-africain de l'exploitation aéroportuaire, aéronautique et météorologique
+          </h2>
+          <p class="article-lead drop-cap">
+            Après plus de 24 mois de travaux, nous avons enfin notre nouveau siège, le bâtiment « Général Abdoulaye Coulibaly ». Nous nous y installerons très bientôt pour poursuivre notre ambition de positionner la SODEXAM comme le leader de l’Afrique de l’Ouest dans l’exploitation et le développement aéroportuaire, aéronautique et météorologique, tout en garantissant un impact positif sur l’environnement, une gestion responsable des ressources et une gouvernance éthique exemplaire.
+          </p>
+        </header>
+
+        <!-- Chiffres clés / Callout Grid -->
+        <div class="stats-grid-callout reveal-on-scroll">
+          <div class="stat-item-box">
+            <div class="stat-number">28 ans</div>
+            <div class="stat-label">Au service de la Nation</div>
+          </div>
+          <div class="stat-item-box">
+            <div class="stat-number">24 mois</div>
+            <div class="stat-label">Travaux du Siège</div>
+          </div>
+          <div class="stat-item-box">
+            <div class="stat-number">1er</div>
+            <div class="stat-label">Hub Météo & Aérien UEMOA</div>
+          </div>
+        </div>
+
+        <!-- Section 1 : Inauguration et Bâtiment -->
+        <div id="section-siege" class="reveal-on-scroll">
+          <div class="section-topic-head">
+            <div class="topic-icon-pill"><i class="fa-solid fa-building-flag"></i></div>
+            <h3 class="topic-title">Une étape historique : Le Bâtiment « Général Abdoulaye Coulibaly »</h3>
+          </div>
+          <p class="speech-paragraph">
+            C’est avec fierté, soulagement et satisfaction que nous l’avons inauguré le jeudi 09 octobre 2025 en présence de Monsieur Téné Birahima OUATTARA, Ministre d’État, ministre de la Défense, de Monsieur Amadou KONE, Ministre des Transports, de Monsieur Amadou Coulibaly, Ministre de la Communication, de Monsieur Abel Djohoré, PCA de SODEXAM, du Général Abdoulaye Coulibaly, PCA d’AIR CI et AERIA, ainsi que de tous nos prestigieux invités et amis de la presse.
+          </p>
+          <p class="speech-paragraph">
+            Ce nouveau siège marque une étape importante dans le développement de notre entreprise. Il porte fièrement le nom d’un grand homme du monde de l’aviation civile et militaire en Côte d’Ivoire, le Général Abdoulaye Coulibaly. Premier Ivoirien ingénieur de l’École de l’Air, premier pilote militaire, premier officier ivoirien commandant du GATL, premier pilote national du Président Houphouët Boigny, le général COULIBALY Abdoulaye demeure une référence. Il est d’un soutien inestimable dans ma mission à la tête de la SODEXAM.
+          </p>
+        </div>
+
+        <!-- Pull quote citation -->
+        <div class="speech-quote-block reveal-on-scroll">
+          <div class="quote-text">
+            « Ce bâtiment représente bien plus qu’un simple lieu de travail. Il incarne notre vision, nos valeurs et nos ambitions pour les décennies à venir. Ses lignes architecturales audacieuses reflètent l’esprit d’innovation qui nous anime. »
+          </div>
+          <div class="quote-author">— Abdul Adam SYLLA, Directeur Général</div>
+        </div>
+
+        <!-- Section 2 : Hommage aux pionniers -->
+        <div id="section-hommage" class="reveal-on-scroll">
+          <div class="section-topic-head">
+            <div class="topic-icon-pill"><i class="fa-solid fa-award"></i></div>
+            <h3 class="topic-title">Hommage aux bâtisseurs de l'aviation ivoirienne</h3>
+          </div>
+          <p class="speech-paragraph">
+            En baptisant ce siège de son nom après les bâtiments dédiés à Savané Vassiriki, Sinaly Siloe et Georges Philippe Ezaley, nous rendons hommage à ceux qui ont porté l’aviation civile ivoirienne. Ce bâtiment incarne notre vision, nos valeurs et nos ambitions pour les décennies à venir. Ses lignes architecturales audacieuses reflètent l’esprit d’innovation qui nous anime, tandis que sa fonctionnalité répond aux exigences des méthodes de travail contemporaines.
+          </p>
+        </div>
+
+        <!-- Section 3 : Le plan Pacte (2019) -->
+        <div id="section-pacte" class="reveal-on-scroll">
+          <div class="section-topic-head">
+            <div class="topic-icon-pill"><i class="fa-solid fa-compass-drafting"></i></div>
+            <h3 class="topic-title">Le plan « Pacte » : Modernisation et bien-être au travail</h3>
+          </div>
+          <p class="speech-paragraph">
+            La décision de construire ce nouveau siège remonte à 2019, lorsque je visitais les bureaux à ma prise de fonction. Nos locaux des années 90 ne répondaient plus aux exigences et attentes de la SODEXAM des années 2000. La croissance de nos activités a rendu nos anciens locaux trop exigus. Pour y remédier, nous avons lancé le « Pacte », un plan d’amélioration des conditions de travail créant un environnement propice à la créativité et à l’épanouissement professionnel.
+          </p>
+
+          <!-- 3 Axes du Pacte -->
+          <div class="pacte-axes-list">
+            <div class="pacte-axis-card">
+              <div class="axis-num">1</div>
+              <div class="axis-text">Amélioration de l'environnement de travail</div>
+            </div>
+            <div class="pacte-axis-card">
+              <div class="axis-num">2</div>
+              <div class="axis-text">Optimisation des ressources humaines</div>
+            </div>
+            <div class="pacte-axis-card">
+              <div class="axis-num">3</div>
+              <div class="axis-text">Renforcement du dialogue social</div>
+            </div>
+          </div>
+
+          <p class="speech-paragraph">
+            Nous avons donc fait le choix fort de rester ici, d’utiliser cet espace dans ce territoire aéroportuaire d’Abidjan qui nous a vus naître et grandir, et d’y renforcer notre présence en construisant ce bâtiment emblématique. Ce projet architectural a d’abord été conçu pour votre bien-être, avec des espaces de travail ergonomiques, lumineux et modulables, complétés par des zones de réunion et de créativité. Ensuite, l’excellence environnementale avec un bâtiment à énergie positive qui va stimuler l’innovation. Enfin, l’ouverture sur l’extérieur avec des espaces partagés accessibles à tous.
+          </p>
+        </div>
+
+        <!-- Section 4 : Vision & Stratégie 2023-2025 -->
+        <div id="section-vision" class="reveal-on-scroll">
+          <div class="section-topic-head">
+            <div class="topic-icon-pill"><i class="fa-solid fa-chart-line"></i></div>
+            <h3 class="topic-title">Stratégie 2023-2025 et dynamisme économique local</h3>
+          </div>
+          <p class="speech-paragraph">
+            Tout ceci s’inscrit dans notre vision de positionner la SODEXAM comme le leader en Afrique de l’Ouest dans le domaine aéroportuaire, aéronautique, la gestion aéroportuaire et la météorologie, et plus particulièrement dans notre stratégie 2023-2025 qui bénéficie du soutien indéfectible du Président de la République, SEM Alassane Ouattara, à travers Monsieur Amadou Koné, Ministre des Transports, notre Ministre de tutelle dont nous bénéficions du leadership et du soutien constant pour nos initiatives de gouvernance et de performance.
+          </p>
+          <p class="speech-paragraph">
+            La construction de ce siège social a mobilisé des compétences diverses pendant la durée des travaux : du cabinet d’architectes aux entreprises de construction, en passant par les bureaux d’études spécialisés. Ce sont principalement des acteurs économiques locaux qui ont contribué à ce projet, générant ainsi des retombées significatives pour l’économie régionale.
+          </p>
+          <p class="speech-paragraph">
+            Pour les membres du comité de direction et les agents qui intégreront ces locaux, ce nouveau cadre de travail marque aussi une évolution de notre culture d’entreprise. Avoir tous les membres du CODIR dans le même bâtiment va encourager les échanges, les rencontres informelles et favoriser l’émergence d’idées nouvelles.
+          </p>
+          <p class="speech-paragraph">
+            Un grand merci à nos partenaires financiers qui ont cru en ce projet et ont accepté de nous accompagner dans cet investissement conséquent. Ma gratitude va également aux équipes internes de la SODEXAM et au PCA Abel Djohoré ainsi qu'à son Conseil d’administration.
+          </p>
+        </div>
+
+        <!-- Section 5 : Santé et Prévention UFACI -->
+        <div id="section-sante" class="reveal-on-scroll">
+          <div class="section-topic-head">
+            <div class="topic-icon-pill"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h3 class="topic-title">Santé, prévention et bien-être de notre capital humain</h3>
+          </div>
+          <p class="speech-paragraph">
+            Pour atteindre ces objectifs, nous devons également veiller à notre santé et à notre bien-être. Travailler avec détermination exige un capital santé préservé.
+          </p>
+
+          <div class="health-callout-card">
+            <div class="health-icon-box">
+              <i class="fa-solid fa-ribbon"></i>
+            </div>
+            <div>
+              <div class="health-title">Campagnes de Dépistage & Solidarité SODEXAM & UFACI</div>
+              <div class="health-desc">
+                En octobre, nous avons organisé une campagne d'envergure de sensibilisation sur les cancers du sein et du col de l'utérus, avec des dépistages gratuits offerts aux femmes de la SODEXAM et de celles de l'UFACI. En novembre, nous poursuivons avec la sensibilisation et la lutte contre le cancer de la prostate, une maladie touchant les hommes à une période cruciale où leur expertise est la plus précieuse pour notre institution.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6 : Engagement et Conclusion -->
+        <div id="section-engagement" class="reveal-on-scroll">
+          <div class="section-topic-head">
+            <div class="topic-icon-pill"><i class="fa-solid fa-flag-checkered"></i></div>
+            <h3 class="topic-title">Cap sur l'avenir : 28 ans d'histoire et nouveaux défis</h3>
+          </div>
+          <p class="speech-paragraph">
+            Que ces murs soient témoins de nombreux succès à venir, d’innovations marquantes et de moments de partage qui renforceront encore notre cohésion et notre performance collective. Je nous engage tous autant que nous sommes à prendre soin de ce bâtiment qui marque un tournant dans l’histoire de notre entreprise, 28 ans après sa création.
+          </p>
+          <p class="speech-paragraph">
+            Nous avons fait du chemin et il reste encore beaucoup à faire pour le développement de notre chère nation, comme prôné par le Président de la République, Son Excellence Alassane Ouattara. Je réitère notre engagement à continuer à faire de la SODEXAM un modèle d’excellence et d’innovation.
+          </p>
+          <p class="speech-paragraph">
+            Assurez-vous également de prendre le temps de vous ressourcer et de recharger vos batteries. Votre énergie et votre engagement sont des éléments essentiels pour clôturer chaque année avec succès et entamer les suivantes avec des objectifs toujours plus grands. Ensemble, faisons de la SODEXAM un modèle d’excellence, fort de notre diversité et de notre engagement commun.
+          </p>
+        </div>
+
+        <!-- Signature officielle -->
+        <div class="dg-signature-section reveal-on-scroll">
+          <div class="signature-meta">
+            <div class="sig-thanks">« Merci pour votre dévouement et votre passion. »</div>
+            <div class="sig-name">Abdul Adam SYLLA</div>
+            <div class="sig-title">Directeur Général</div>
+            <div class="sig-company">SODEXAM • République de Côte d'Ivoire</div>
+          </div>
+
+          <div class="signature-seal-stamp">
+            <div class="seal-icon">
+              <i class="fa-solid fa-stamp"></i>
+            </div>
+            <div>
+              <div class="seal-text-title">Direction Générale</div>
+              <div class="seal-text-date">Siège Général Abdoulaye Coulibaly</div>
+            </div>
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+  </div>
+</main>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+  <div class="container newsletter-content">
+    <div class="nl-left">
+      <div class="nl-icon">
+        <i class="fa-solid fa-envelope-open-text"></i>
+      </div>
+      <div>
+        <div class="nl-title">Restez informé des activités de la SODEXAM</div>
+        <div class="nl-sub">Recevez nos bulletins météo, actualités aéronautiques et communiqués officiels.</div>
+      </div>
+    </div>
+    <form class="nl-form" onsubmit="event.preventDefault(); alert('Merci pour votre inscription à la newsletter de la SODEXAM !');">
+      <input type="email" class="nl-input" placeholder="Entrez votre adresse email..." required>
+      <button type="submit" class="nl-btn">S'abonner</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<!-- FOOTER UNIFORME SODEXAM -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="margin-bottom:20px;">
+          <a href="Maquette_site_internet.html" title="SODEXAM — Retour à l'accueil">
+            <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
+          </a>
+        </div>
+        <p style="line-height:1.7; margin-bottom:20px; color:#94A3B8; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire. Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        </p>
+        <div style="display:flex; gap:12px; font-size:15px;">
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation Rapide</div>
+        <ul class="footer-links">
+          <li><a href="Maquette_site_internet.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Actualités & Presse</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météorologie Nationale</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Navigation Aérienne & Aéroports Régionaux</a></li>
+          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Médecine Aéronautique (CERMA)</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Publications & Médias</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Toutes les actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien N°84</a></li>
+          <li><a href="actualites.html#cooperation"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Coopération Internationale</a></li>
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Communiqués officiels</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Direction Générale</div>
+        <p style="color:#94A3B8; margin-bottom:12px; line-height:1.6; font-size:13.5px;">
+          <i class="fa-solid fa-location-dot" style="color:var(--orange); margin-right:8px;"></i>
+          Siège Bâtiment Général Abdoulaye Coulibaly, Zone Aéroportuaire Félix Houphouët-Boigny, Abidjan - Côte d'Ivoire
+        </p>
+        <p style="color:#94A3B8; margin-bottom:8px; font-size:13.5px;">
+          <i class="fa-solid fa-phone" style="color:var(--orange); margin-right:8px;"></i> +225 27 21 58 87 00
+        </p>
+        <p style="color:#94A3B8; font-size:13.5px;">
+          <i class="fa-solid fa-envelope" style="color:var(--orange); margin-right:8px;"></i> contact@sodexam.ci
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="#">Mentions Légales</a>
+        <a href="#">Politique de Confidentialité</a>
+        <a href="#">Plan du site</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+<!-- Bouton Remonter en haut -->
+<button class="scroll-top-btn" id="scrollTopBtn" title="Retourner en haut" aria-label="Haut de page">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<!-- ============================================================
+     INTERACTIONS & MOTION CHOREOGRAPHY (Conforme /review-animations)
+     ============================================================ -->
+<script>
+// 1. Barre de progression de lecture
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+  const bar = document.getElementById('reading-bar');
+  if (bar) {
+    bar.style.width = scrolled + '%';
+  }
+
+  // Bouton retour en haut
+  const btn = document.getElementById('scrollTopBtn');
+  if (btn) {
+    if (winScroll > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }
+}, { passive: true });
+
+// Clic retour haut
+document.getElementById('scrollTopBtn')?.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// 2. IntersectionObserver pour les reveals au scroll fluides (GPU-only transform & opacity)
+const observerOptions = {
+  root: null,
+  rootMargin: '0px 0px -60px 0px',
+  threshold: 0.1
+};
+
+const revealObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// 3. ScrollSpy pour le Sommaire rapide dans la colonne sticky
+const sections = document.querySelectorAll('div[id^="section-"]');
+const tocLinks = document.querySelectorAll('.toc-item a');
+
+const spyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      tocLinks.forEach(link => {
+        if (link.getAttribute('href') === '#' + id) {
+          link.style.color = 'var(--orange)';
+          link.style.background = 'var(--orange-subtle)';
+          link.style.fontWeight = '700';
+        } else {
+          link.style.color = 'var(--text-muted)';
+          link.style.background = 'transparent';
+          link.style.fontWeight = '600';
+        }
+      });
+    }
+  });
+}, { threshold: 0.35 });
+
+sections.forEach(sec => spyObserver.observe(sec));
+</script>
+
+</body>
+</html>
+
