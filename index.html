@@ -1838,14 +1838,15 @@ body {
    ============================================================ */
 /* ============================================================
    HERO BANNER : BÂTIMENT DU SIÈGE SOCIAL SODEXAM
-   Sans aucun flou, logo SODEXAM parfaitement visible & identifiable
+   Hauteur compacte (220px) pour affichage 100% au-dessus du pli (Above the Fold)
+   Logo SODEXAM parfaitement visible & centré dans la bande dégagée
    Filtre couleur harmonieux pour valoriser le bâtiment et protéger les cartes & le bulletin
    ============================================================ */
 .homepage-hero-banner {
   position: relative;
-  height: 560px;
-  min-height: 560px;
-  background: #18181B url('images/siege-sodexam-batiment-crisp.jpg') 43% 36% / cover no-repeat;
+  height: 220px;
+  min-height: 220px;
+  background: #18181B url('images/siege-sodexam-batiment-crisp.jpg') 43% 45% / cover no-repeat;
   border-bottom: 3px solid var(--orange);
   overflow: hidden;
 }
@@ -1855,38 +1856,38 @@ body {
   inset: 0;
   background: 
     linear-gradient(180deg, 
-      rgba(20, 20, 24, 0.32) 0%, 
-      rgba(20, 20, 24, 0.48) 40%, 
-      rgba(24, 24, 27, 0.85) 75%, 
-      rgba(24, 24, 27, 0.98) 100%
+      rgba(20, 20, 24, 0.28) 0%, 
+      rgba(20, 20, 24, 0.42) 48%, 
+      rgba(24, 24, 27, 0.82) 78%, 
+      rgba(24, 24, 27, 0.96) 100%
     ),
-    linear-gradient(135deg, rgba(242, 106, 33, 0.12) 0%, transparent 60%);
+    linear-gradient(135deg, rgba(242, 106, 33, 0.10) 0%, transparent 60%);
   pointer-events: none;
 }
 
 /* ============================================================
-   DÉCALAGE DU CARROUSEL ET DU WIDGET MÉTÉO (REMONTÉ HAUTEUR CONFORT)
+   HERO OVERLAP : CARROUSEL D'ARTICLES ET WIDGET MÉTÉO (FIT SANS SCROLL)
    ============================================================ */
 .hero-overlap-section {
-  margin-top: -160px;
+  margin-top: -60px;
   position: relative;
   z-index: 10;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 .hero-split-container {
   display: grid;
   grid-template-columns: 1.9fr 1fr;
-  gap: 24px;
+  gap: 20px;
   align-items: stretch;
 }
 @media (max-width: 991px) {
   .homepage-hero-banner {
-    height: 420px;
-    min-height: 420px;
-    background-position: 45% 32%;
+    height: 180px;
+    min-height: 180px;
+    background-position: 45% 44%;
   }
   .hero-overlap-section {
-    margin-top: -100px;
+    margin-top: -40px;
   }
   .hero-split-container {
     grid-template-columns: 1fr;
@@ -1895,17 +1896,17 @@ body {
 }
 @media (max-width: 640px) {
   .homepage-hero-banner {
-    height: 320px;
-    min-height: 320px;
-    background-position: 48% 30%;
+    height: 150px;
+    min-height: 150px;
+    background-position: 48% 42%;
   }
   .hero-overlap-section {
-    margin-top: -60px;
+    margin-top: -30px;
   }
 }
 .hero-real-showcase {
-  height: 480px;
-  max-height: 480px;
+  height: 440px;
+  max-height: 440px;
   border-radius: 16px;
   position: relative;
   overflow: hidden;
@@ -1920,9 +1921,9 @@ body {
 }
 .hero-slider-main {
   position: relative;
-  height: 490px;
-  min-height: 490px;
-  max-height: 490px;
+  height: 440px;
+  min-height: 440px;
+  max-height: 440px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.4);
@@ -1987,13 +1988,15 @@ body {
   background: linear-gradient(155deg, #1C1917 0%, #292524 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  padding: 24px;
+  padding: 18px 20px;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.35);
-  height: 490px;
+  height: 440px;
+  min-height: 440px;
+  max-height: 440px;
   box-sizing: border-box;
 }
 .widget-head-badge {
@@ -2454,9 +2457,9 @@ body {
    ============================================================ */
 .hero-real-showcase {
   position: relative;
-  height: 490px;
-  min-height: 490px;
-  max-height: 490px;
+  height: 440px;
+  min-height: 440px;
+  max-height: 440px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.4);
@@ -2714,9 +2717,9 @@ body {
    ============================================================ */
 .hero-real-showcase {
   position: relative;
-  height: 490px;
-  min-height: 490px;
-  max-height: 490px;
+  height: 440px;
+  min-height: 440px;
+  max-height: 440px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 45px -10px rgba(24, 24, 27, 0.35);
@@ -2803,7 +2806,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 28px 32px 26px;
+  padding: 20px 24px 18px;
   z-index: 10;
   color: white;
 }
