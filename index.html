@@ -1837,25 +1837,30 @@ body {
    NEW HERO 2/3 + 1/3 LAYOUT
    ============================================================ */
 /* ============================================================
-   HERO BANNER : BÂTIMENT DU SIÈGE SOCIAL SODEXAM (DÉZOOMÉ & FILTRÉ)
+   HERO BANNER : BÂTIMENT DU SIÈGE SOCIAL SODEXAM
+   Sans aucun flou, logo SODEXAM parfaitement visible & identifiable
+   Filtre couleur harmonieux pour valoriser le bâtiment et protéger les cartes & le bulletin
    ============================================================ */
 .homepage-hero-banner {
   position: relative;
-  height: 480px;
-  min-height: 480px;
-  background: #18181B url('images/siege-sodexam-batiment-wide.jpg') center 22% / cover no-repeat;
+  height: 560px;
+  min-height: 560px;
+  background: #18181B url('images/siege-sodexam-batiment-crisp.jpg') 43% 36% / cover no-repeat;
   border-bottom: 3px solid var(--orange);
   overflow: hidden;
 }
 .homepage-hero-banner::after {
-  content: ;
+  content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, 
-    rgba(15, 15, 18, 0.28) 0%, 
-    rgba(15, 15, 18, 0.44) 55%, 
-    rgba(15, 15, 18, 0.85) 100%
-  );
+  background: 
+    linear-gradient(180deg, 
+      rgba(20, 20, 24, 0.32) 0%, 
+      rgba(20, 20, 24, 0.48) 40%, 
+      rgba(24, 24, 27, 0.85) 75%, 
+      rgba(24, 24, 27, 0.98) 100%
+    ),
+    linear-gradient(135deg, rgba(242, 106, 33, 0.12) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -1863,7 +1868,7 @@ body {
    DÉCALAGE DU CARROUSEL ET DU WIDGET MÉTÉO (REMONTÉ HAUTEUR CONFORT)
    ============================================================ */
 .hero-overlap-section {
-  margin-top: -200px;
+  margin-top: -160px;
   position: relative;
   z-index: 10;
   margin-bottom: 48px;
@@ -1876,11 +1881,12 @@ body {
 }
 @media (max-width: 991px) {
   .homepage-hero-banner {
-    height: 380px;
-    min-height: 380px;
+    height: 420px;
+    min-height: 420px;
+    background-position: 45% 32%;
   }
   .hero-overlap-section {
-    margin-top: -120px;
+    margin-top: -100px;
   }
   .hero-split-container {
     grid-template-columns: 1fr;
@@ -1889,13 +1895,13 @@ body {
 }
 @media (max-width: 640px) {
   .homepage-hero-banner {
-    height: 280px;
-    min-height: 280px;
+    height: 320px;
+    min-height: 320px;
+    background-position: 48% 30%;
   }
   .hero-overlap-section {
     margin-top: -60px;
   }
-}
 }
 .hero-real-showcase {
   height: 480px;
@@ -4905,6 +4911,152 @@ function filterCiMap(type) {
 }
 
 // Initialisation de la sélection par défaut
+
+// ============================================================
+// GESTION DU LECTEUR VIDÉO YOUTUBE (SODEXAM TV)
+// ============================================================
+function changeYtVideo(videoId, title, cardElement) {
+  const iframe = document.getElementById('mainYtFrame');
+  const titleEl = document.getElementById('mainYtTitle');
+  if (iframe) {
+    iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+  }
+  if (titleEl) {
+    titleEl.textContent = title;
+  }
+  document.querySelectorAll('.yt-video-card').forEach(card => card.classList.remove('active'));
+  if (cardElement && cardElement.classList) {
+    cardElement.classList.add('active');
+  }
+  const playerBox = document.querySelector('.yt-player-box');
+  if (playerBox && window.innerWidth < 768) {
+    playerBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// ============================================================
+// WIDGET MÉTÉO DU HERO (5 VILLES MAJEURES DE CÔTE D'IVOIRE)
+// ============================================================
+const HERO_WEATHER_DATA = {
+  'abidjan': {
+    temp: '28°C',
+    desc: 'Ciel peu nuageux',
+    cityLabel: 'Abidjan (Port-Bouët • Hub DMN)',
+    iconHtml: '<i class="fa-solid fa-cloud-sun w-anim-cloud-sun" style="color:#FBBF24;"></i>',
+    humidity: '78 %',
+    wind: '14 km/h S-O',
+    pressure: '1013 hPa',
+    visibility: '10 km',
+    forecast: [
+      { day: "Aujourd'hui", icon: '<i class="fa-solid fa-cloud-sun w-anim-cloud-sun" style="color:#FBBF24;"></i>', temp: '29° / 24°' },
+      { day: 'Demain', icon: '<i class="fa-solid fa-sun w-anim-sun" style="color:#F59E0B;"></i>', temp: '28° / 23°' },
+      { day: 'Après-demain', icon: '<i class="fa-solid fa-cloud w-anim-cloud" style="color:#94A3B8;"></i>', temp: '30° / 24°' }
+    ]
+  },
+  'yamoussoukro': {
+    temp: '31°C',
+    desc: 'Ensoleillé & Voile léger',
+    cityLabel: 'Yamoussoukro (Bélier • Station Synoptique)',
+    iconHtml: '<i class="fa-solid fa-sun w-anim-sun" style="color:#F59E0B;"></i>',
+    humidity: '62 %',
+    wind: '11 km/h S-E',
+    pressure: '1011 hPa',
+    visibility: '12 km',
+    forecast: [
+      { day: "Aujourd'hui", icon: '<i class="fa-solid fa-sun w-anim-sun" style="color:#F59E0B;"></i>', temp: '32° / 22°' },
+      { day: 'Demain', icon: '<i class="fa-solid fa-cloud-sun w-anim-cloud-sun" style="color:#FBBF24;"></i>', temp: '31° / 23°' },
+      { day: 'Après-demain', icon: '<i class="fa-solid fa-cloud-sun w-anim-cloud-sun" style="color:#FBBF24;"></i>', temp: '33° / 22°' }
+    ]
+  },
+  'sanpedro': {
+    temp: '27°C',
+    desc: 'Brise marine & Nuages épars',
+    cityLabel: 'San Pedro (Littoral Sud-Ouest • Station Côtière)',
+    iconHtml: '<i class="fa-solid fa-cloud-sun w-anim-cloud-sun" style="color:#38BDF8;"></i>',
+    humidity: '84 %',
+    wind: '18 km/h S',
+    pressure: '1014 hPa',
+    visibility: '9 km',
+    forecast: [
+      { day: "Aujourd'hui", icon: '<i class="fa-solid fa-cloud-sun w-anim-cloud-sun" style="color:#38BDF8;"></i>', temp: '27° / 23°' },
+      { day: 'Demain', icon: '<i class="fa-solid fa-cloud-rain" style="color:#60A5FA;"></i>', temp: '26° / 23°' },
+      { day: 'Après-demain', icon: '<i class="fa-solid fa-cloud-sun w-anim-cloud-sun" style="color:#38BDF8;"></i>', temp: '28° / 24°' }
+    ]
+  },
+  'bouake': {
+    temp: '30°C',
+    desc: 'Éclaircies & Temps sec',
+    cityLabel: 'Bouaké (Gbêkê • Centre National)',
+    iconHtml: '<i class="fa-solid fa-sun w-anim-sun" style="color:#F59E0B;"></i>',
+    humidity: '66 %',
+    wind: '9 km/h N-E',
+    pressure: '1012 hPa',
+    visibility: '10 km',
+    forecast: [
+      { day: "Aujourd'hui", icon: '<i class="fa-solid fa-sun w-anim-sun" style="color:#F59E0B;"></i>', temp: '31° / 22°' },
+      { day: 'Demain', icon: '<i class="fa-solid fa-cloud-sun w-anim-cloud-sun" style="color:#FBBF24;"></i>', temp: '30° / 22°' },
+      { day: 'Après-demain', icon: '<i class="fa-solid fa-cloud" style="color:#94A3B8;"></i>', temp: '29° / 21°' }
+    ]
+  },
+  'korhogo': {
+    temp: '33°C',
+    desc: 'Chaud & Ciel dégagé',
+    cityLabel: 'Korhogo (Poro • Grand Nord Ivoirien)',
+    iconHtml: '<i class="fa-solid fa-sun w-anim-sun" style="color:#EA580C;"></i>',
+    humidity: '48 %',
+    wind: '12 km/h N-E (Harmattan modéré)',
+    pressure: '1010 hPa',
+    visibility: '8 km (Brume sèche)',
+    forecast: [
+      { day: "Aujourd'hui", icon: '<i class="fa-solid fa-sun w-anim-sun" style="color:#EA580C;"></i>', temp: '34° / 21°' },
+      { day: 'Demain', icon: '<i class="fa-solid fa-sun w-anim-sun" style="color:#EA580C;"></i>', temp: '34° / 20°' },
+      { day: 'Après-demain', icon: '<i class="fa-solid fa-cloud-sun w-anim-cloud-sun" style="color:#FBBF24;"></i>', temp: '33° / 21°' }
+    ]
+  }
+};
+
+function setWidgetCity(cityName) {
+  const data = HERO_WEATHER_DATA[cityName];
+  if (!data) return;
+
+  document.querySelectorAll('.widget-city-btn').forEach(btn => {
+    btn.classList.remove('active');
+    const onclickAttr = btn.getAttribute('onclick') || '';
+    if (onclickAttr.includes("'" + cityName + "'")) {
+      btn.classList.add('active');
+    }
+  });
+
+  const setElText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  const setElHtml = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+
+  setElText('wTemp', data.temp);
+  setElText('wDesc', data.desc);
+  setElText('wCityLabel', data.cityLabel);
+  setElHtml('wIcon', data.iconHtml);
+  setElText('wHum', data.humidity);
+  setElText('wWind', data.wind);
+  setElText('wPres', data.pressure);
+  setElText('wVis', data.visibility);
+
+  if (data.forecast && data.forecast.length >= 3) {
+    setElHtml('wF1Icon', data.forecast[0].icon);
+    setElText('wF1', data.forecast[0].temp);
+    setElHtml('wF2Icon', data.forecast[1].icon);
+    setElText('wF2', data.forecast[1].temp);
+    setElHtml('wF3Icon', data.forecast[2].icon);
+    setElText('wF3', data.forecast[2].temp);
+  }
+
+  const clockEl = document.getElementById('heroLiveClock');
+  if (clockEl) {
+    const capitalized = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+    clockEl.textContent = 'GMT • ' + capitalized;
+  }
+}
+
+// Initialisation par défaut
+setWidgetCity('abidjan');
 selectAirport('abidjan');
 </script>
 
