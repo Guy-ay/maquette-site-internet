@@ -22,18 +22,18 @@
   --green: #1E7A3C;
   --green-light: #2FA95B;
   --green-subtle: rgba(30, 122, 60, 0.08);
-  --blue-sky: #0284C7;
-  --blue-navy: #0F172A;
+  --blue-sky: #E8631C;
+  --blue-navy: #1C1917;
   
-  --bg-page: #FCFCFC;
+  --bg-page: #FAF8F5;
   --bg-surface: #FFFFFF;
-  --bg-subtle: #F8FAFC;
+  --bg-subtle: #F3EFEA;
   
-  --text-main: #1E293B;
-  --text-muted: #64748B;
-  --text-light: #94A3B8;
+  --text-main: #1C1917;
+  --text-muted: #57534E;
+  --text-light: #A8A29E;
   
-  --border-light: rgba(226, 232, 240, 0.85);
+  --border-light: rgba(231, 229, 228, 0.85);
   --border-focus: rgba(242, 106, 33, 0.4);
   
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
@@ -41,8 +41,8 @@
   --dur-fast: 220ms;
   --dur-base: 360ms;
   
-  --shadow-bezel: 0 16px 36px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
-  --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+  --shadow-bezel: 0 16px 36px -12px rgba(28, 25, 23, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(28, 25, 23, 0.06);
   --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
 }
 
@@ -50,7 +50,7 @@
    FLASH BAR UNIFORME
    ============================================================ */
 .flash-bar {
-  background: #111827;
+  background: #18181B;
   color: white;
   height: 42px;
   display: flex;
@@ -95,7 +95,7 @@
   flex: 1;
   padding-left: 20px;
   font-size: 13px;
-  color: #E2E8F0;
+  color: #E7E5E4;
 }
 .flash-track:hover { animation-play-state: paused; }
 @keyframes flashMarquee {
@@ -114,7 +114,7 @@
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid var(--border-light);
-  box-shadow: 0 4px 20px -8px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 4px 20px -8px rgba(28, 25, 23, 0.05);
 }
 .header-inner {
   height: 80px;
@@ -294,8 +294,8 @@
    FOOTER UNIFORME
    ============================================================ */
 .footer {
-  background: #0B132B;
-  color: #94A3B8;
+  background: #18181B;
+  color: #A8A29E;
   padding: 64px 0 28px;
   font-size: 14px;
   border-top: 3px solid var(--orange);
@@ -332,7 +332,7 @@
   margin: 0;
 }
 .footer-links a {
-  color: #94A3B8;
+  color: #A8A29E;
   transition: all var(--dur-fast) var(--ease-spring);
   display: inline-block;
 }
@@ -349,10 +349,10 @@
   font-size: 13px;
   flex-wrap: wrap;
   gap: 16px;
-  color: #64748B;
+  color: #57534E;
 }
 .footer-bottom a {
-  color: #94A3B8;
+  color: #A8A29E;
   transition: color var(--dur-fast);
 }
 .footer-bottom a:hover {
@@ -391,7 +391,7 @@ body {
 
 /* Hero Banner */
 .mag-hero {
-  background: linear-gradient(135deg, #0B132B 0%, #1E3A8A 60%, #0B132B 100%);
+  background: linear-gradient(135deg, #18181B 0%, #27201C 60%, #18181B 100%);
   color: white;
   padding: 64px 0 56px;
   position: relative;
@@ -438,7 +438,7 @@ body {
 }
 .mag-hero p {
   font-size: 16px;
-  color: #CBD5E1;
+  color: #D6D3D1;
   line-height: 1.6;
   max-width: 720px;
   margin: 0 auto;
@@ -452,7 +452,7 @@ body {
   background: white;
   border-radius: 24px;
   border: 1px solid var(--border-light);
-  box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 45px -12px rgba(28, 25, 23, 0.08);
   padding: 40px;
   display: grid;
   grid-template-columns: 360px 1fr;
@@ -463,7 +463,7 @@ body {
 }
 .mag-featured-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 24px 50px -12px rgba(15, 23, 42, 0.14);
+  box-shadow: 0 24px 50px -12px rgba(28, 25, 23, 0.14);
 }
 .mag-cover-frame {
   position: relative;
@@ -471,7 +471,7 @@ body {
   overflow: hidden;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
   border: 1px solid rgba(0,0,0,0.1);
-  background: #F1F5F9;
+  background: #F5F2EB;
   cursor: pointer;
 }
 .mag-cover-img {
@@ -580,7 +580,7 @@ body {
 }
 .mag-grid-item:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 20px 40px -10px rgba(28, 25, 23, 0.12);
   border-color: rgba(242, 106, 33, 0.4);
 }
 .mag-grid-thumb-wrap {
@@ -638,7 +638,7 @@ body {
 .mag-modal {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(28, 25, 23, 0.85);
   backdrop-filter: blur(10px);
   z-index: 3000;
   display: none;
@@ -687,10 +687,278 @@ body {
   .mag-btn-reader { margin-left: 0; margin-top: 10px; width: 100%; justify-content: center; }
   .mag-btn-download { width: 100%; justify-content: center; }
 }
+
+/* ============================================================
+   L'AÉRIEN TV & FORMAT SWITCHER STYLES (/minimalist-ui)
+   ============================================================ */
+.aerien-format-switcher {
+  display: inline-flex;
+  background: #FFFFFF;
+  padding: 4px;
+  border-radius: 9999px;
+  gap: 4px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+.aerien-tab-btn {
+  border: none;
+  background: transparent;
+  color: #57534E;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.aerien-tab-btn.active {
+  background: #1C1917;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(28,25,23,0.15);
+}
+.aerien-tv-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.95fr;
+  gap: 28px;
+  align-items: stretch;
+}
+.aerien-video-stage {
+  background: #FFFFFF;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+.aerien-stage-screen {
+  position: relative;
+  min-height: 360px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 28px;
+}
+.aerien-stage-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(28, 25, 23, 0.15) 0%, rgba(28, 25, 23, 0.88) 100%);
+}
+.aerien-play-trigger {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 8px 24px rgba(242,106,33,0.45);
+  transition: all 0.25s var(--ease-spring);
+  z-index: 3;
+}
+.aerien-play-trigger:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: #D4551A;
+}
+.aerien-stage-caption {
+  position: relative;
+  z-index: 2;
+  color: #FFFFFF;
+}
+.badge-stage-pill {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #FDBA74;
+  background: rgba(242, 106, 33, 0.3);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+.aerien-stage-title {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+.aerien-stage-desc {
+  font-size: 13.5px;
+  color: #E7E5E4;
+  line-height: 1.55;
+  max-width: 620px;
+}
+.aerien-stage-footer {
+  padding: 16px 24px;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-light);
+}
+.aerien-playlist-col {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+.aerien-playlist-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+.aerien-playlist-card {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 14px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #FAF8F5;
+}
+.aerien-playlist-card:hover {
+  background: #FFFFFF;
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+.aerien-playlist-card.active {
+  background: #FFFFFF;
+  border-color: var(--orange);
+  box-shadow: 0 4px 14px rgba(242,106,33,0.12);
+}
+.ap-card-thumb {
+  height: 72px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 4px;
+}
+.ap-card-dur {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #FFFFFF;
+  background: rgba(0,0,0,0.75);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.ap-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ap-card-tag {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.ap-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1C1917;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.ap-card-meta {
+  font-size: 11px;
+  color: #78716C;
+  font-weight: 600;
+}
+@media (max-width: 992px) {
+  .aerien-tv-grid { grid-template-columns: 1fr; }
+}
+
+
+/* === PROPORTIONAL LOGO & CLEAN UNIFORM HEADER (/minimalist-ui) === */
+.header-inner {
+  height: 68px !important;
+  gap: 16px !important;
+}
+.header-logo-img {
+  height: 30px !important;
+  max-width: 164px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+.logo-wrap {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+.main-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+.nav-link {
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  color: #1C1917 !important;
+  letter-spacing: -0.01em !important;
+}
+.nav-link.active, .nav-link:hover {
+  color: var(--orange) !important;
+}
+@media (max-width: 768px) {
+  .header-inner { height: 60px !important; }
+  .header-logo-img { height: 26px !important; max-width: 140px !important; }
+}
+
+
+/* ============================================================
+   REACT & WEB BEST PRACTICES : RENDERING & CORE WEB VITALS
+   ============================================================ */
+@supports (content-visibility: auto) {
+  .grands-dossiers, .actualites, #aeroports-explorer, .actu-grid,
+  .article-related-section, .article-prev-next, .footer, .sidebar-stack {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 450px;
+  }
+}
+
+img {
+  content-visibility: auto;
+}
+
+.actu-img, .article-cover-hero, .dossier-card-img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
 </style>
 </head>
 <body>
 
+<!-- Top Bar Alertes Flash -->
 <!-- Top Bar Alertes Flash -->
 <div class="flash-bar">
   <div class="flash-label">
@@ -700,7 +968,7 @@ body {
   <div class="flash-track">
     <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
     <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
-    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins quotidiens Vigiclim</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins météo quotidiens</span>
     <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
     <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
   </div>
@@ -709,56 +977,69 @@ body {
 <!-- Header Principal -->
 <header class="main-header">
   <div class="container header-inner">
-    <a href="Maquette_site_internet.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+    <a href="index.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
       <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
     </a>
 
     <nav class="main-nav">
-      <a href="Maquette_site_internet.html" class="nav-link">
+      <a href="index.html" class="nav-link">
         <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
       </a>
       
+      <!-- Qui sommes-nous -->
       <div class="nav-item-dropdown">
-        <a href="#" class="nav-link">
+        <a href="presentation.html" class="nav-link">
           Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
         </a>
         <div class="dropdown-panel">
-          <a href="Maquette_site_internet.html#presentation">Présentation générale</a>
+          <a href="presentation.html">Présentation de la SODEXAM</a>
           <a href="mot-du-dg.html">Mot du Directeur Général</a>
-          <a href="Maquette_site_internet.html#missions">Nos missions & valeurs</a>
-          <a href="Maquette_site_internet.html#gouvernance">Conseil d'administration</a>
-          <a href="Maquette_site_internet.html#codir">Comité de direction</a>
+          <a href="gouvernance.html">Conseil d'Administration</a>
+          <a href="comite-direction.html">Comité de Direction</a>
         </div>
       </div>
 
+      <!-- Aéroports -->
+      <a href="navigation-aeroports.html" class="nav-link">
+        Aéroports
+      </a>
+
+      <!-- Météorologie -->
       <div class="nav-item-dropdown">
-        <a href="Maquette_site_internet.html#activites" class="nav-link">
-          Nos activités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        <a href="meteo.html" class="nav-link">
+          Météorologie <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
         </a>
         <div class="dropdown-panel">
-          <a href="Maquette_site_internet.html#activites">Météorologie Nationale & Vigiclim</a>
-          <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
-          <a href="Maquette_site_internet.html#activites">Médecine Aéronautique (CERMA)</a>
+          <a href="meteo.html">Météo (Prévisions &amp; Vigilance)</a>
+          <a href="nos-stations.html">Nos stations</a>
+          <a href="documentation.html">Notre documentation</a>
         </div>
       </div>
 
+      <!-- Médecine (ex-CERMA) -->
       <div class="nav-item-dropdown">
-        <a href="actualites.html" class="nav-link">
+        <a href="presentation-cerma.html" class="nav-link">
+          Médecine <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation-cerma.html">Présentation du CERMA</a>
+          <a href="prestations-cerma.html">Nos prestations</a>
+        </div>
+      </div>
+
+      <!-- Actualités -->
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link active">
           Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
         </a>
         <div class="dropdown-panel">
-          <a href="actualites.html">Toutes les actualités (15)</a>
-          <a href="magazine-aerien.html" class="active-item">Magazine L'Aérien</a>
-          <a href="actualites.html#cooperation">Coopération & Partenariats</a>
-          <a href="actualites.html">Communiqués officiels</a>
+          <a href="actualites.html" class="active-item">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html">Magazine L'Aérien (Presse &amp; Vidéo)</a>
         </div>
       </div>
 
-      <a href="magazine-aerien.html" class="nav-link active">
-        Magazine L'Aérien
-      </a>
-
-      <a href="Maquette_site_internet.html#contact" class="nav-link">
+      <!-- Contact -->
+      <a href="contact.html" class="nav-link">
         Contact
       </a>
     </nav>
@@ -774,26 +1055,43 @@ body {
 <!-- Mobile Drawer Overlay -->
 <div class="mobile-drawer" id="mobileDrawer">
   <div class="drawer-header">
-    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" class="header-logo-img">
     <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
   </div>
   <div class="drawer-links">
-    <a href="Maquette_site_internet.html"><i class="fa-solid fa-house"></i> Accueil</a>
-    <a href="mot-du-dg.html">Mot du Directeur Général</a>
-    <a href="actualites.html">Actualités & Presse</a>
-    <a href="magazine-aerien.html" class="active">Magazine L'Aérien</a>
-    <a href="Maquette_site_internet.html#activites">Météorologie Nationale</a>
-    <a href="Maquette_site_internet.html#activites">Navigation Aérienne & Aéroports Régionaux</a>
-    <a href="Maquette_site_internet.html#activites">CERMA / Santé</a>
-    <a href="Maquette_site_internet.html#contact">Contact</a>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Qui sommes-nous</div>
+    <a href="presentation.html" style="padding-left:28px;"><i class="fa-solid fa-building"></i> Présentation de la SODEXAM</a>
+    <a href="mot-du-dg.html" style="padding-left:28px;"><i class="fa-solid fa-user-tie"></i> Mot du Directeur Général</a>
+    <a href="gouvernance.html" style="padding-left:28px;"><i class="fa-solid fa-users-gear"></i> Conseil d'Administration</a>
+    <a href="comite-direction.html" style="padding-left:28px;"><i class="fa-solid fa-sitemap"></i> Comité de Direction</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Aviation &amp; Navigation</div>
+    <a href="navigation-aeroports.html"><i class="fa-solid fa-plane-departure"></i> Aéroports de Côte d'Ivoire</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Météorologie</div>
+    <a href="meteo.html" style="padding-left:28px;"><i class="fa-solid fa-cloud-sun-rain"></i> Météo (Prévisions &amp; Vigilance)</a>
+    <a href="nos-stations.html" style="padding-left:28px;"><i class="fa-solid fa-tower-broadcast"></i> Nos stations</a>
+    <a href="documentation.html" style="padding-left:28px;"><i class="fa-solid fa-book"></i> Notre documentation</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Médecine (CERMA)</div>
+    <a href="presentation-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-heart-pulse"></i> Présentation du CERMA</a>
+    <a href="prestations-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-stethoscope"></i> Nos prestations</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Actualités &amp; Médias</div>
+    <a href="actualites.html" class="active" style="padding-left:28px;"><i class="fa-regular fa-newspaper"></i> Toutes les actualités</a>
+    <a href="magazine-aerien.html" style="padding-left:28px;"><i class="fa-solid fa-video"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a>
+
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
   </div>
 </div>
+
 
 
 <!-- Mobile Drawer Overlay -->
 <div class="mobile-drawer" id="mobileDrawer">
   <div class="drawer-header">
-    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;" loading="lazy" decoding="async">
     <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
   </div>
   <div class="drawer-links">
@@ -812,7 +1110,7 @@ body {
 <!-- Mobile Drawer Overlay -->
 <div class="mobile-drawer" id="mobileDrawer">
   <div class="drawer-header">
-    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" style="height:36px; width:auto;" loading="lazy" decoding="async">
     <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
   </div>
   <div class="drawer-links">
@@ -839,6 +1137,129 @@ body {
   </div>
 </section>
 
+<!-- ============================================================
+     SÉLECTEUR DE FORMATS & VOLET VIDÉO (L'AÉRIEN TV)
+     ============================================================ -->
+<section class="aerien-format-bar-section" style="padding: 24px 0 0; background: #FAF8F5;">
+  <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+    <div class="aerien-format-switcher">
+      <button type="button" class="aerien-tab-btn active" id="tab-all" onclick="switchAerienTab('all')">
+        <i class="fa-solid fa-layer-group"></i> Tous les formats
+      </button>
+      <button type="button" class="aerien-tab-btn" id="tab-mag" onclick="switchAerienTab('mag')">
+        <i class="fa-solid fa-book-open"></i> Éditions Presse (PDF)
+      </button>
+      <button type="button" class="aerien-tab-btn" id="tab-video" onclick="switchAerienTab('video')">
+        <i class="fa-solid fa-circle-play" style="color:var(--orange);"></i> Volet Vidéo (L'Aérien TV)
+      </button>
+    </div>
+    <div style="font-size:13px; color:#78716C; font-weight:600;">
+      <i class="fa-solid fa-bullhorn" style="color:var(--orange); margin-right:6px;"></i> Éditions officielles &amp; reportages exclusifs
+    </div>
+  </div>
+</section>
+
+<!-- SECTION VOLET VIDÉO : L'AÉRIEN TV -->
+<section class="aerien-video-section" id="volet-video" style="padding: 56px 0; background: linear-gradient(180deg, #FAF8F5 0%, #F3EFEA 100%); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:32px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); background:rgba(242,106,33,0.12); padding:4px 14px; border-radius:9999px; margin-bottom:10px;">
+          <i class="fa-solid fa-video" style="margin-right:6px;"></i> L'Aérien TV • Volet Vidéo &amp; Reportages
+        </span>
+        <h2 style="font-size:30px; font-weight:800; color:#1C1917; line-height:1.2;">Les Grands Reportages Audiovisuels de la SODEXAM</h2>
+        <p style="color:var(--text-muted); font-size:14.5px; margin-top:6px;">Immersions exclusives sur nos chantiers d'infrastructure, reportages techniques et coulisses de l'aviation civile et de la météo nationale.</p>
+      </div>
+      <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener noreferrer" class="btn-primary-capsule">
+        <span>Chaîne YouTube Officielle</span>
+        <span class="btn-circle-icon"><i class="fa-brands fa-youtube"></i></span>
+      </a>
+    </div>
+
+    <div class="aerien-tv-grid">
+      <!-- Lecteur Vidéo Principal (Stage) -->
+      <div class="aerien-video-stage">
+        <div class="aerien-stage-screen" id="aerienVideoStage" style="background-image: url('https://sodexam.com/wp-content/uploads/2024/06/18-05-2024-Inauguration-de-lAeroport-de-Korhogo-61-scaled-1.jpg');">
+          <div class="aerien-stage-overlay"></div>
+          <a href="https://www.youtube.com/watch?v=F3_6r3nJt3o" target="_blank" rel="noopener noreferrer" class="aerien-play-trigger" id="aerienPlayBtn" title="Lire la vidéo sur YouTube">
+            <i class="fa-solid fa-play"></i>
+          </a>
+          <div class="aerien-stage-caption">
+            <span class="badge-stage-pill" id="aerienStageBadge">REPORTAGE SPÉCIAL • 08:45</span>
+            <h3 class="aerien-stage-title" id="aerienStageTitle">Inauguration et mise en service opérationnelle du nouvel Aéroport de Korhogo</h3>
+            <p class="aerien-stage-desc" id="aerienStageDesc">Retour en images sur le déploiement des infrastructures modernes, la nouvelle aérogare et les nouvelles perspectives économiques pour le Grand Nord ivoirien.</p>
+          </div>
+        </div>
+        <div class="aerien-stage-footer">
+          <div style="font-size:13px; color:#57534E; font-weight:600;">
+            <i class="fa-regular fa-clock" style="color:var(--orange); margin-right:6px;"></i> Durée totale : <span id="aerienStageDuration">08 min 45 s</span>
+          </div>
+          <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:700; color:var(--orange); display:inline-flex; align-items:center; gap:6px;">
+            Plus de reportages <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Playlist des Épisodes L'Aérien TV -->
+      <div class="aerien-playlist-col">
+        <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:#78716C; margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid var(--border-light);">
+          Playlist des Épisodes Récents :
+        </div>
+
+        <div class="aerien-playlist-stack">
+          <!-- Item 0 -->
+          <div class="aerien-playlist-card active" onclick="selectAerienVideo(0)">
+            <div class="ap-card-thumb" style="background-image: url('https://sodexam.com/wp-content/uploads/2024/06/18-05-2024-Inauguration-de-lAeroport-de-Korhogo-61-scaled-1.jpg');">
+              <span class="ap-card-dur">08:45</span>
+            </div>
+            <div class="ap-card-body">
+              <span class="ap-card-tag">Plateformes Régionales</span>
+              <h4 class="ap-card-title">Inauguration et mise en service du nouvel Aéroport de Korhogo</h4>
+              <span class="ap-card-meta"><i class="fa-brands fa-youtube" style="color:#DC2626;"></i> SODEXAM TV</span>
+            </div>
+          </div>
+
+          <!-- Item 1 -->
+          <div class="aerien-playlist-card" onclick="selectAerienVideo(1)">
+            <div class="ap-card-thumb" style="background-image: url('https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-11-at-10.42.31.jpeg');">
+              <span class="ap-card-dur">12:20</span>
+            </div>
+            <div class="ap-card-body">
+              <span class="ap-card-tag">Météorologie &amp; Climat</span>
+              <h4 class="ap-card-title">Au cœur de la DMN : de l'observation à l'alerte précoce Vigiclim</h4>
+              <span class="ap-card-meta"><i class="fa-brands fa-youtube" style="color:#DC2626;"></i> SODEXAM TV</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="aerien-playlist-card" onclick="selectAerienVideo(2)">
+            <div class="ap-card-thumb" style="background-image: url('https://sodexam.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-09-at-10.50.33.jpeg');">
+              <span class="ap-card-dur">06:30</span>
+            </div>
+            <div class="ap-card-body">
+              <span class="ap-card-tag">Navigation Aérienne</span>
+              <h4 class="ap-card-title">Modernisation et sûreté : visite de terrain à l'Aéroport de San Pedro</h4>
+              <span class="ap-card-meta"><i class="fa-brands fa-youtube" style="color:#DC2626;"></i> SODEXAM TV</span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="aerien-playlist-card" onclick="selectAerienVideo(3)">
+            <div class="ap-card-thumb" style="background-image: url('https://sodexam.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-11-at-14.47.09.jpeg');">
+              <span class="ap-card-dur">09:15</span>
+            </div>
+            <div class="ap-card-body">
+              <span class="ap-card-tag">Jeunesse &amp; Aéronautique</span>
+              <h4 class="ap-card-title">Bourse Dominique Ouattara : immersion des 20 lauréates</h4>
+              <span class="ap-card-meta"><i class="fa-brands fa-youtube" style="color:#DC2626;"></i> SODEXAM TV</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- DERNIERS NUMÉROS À LA UNE (Inspiré Sika Finance) -->
 <section class="mag-featured-wrap">
   <div class="container">
@@ -846,7 +1267,7 @@ body {
     <!-- Numéro 84 (Flagship) -->
     <div class="mag-featured-card">
       <div class="mag-cover-frame" onclick="openModal('N84')">
-        <img src="https://sodexam.com/wp-content/uploads/2026/09/Capture-decran-2026-09-07-145408.png" alt="L'Aérien N°84" class="mag-cover-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+        <img src="https://sodexam.com/wp-content/uploads/2026/09/Capture-decran-2026-09-07-145408.png" alt="L'Aérien N°84" class="mag-cover-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'" loading="lazy" decoding="async">
       </div>
       <div class="mag-featured-info">
         <div class="mag-meta-date"><i class="fa-regular fa-calendar-days"></i> Édition Septembre - Octobre 2026 • N° 84</div>
@@ -867,7 +1288,7 @@ body {
     <!-- Numéro 71 (Hors-série) -->
     <div class="mag-featured-card">
       <div class="mag-cover-frame" onclick="openModal('N71')">
-        <img src="https://sodexam.com/wp-content/uploads/2024/12/A_71DEF.png" alt="L'Aérien N°71" class="mag-cover-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'">
+        <img src="https://sodexam.com/wp-content/uploads/2024/12/A_71DEF.png" alt="L'Aérien N°71" class="mag-cover-img" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800'" loading="lazy" decoding="async">
       </div>
       <div class="mag-featured-info">
         <div class="mag-meta-date"><i class="fa-regular fa-calendar-days"></i> Édition Décembre 2024 • N° 71</div>
@@ -901,7 +1322,7 @@ body {
       <!-- N°70 -->
       <div class="mag-grid-item">
         <div class="mag-grid-thumb-wrap">
-          <img src="https://sodexam.com/wp-content/uploads/2024/10/A_70DEF.png" alt="L'Aérien N°70" class="mag-grid-thumb" loading="lazy">
+          <img src="https://sodexam.com/wp-content/uploads/2024/10/A_70DEF.png" alt="L'Aérien N°70" class="mag-grid-thumb" loading="lazy" decoding="async">
         </div>
         <div class="mag-grid-name">L'Aérien N°70</div>
         <div class="mag-grid-date">Octobre 2024 • Sécurité & Pistes</div>
@@ -913,7 +1334,7 @@ body {
       <!-- N°69 -->
       <div class="mag-grid-item">
         <div class="mag-grid-thumb-wrap">
-          <img src="https://sodexam.com/wp-content/uploads/2024/09/A-69.png" alt="L'Aérien N°69" class="mag-grid-thumb" loading="lazy">
+          <img src="https://sodexam.com/wp-content/uploads/2024/09/A-69.png" alt="L'Aérien N°69" class="mag-grid-thumb" loading="lazy" decoding="async">
         </div>
         <div class="mag-grid-name">L'Aérien N°69</div>
         <div class="mag-grid-date">Septembre 2024 • Météo & Climat</div>
@@ -925,7 +1346,7 @@ body {
       <!-- N°68 -->
       <div class="mag-grid-item">
         <div class="mag-grid-thumb-wrap">
-          <img src="https://sodexam.com/wp-content/uploads/2024/08/A-68.png" alt="L'Aérien N°68" class="mag-grid-thumb" loading="lazy">
+          <img src="https://sodexam.com/wp-content/uploads/2024/08/A-68.png" alt="L'Aérien N°68" class="mag-grid-thumb" loading="lazy" decoding="async">
         </div>
         <div class="mag-grid-name">L'Aérien N°68</div>
         <div class="mag-grid-date">Août 2024 • Aéroports Régionaux</div>
@@ -937,7 +1358,7 @@ body {
       <!-- N°64 -->
       <div class="mag-grid-item">
         <div class="mag-grid-thumb-wrap">
-          <img src="https://sodexam.com/wp-content/uploads/2024/02/WhatsApp-Image-2023-10-02-a-13.26.21.jpg" alt="L'Aérien N°64" class="mag-grid-thumb" loading="lazy">
+          <img src="https://sodexam.com/wp-content/uploads/2024/02/WhatsApp-Image-2023-10-02-a-13.26.21.jpg" alt="L'Aérien N°64" class="mag-grid-thumb" loading="lazy" decoding="async">
         </div>
         <div class="mag-grid-name">L'Aérien N°64</div>
         <div class="mag-grid-date">Mars 2024 • Infrastructures</div>
@@ -949,7 +1370,7 @@ body {
       <!-- N°63 -->
       <div class="mag-grid-item">
         <div class="mag-grid-thumb-wrap">
-          <img src="https://sodexam.com/wp-content/uploads/2024/01/aerien_63.png" alt="L'Aérien N°63" class="mag-grid-thumb" loading="lazy">
+          <img src="https://sodexam.com/wp-content/uploads/2024/01/aerien_63.png" alt="L'Aérien N°63" class="mag-grid-thumb" loading="lazy" decoding="async">
         </div>
         <div class="mag-grid-name">L'Aérien N°63</div>
         <div class="mag-grid-date">Janvier 2024 • CAN 2023 Météo</div>
@@ -961,7 +1382,7 @@ body {
       <!-- N°62 -->
       <div class="mag-grid-item">
         <div class="mag-grid-thumb-wrap">
-          <img src="https://sodexam.com/wp-content/uploads/2024/01/aerien_62.png" alt="L'Aérien N°62" class="mag-grid-thumb" loading="lazy">
+          <img src="https://sodexam.com/wp-content/uploads/2024/01/aerien_62.png" alt="L'Aérien N°62" class="mag-grid-thumb" loading="lazy" decoding="async">
         </div>
         <div class="mag-grid-name">L'Aérien N°62</div>
         <div class="mag-grid-date">Janvier 2024 • Navigation Aérienne</div>
@@ -973,7 +1394,7 @@ body {
       <!-- N°61 -->
       <div class="mag-grid-item">
         <div class="mag-grid-thumb-wrap">
-          <img src="https://sodexam.com/wp-content/uploads/2023/11/image_l_aerien_61.png" alt="L'Aérien N°61" class="mag-grid-thumb" loading="lazy">
+          <img src="https://sodexam.com/wp-content/uploads/2023/11/image_l_aerien_61.png" alt="L'Aérien N°61" class="mag-grid-thumb" loading="lazy" decoding="async">
         </div>
         <div class="mag-grid-name">L'Aérien N°61</div>
         <div class="mag-grid-date">Novembre 2023 • Santé & CERMA</div>
@@ -985,7 +1406,7 @@ body {
       <!-- N°60 -->
       <div class="mag-grid-item">
         <div class="mag-grid-thumb-wrap">
-          <img src="https://sodexam.com/wp-content/uploads/2023/11/image_l_aerien_60.png" alt="L'Aérien N°60" class="mag-grid-thumb" loading="lazy">
+          <img src="https://sodexam.com/wp-content/uploads/2023/11/image_l_aerien_60.png" alt="L'Aérien N°60" class="mag-grid-thumb" loading="lazy" decoding="async">
         </div>
         <div class="mag-grid-name">L'Aérien N°60</div>
         <div class="mag-grid-date">Novembre 2023 • Veille Climat</div>
@@ -997,7 +1418,7 @@ body {
       <!-- N°59 -->
       <div class="mag-grid-item">
         <div class="mag-grid-thumb-wrap">
-          <img src="https://sodexam.com/wp-content/uploads/2023/11/image_l_aerien_59-1.png" alt="L'Aérien N°59" class="mag-grid-thumb" loading="lazy">
+          <img src="https://sodexam.com/wp-content/uploads/2023/11/image_l_aerien_59-1.png" alt="L'Aérien N°59" class="mag-grid-thumb" loading="lazy" decoding="async">
         </div>
         <div class="mag-grid-name">L'Aérien N°59</div>
         <div class="mag-grid-date">Novembre 2023 • Équipements Radar</div>
@@ -1041,74 +1462,75 @@ body {
 </div>
 
 <!-- FOOTER UNIFORME SODEXAM -->
+<!-- FOOTER UNIFORME SODEXAM -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div>
         <div style="margin-bottom:20px;">
-          <a href="Maquette_site_internet.html" title="SODEXAM — Retour à l'accueil">
+          <a href="index.html" title="SODEXAM — Retour à l'accueil">
             <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
           </a>
         </div>
-        <p style="line-height:1.7; margin-bottom:20px; color:#94A3B8; font-size:14px;">
-          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire. Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        <p style="line-height:1.7; margin-bottom:20px; color:#A8A29E; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire (Décret n°97-228 du 16 avril 1997). Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
         </p>
         <div style="display:flex; gap:12px; font-size:15px;">
-          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.facebook.com/sodexam.ci" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
 
       <div>
-        <div class="footer-col-title">Navigation Rapide</div>
+        <div class="footer-col-title">Navigation Institutionnelle</div>
         <ul class="footer-links">
-          <li><a href="Maquette_site_internet.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="index.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="presentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation &amp; Film SODEXAM</a></li>
           <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
-          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Actualités & Presse</a></li>
-          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien</a></li>
-          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météorologie Nationale</a></li>
-          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Navigation Aérienne & Aéroports Régionaux</a></li>
-          <li><a href="Maquette_site_internet.html#activites"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Médecine Aéronautique (CERMA)</a></li>
+          <li><a href="gouvernance.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Conseil d'Administration</a></li>
+          <li><a href="comite-direction.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Comité de Direction (CODIR)</a></li>
+          <li><a href="navigation-aeroports.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Aéroports de Côte d'Ivoire</a></li>
         </ul>
       </div>
 
       <div>
-        <div class="footer-col-title">Publications & Médias</div>
+        <div class="footer-col-title">Météorologie &amp; Médecine</div>
         <ul class="footer-links">
-          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Toutes les actualités</a></li>
-          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien N°84</a></li>
-          <li><a href="actualites.html#cooperation"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Coopération Internationale</a></li>
-          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Communiqués officiels</a></li>
+          <li><a href="meteo.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météo Prévisions &amp; Vigilance</a></li>
+          <li><a href="nos-stations.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Nos stations d'observation</a></li>
+          <li><a href="documentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Notre documentation officielle</a></li>
+          <li><a href="presentation-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation du CERMA</a></li>
+          <li><a href="prestations-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Prestations médicales navigants</a></li>
+          <li><a href="documentation.html#iso9001"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Certification ISO 9001:2015</a></li>
         </ul>
       </div>
 
       <div>
-        <div class="footer-col-title">Direction Générale</div>
-        <p style="color:#94A3B8; margin-bottom:12px; line-height:1.6; font-size:13.5px;">
-          <i class="fa-solid fa-location-dot" style="color:var(--orange); margin-right:8px;"></i>
-          Siège Bâtiment Général Abdoulaye Coulibaly, Zone Aéroportuaire Félix Houphouët-Boigny, Abidjan - Côte d'Ivoire
-        </p>
-        <p style="color:#94A3B8; margin-bottom:8px; font-size:13.5px;">
-          <i class="fa-solid fa-phone" style="color:var(--orange); margin-right:8px;"></i> +225 27 21 58 87 00
-        </p>
-        <p style="color:#94A3B8; font-size:13.5px;">
-          <i class="fa-solid fa-envelope" style="color:var(--orange); margin-right:8px;"></i> contact@sodexam.ci
-        </p>
+        <div class="footer-col-title">Actualités &amp; Contacts</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Dernières Actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a></li>
+          <li><a href="documentation.html#feux"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Feux de Brousse</a></li>
+          <li><a href="documentation.html#decades"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Décadaires Agrométéo</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Contact &amp; Service Presse</a></li>
+          <li><a href="contact.html#urgence"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Urgences Aéronautiques SSLIA</a></li>
+        </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <div>© 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div>&copy; 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
       <div style="display:flex; gap:20px;">
-        <a href="#">Mentions Légales</a>
-        <a href="#">Politique de Confidentialité</a>
-        <a href="#">Plan du site</a>
+        <a href="presentation.html">Mentions Légales</a>
+        <a href="documentation.html">Réglementation &amp; Qualité</a>
+        <a href="contact.html">Plan d'Accès</a>
       </div>
     </div>
   </div>
 </footer>
+
 
 
 
@@ -1149,11 +1571,11 @@ function openModal(ed) {
   if (ed === 'N84') {
     modalBadge.textContent = 'Édition N°84';
     modalDate.textContent = 'Septembre - Octobre 2026';
-    modalTitle.textContent = 'L'Aérien N°84 — Spécial Nouveau Siège & Modernisation';
+    modalTitle.textContent = "L'Aérien N°84 — Spécial Nouveau Siège & Modernisation";
   } else {
     modalBadge.textContent = 'Édition N°71';
     modalDate.textContent = 'Décembre 2024';
-    modalTitle.textContent = 'L'Aérien N°71 — Conférence OACI Montréal';
+    modalTitle.textContent = "L'Aérien N°71 — Conférence OACI Montréal";
   }
   modal.classList.add('open');
 }
@@ -1166,6 +1588,95 @@ window.addEventListener('click', (e) => {
   const modal = document.getElementById('magModal');
   if (e.target === modal) closeModal();
 });
+</script>
+
+
+<script>
+// Volet Vidéo L'Aérien TV Data & Logic
+const AERIEN_VIDEOS = [
+  {
+    title: "Inauguration et mise en service opérationnelle du nouvel Aéroport de Korhogo",
+    badge: "REPORTAGE SPÉCIAL • 08:45",
+    duration: "08 min 45 s",
+    desc: "Retour en images sur le déploiement des infrastructures modernes, la nouvelle aérogare et les nouvelles perspectives économiques pour le Grand Nord ivoirien.",
+    image: "https://sodexam.com/wp-content/uploads/2024/06/18-05-2024-Inauguration-de-lAeroport-de-Korhogo-61-scaled-1.jpg",
+    youtubeUrl: "https://www.youtube.com/watch?v=F3_6r3nJt3o"
+  },
+  {
+    title: "Au cœur de la DMN : de l'observation à l'alerte précoce Vigiclim",
+    badge: "MÉTÉOROLOGIE & CLIMAT • 12:20",
+    duration: "12 min 20 s",
+    desc: "Plongée dans les coulisses de la Direction de la Météorologie Nationale, les stations synoptiques et les prévisions numériques au service du monde agricole et citoyen.",
+    image: "https://sodexam.com/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-11-at-10.42.31.jpeg",
+    youtubeUrl: "https://www.youtube.com/@sodexamci7057"
+  },
+  {
+    title: "Modernisation et sûreté : visite de terrain à l'Aéroport de San Pedro",
+    badge: "NAVIGATION AÉRIENNE • 06:30",
+    duration: "06 min 30 s",
+    desc: "Inspection technique de la piste réhabilitée de 2 100 m et des équipements de sûreté aéroportuaire du deuxième pôle économique du pays.",
+    image: "https://sodexam.com/wp-content/uploads/2026/10/WhatsApp-Image-2026-10-09-at-10.50.33.jpeg",
+    youtubeUrl: "https://www.youtube.com/@sodexamci7057"
+  },
+  {
+    title: "Bourse Dominique Ouattara : immersion des 20 lauréates dans l'aéronautique",
+    badge: "JEUNESSE & RSE • 09:15",
+    duration: "09 min 15 s",
+    desc: "Témoignages émouvants des jeunes bachelières ivoiriennes soutenues par la SODEXAM dans leur parcours d'excellence vers les métiers du ciel.",
+    image: "https://sodexam.com/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-11-at-14.47.09.jpeg",
+    youtubeUrl: "https://www.youtube.com/@sodexamci7057"
+  }
+];
+
+function selectAerienVideo(idx) {
+  const v = AERIEN_VIDEOS[idx];
+  if (!v) return;
+
+  const stage = document.getElementById('aerienVideoStage');
+  if (stage) stage.style.backgroundImage = `url('${v.image}')`;
+
+  const titleEl = document.getElementById('aerienStageTitle');
+  if (titleEl) titleEl.textContent = v.title;
+
+  const badgeEl = document.getElementById('aerienStageBadge');
+  if (badgeEl) badgeEl.textContent = v.badge;
+
+  const descEl = document.getElementById('aerienStageDesc');
+  if (descEl) descEl.textContent = v.desc;
+
+  const durEl = document.getElementById('aerienStageDuration');
+  if (durEl) durEl.textContent = v.duration;
+
+  const playBtn = document.getElementById('aerienPlayBtn');
+  if (playBtn) playBtn.href = v.youtubeUrl;
+
+  document.querySelectorAll('.aerien-playlist-card').forEach((card, i) => {
+    card.classList.toggle('active', i === idx);
+  });
+}
+
+function switchAerienTab(tab) {
+  document.querySelectorAll('.aerien-tab-btn').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById('tab-' + tab);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  const videoSec = document.getElementById('volet-video');
+  const magSecs = document.querySelectorAll('.mag-featured-wrap, .mag-archive-section');
+
+  if (tab === 'all') {
+    if (videoSec) videoSec.style.display = '';
+    magSecs.forEach(s => s.style.display = '');
+  } else if (tab === 'mag') {
+    if (videoSec) videoSec.style.display = 'none';
+    magSecs.forEach(s => s.style.display = '');
+  } else if (tab === 'video') {
+    if (videoSec) {
+      videoSec.style.display = '';
+      videoSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    magSecs.forEach(s => s.style.display = 'none');
+  }
+}
 </script>
 
 </body>

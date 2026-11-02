@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navigation Aérienne & Aéroports Nationaux — SODEXAM Côte d'Ivoire</title>
+<meta name="description" content="Carte interactive du réseau des aéroports régionaux de Côte d'Ivoire gérés par la SODEXAM : San Pedro, Bouaké, Korhogo, Yamoussoukro, Man, Odienné, Kong, Daloa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+
+/* ============================================================
+   DESIGN SYSTEM & CHARTE GRAPHIQUE UNIFORME — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #2FA95B;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #E8631C;
+  --blue-navy: #1C1917;
+  
+  --bg-page: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3EFEA;
+  
+  --text-main: #1C1917;
+  --text-muted: #57534E;
+  --text-light: #A8A29E;
+  
+  --border-light: rgba(231, 229, 228, 0.85);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 16px 36px -12px rgba(28, 25, 23, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(28, 25, 23, 0.06);
+  --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
+}
+
+/* ============================================================
+   FLASH BAR UNIFORME
+   ============================================================ */
+.flash-bar {
+  background: #18181B;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  background: #EF4444;
+  color: white;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+  z-index: 2;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.25);
+}
+.flash-pulse {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: flashDot 1.4s infinite ease-in-out;
+}
+@keyframes flashDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  white-space: nowrap;
+  animation: flashTicker 42s linear infinite;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #F4F4F5;
+}
+.flash-track:hover { animation-play-state: paused; }
+.flash-track span {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 48px;
+}
+.flash-track span::before {
+  content: "•";
+  color: var(--orange);
+  font-size: 18px;
+  margin-right: 12px;
+}
+@keyframes flashTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   HEADER & NAVIGATION UNIFORME
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -4px rgba(28, 25, 23, 0.05);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px !important;
+  gap: 20px;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.header-logo-img {
+  height: 30px !important;
+  max-width: 164px !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 260px;
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 40px -10px rgba(28, 25, 23, 0.12);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all var(--dur-fast) var(--ease-spring);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dropdown-panel a {
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dropdown-panel a:hover, .dropdown-panel a.active-item {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(3px);
+}
+.chev {
+  font-size: 9px;
+  transition: transform var(--dur-fast);
+  opacity: 0.6;
+}
+.nav-item-dropdown:hover .chev {
+  transform: rotate(180deg);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  padding: 8px;
+}
+.burger-btn span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: all var(--dur-fast);
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(85vw, 360px);
+  height: 100vh;
+  background: white;
+  z-index: 2000;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s var(--ease-spring);
+  padding: 24px;
+  overflow-y: auto;
+}
+.mobile-drawer.open {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.drawer-close {
+  background: var(--bg-subtle);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.drawer-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.drawer-links a.active, .drawer-links a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+
+/* ============================================================
+   FOOTER UNIFORME
+   ============================================================ */
+.footer {
+  background: #18181B;
+  color: #A8A29E;
+  padding: 64px 0 28px;
+  font-size: 14px;
+  border-top: 3px solid var(--orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.footer-links a {
+  color: #A8A29E;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #57534E;
+}
+.footer-bottom a {
+  color: #A8A29E;
+  transition: color var(--dur-fast);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 991px) {
+  .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-page);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero Aeroports */
+.aero-hero {
+  background: linear-gradient(135deg, #18181B 0%, #2A1F1B 60%, #1C1917 100%);
+  color: white;
+  padding: 46px 0 38px;
+  border-bottom: 3px solid var(--orange);
+  position: relative;
+  overflow: hidden;
+}
+.aero-hero::before {
+  content: "";
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 440px; height: 440px;
+  background: radial-gradient(circle, rgba(242,106,33,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.aero-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #A1A1AA;
+  margin-bottom: 14px;
+}
+.aero-breadcrumb a { color: #D4D4D8; text-decoration: none; transition: color 0.2s; }
+.aero-breadcrumb a:hover { color: var(--orange); }
+.aero-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(242,106,33,0.15);
+  border: 1px solid rgba(242,106,33,0.3);
+  color: var(--orange);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 12px;
+}
+.aero-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  color: #FFFFFF;
+}
+.aero-hero-title span { color: var(--orange); }
+.aero-hero-subtitle {
+  color: #D4D4D8;
+  font-size: 15px;
+  max-width: 820px;
+  line-height: 1.6;
+}
+
+/* Stats Strip */
+.aero-stats-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+}
+.aero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.aero-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+}
+.aero-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(242,106,33,0.1);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.aero-stat-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+.aero-stat-lbl {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Main Interactive Workspace */
+.aero-main-section {
+  padding: 38px 0 64px;
+}
+.aero-grid-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Left Sidebar - List of Airports */
+.aero-sidebar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+}
+.aero-sidebar-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.aero-sidebar-badge {
+  font-size: 11px;
+  background: rgba(242,106,33,0.1);
+  color: var(--orange);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+.aero-search-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-page);
+  color: var(--text-main);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+.aero-search-input:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+.aero-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 640px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.aero-list-item {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.aero-list-item:hover {
+  border-color: var(--orange);
+  background: #FFF7ED;
+}
+.aero-list-item.active {
+  border-color: var(--orange);
+  background: rgba(242,106,33,0.08);
+  border-left: 4px solid var(--orange);
+}
+.aero-item-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.aero-item-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.aero-item-codes {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--orange);
+  background: white;
+  border: 1px solid var(--border);
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+/* Right Area: Map + Detail Inspector */
+.aero-content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Interactive Map Container */
+.aero-map-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+  position: relative;
+}
+.aero-map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.aero-map-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.aero-map-tip {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.map-svg-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.map-svg-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));
+}
+
+/* SVG Markers — SANS AUCUN DÉCALAGE NI EFFET DE BOUTON FANTÔME */
+.airport-marker {
+  cursor: pointer;
+}
+.airport-marker circle.marker-halo {
+  transition: fill 0.2s ease, opacity 0.2s ease;
+}
+.airport-marker circle.base-dot {
+  transition: fill 0.2s ease, stroke-width 0.2s ease;
+}
+.airport-marker:hover circle.marker-halo {
+  fill: rgba(242,106,33,0.38) !important;
+}
+.airport-marker:hover circle.base-dot {
+  fill: #D4551A;
+  stroke: #FFFFFF;
+  stroke-width: 2.2px;
+}
+.airport-marker.active circle.marker-halo {
+  fill: rgba(242,106,33,0.45) !important;
+}
+.airport-marker.active circle.base-dot {
+  fill: var(--orange);
+  stroke: #FFFFFF;
+  stroke-width: 2.5px;
+}
+.airport-marker text {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  fill: #18181B;
+  pointer-events: none;
+  transition: fill 0.2s ease;
+}
+.airport-marker:hover text, .airport-marker.active text {
+  fill: var(--orange);
+}
+
+/* Detail Inspector Panel */
+.aero-inspector {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+  border-top: 4px solid var(--orange);
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.inspector-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+.inspector-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+.inspector-subtitle {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.inspector-badge-row {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.badge-code {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--orange);
+  background: rgba(242,106,33,0.1);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(242,106,33,0.25);
+}
+.badge-status {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1E7A3C;
+  background: rgba(30,122,60,0.1);
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Inspector Grid of Specs */
+.inspector-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.spec-box {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+.spec-box-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.spec-box-label i { color: var(--orange); }
+.spec-box-val {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.spec-box-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Detailed tabs / blocks in inspector */
+.inspector-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 10px;
+}
+.detail-card {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+.detail-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.detail-card-title i { color: var(--orange); }
+.detail-card-list {
+  list-style: none;
+  padding: 0;
+}
+.detail-card-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+.detail-card-list li i {
+  color: #1E7A3C;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+@media (max-width: 992px) {
+  .aero-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .aero-grid-layout { grid-template-columns: 1fr; }
+  .inspector-specs-grid { grid-template-columns: repeat(2, 1fr); }
+  .inspector-details-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .aero-stats-grid { grid-template-columns: 1fr; }
+  .inspector-specs-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar Alertes Flash -->
+<div class="flash-bar">
+  <div class="flash-label">
+    <span class="flash-pulse"></span>
+    SODEXAM FLASH
+  </div>
+  <div class="flash-track">
+    <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
+    <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins météo quotidiens</span>
+    <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
+    <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
+  </div>
+</div>
+
+<!-- Header Principal -->
+<header class="main-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+      <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">
+        <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
+      </a>
+      
+      <!-- Qui sommes-nous -->
+      <div class="nav-item-dropdown">
+        <a href="presentation.html" class="nav-link">
+          Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation.html">Présentation de la SODEXAM</a>
+          <a href="mot-du-dg.html">Mot du Directeur Général</a>
+          <a href="gouvernance.html">Conseil d'Administration</a>
+          <a href="comite-direction.html">Comité de Direction</a>
+        </div>
+      </div>
+
+      <!-- Aéroports -->
+      <a href="navigation-aeroports.html" class="nav-link">
+        Aéroports
+      </a>
+
+      <!-- Météorologie -->
+      <div class="nav-item-dropdown">
+        <a href="meteo.html" class="nav-link">
+          Météorologie <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="meteo.html">Météo (Prévisions &amp; Vigilance)</a>
+          <a href="nos-stations.html">Nos stations</a>
+          <a href="documentation.html">Notre documentation</a>
+        </div>
+      </div>
+
+      <!-- Médecine (ex-CERMA) -->
+      <div class="nav-item-dropdown">
+        <a href="presentation-cerma.html" class="nav-link">
+          Médecine <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation-cerma.html">Présentation du CERMA</a>
+          <a href="prestations-cerma.html">Nos prestations</a>
+        </div>
+      </div>
+
+      <!-- Actualités -->
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link">
+          Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="actualites.html">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html">Magazine L'Aérien (Presse &amp; Vidéo)</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <a href="contact.html" class="nav-link">
+        Contact
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="burger-btn" id="burgerToggle" aria-label="Menu Mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" class="header-logo-img">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Qui sommes-nous</div>
+    <a href="presentation.html" style="padding-left:28px;"><i class="fa-solid fa-building"></i> Présentation de la SODEXAM</a>
+    <a href="mot-du-dg.html" style="padding-left:28px;"><i class="fa-solid fa-user-tie"></i> Mot du Directeur Général</a>
+    <a href="gouvernance.html" style="padding-left:28px;"><i class="fa-solid fa-users-gear"></i> Conseil d'Administration</a>
+    <a href="comite-direction.html" style="padding-left:28px;"><i class="fa-solid fa-sitemap"></i> Comité de Direction</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Aviation &amp; Navigation</div>
+    <a href="navigation-aeroports.html"><i class="fa-solid fa-plane-departure"></i> Aéroports de Côte d'Ivoire</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Météorologie</div>
+    <a href="meteo.html" style="padding-left:28px;"><i class="fa-solid fa-cloud-sun-rain"></i> Météo (Prévisions &amp; Vigilance)</a>
+    <a href="nos-stations.html" style="padding-left:28px;"><i class="fa-solid fa-tower-broadcast"></i> Nos stations</a>
+    <a href="documentation.html" style="padding-left:28px;"><i class="fa-solid fa-book"></i> Notre documentation</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Médecine (CERMA)</div>
+    <a href="presentation-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-heart-pulse"></i> Présentation du CERMA</a>
+    <a href="prestations-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-stethoscope"></i> Nos prestations</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Actualités &amp; Médias</div>
+    <a href="actualites.html" style="padding-left:28px;"><i class="fa-regular fa-newspaper"></i> Toutes les actualités</a>
+    <a href="magazine-aerien.html" style="padding-left:28px;"><i class="fa-solid fa-video"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a>
+
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+
+<!-- Hero Aeroports -->
+<section class="aero-hero">
+  <div class="container">
+    <div class="aero-breadcrumb">
+      <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+      <span><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></span>
+      <span style="color:#D4D4D8;">Aéroports</span>
+      <span><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></span>
+      <span style="color:#FFFFFF; font-weight:600;">Navigation & Aéroports</span>
+    </div>
+    <div class="aero-hero-badge"><i class="fa-solid fa-plane-departure"></i> Réseau Intérieur SODEXAM</div>
+    <h1 class="aero-hero-title">Plateformes Aéroportuaires & <span>Navigation Aérienne</span></h1>
+    <p class="aero-hero-subtitle">
+      Explorez les 11 aéroports et aérodromes de l'intérieur de la Côte d'Ivoire gérés par la SODEXAM. Cliquez sur un aéroport sur la carte ou dans la liste pour afficher instantanément toutes ses caractéristiques opérationnelles, pistes, sécurités SSLIA et services météorologiques.
+    </p>
+  </div>
+</section>
+
+<!-- Stats Strip -->
+<section class="aero-stats-strip">
+  <div class="container">
+    <div class="aero-stats-grid">
+      <div class="aero-stat-card">
+        <div class="aero-stat-icon"><i class="fa-solid fa-plane-up"></i></div>
+        <div>
+          <div class="aero-stat-val">11 Aéroports</div>
+          <div class="aero-stat-lbl">Réseau intérieur SODEXAM</div>
+        </div>
+      </div>
+      <div class="aero-stat-card">
+        <div class="aero-stat-icon"><i class="fa-solid fa-road"></i></div>
+        <div>
+          <div class="aero-stat-val">3 300 m (Bouaké)</div>
+          <div class="aero-stat-lbl">Plus longue piste intérieure</div>
+        </div>
+      </div>
+      <div class="aero-stat-card">
+        <div class="aero-stat-icon"><i class="fa-solid fa-fire-extinguisher"></i></div>
+        <div>
+          <div class="aero-stat-val">SSLIA Cat. 2 à 7</div>
+          <div class="aero-stat-lbl">Sécurité incendie certifiée</div>
+        </div>
+      </div>
+      <div class="aero-stat-card">
+        <div class="aero-stat-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+        <div>
+          <div class="aero-stat-val">Assistance OACI</div>
+          <div class="aero-stat-lbl">Contrôle TWR / AFIS & météo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Interactive Section -->
+<section class="aero-main-section">
+  <div class="container">
+    <div class="aero-grid-layout">
+      
+      <!-- Left: Airport List -->
+      <aside class="aero-sidebar">
+        <div class="aero-sidebar-title">
+          <span>Aéroports de l'Intérieur</span>
+          <span class="aero-sidebar-badge" id="aeroCountBadge">11 sites</span>
+        </div>
+
+        <input type="text" id="aeroSearchInput" class="aero-search-input" placeholder="Filtrer un aéroport (ex: Yamoussoukro, San Pedro, Bouaké)...">
+
+        <div class="aero-list" id="aeroListContainer">
+          <!-- Populated by JS -->
+        </div>
+      </aside>
+
+      <!-- Right: Map + Inspector -->
+      <main class="aero-content-area">
+        
+        <!-- Interactive Map Card -->
+        <div class="aero-map-card">
+          <div class="aero-map-header">
+            <div class="aero-map-title"><i class="fa-solid fa-map-location-dot" style="color:var(--orange);"></i> Carte des Aéroports Intérieurs de Côte d'Ivoire</div>
+            <div class="aero-map-tip"><i class="fa-regular fa-hand-pointer"></i> Cliquez sur un repère pour charger ses détails</div>
+          </div>
+
+          <div class="map-svg-wrap">
+            <svg viewBox="0 0 400 420" width="100%" height="auto" aria-label="Carte officielle des aéroports de Côte d'Ivoire">
+              <!-- Contour Authentique de la Côte d'Ivoire (227 points) -->
+              <path d="M 154.0,26.0 L 162.6,28.1 L 160.7,35.2 L 163.5,40.3 L 164.5,38.3 L 162.6,46.5 L 164.5,53.6 L 177.9,56.7 L 186.6,44.4 L 195.2,40.3 L 201.9,41.4 L 209.6,49.5 L 220.1,48.5 L 231.7,62.8 L 231.7,72.0 L 241.2,77.1 L 238.4,79.2 L 241.2,83.3 L 245.1,82.2 L 251.8,86.3 L 256.6,83.3 L 255.6,87.3 L 262.4,87.3 L 258.5,88.4 L 263.3,89.4 L 262.4,92.5 L 266.2,92.5 L 276.7,79.2 L 283.5,79.2 L 301.7,71.0 L 316.1,72.0 L 322.8,74.1 L 323.8,77.1 L 327.6,75.1 L 331.4,77.1 L 336.2,84.3 L 341.0,85.3 L 341.0,89.4 L 350.6,102.7 L 356.4,102.7 L 353.5,104.7 L 355.4,112.9 L 352.5,118.0 L 350.6,117.0 L 350.6,122.1 L 355.4,126.2 L 358.3,125.2 L 361.2,132.3 L 363.1,164.0 L 366.0,165.0 L 364.0,172.2 L 361.2,170.1 L 358.3,172.2 L 360.2,180.4 L 353.5,182.4 L 354.4,184.4 L 352.5,186.5 L 351.6,184.4 L 350.6,190.6 L 347.7,191.6 L 349.7,192.6 L 342.9,203.9 L 340.1,216.1 L 340.1,231.5 L 337.2,237.6 L 327.6,244.8 L 327.6,261.1 L 323.8,263.1 L 333.3,293.8 L 333.3,302.0 L 337.2,308.1 L 337.2,317.3 L 341.0,320.4 L 340.1,324.5 L 351.6,325.5 L 354.4,337.8 L 350.6,339.8 L 352.5,350.0 L 346.8,345.9 L 342.9,347.0 L 342.9,351.0 L 334.3,350.0 L 331.4,347.0 L 335.3,342.9 L 335.3,335.7 L 326.6,337.8 L 319.9,350.0 L 313.2,350.0 L 310.3,345.9 L 303.6,347.0 L 297.8,335.7 L 295.0,337.8 L 296.9,341.9 L 288.3,337.8 L 279.6,340.8 L 270.0,338.8 L 269.1,340.8 L 267.2,337.8 L 267.2,341.9 L 248.9,339.8 L 239.3,347.0 L 241.2,350.0 L 237.4,351.0 L 232.6,350.0 L 231.7,345.9 L 213.4,345.9 L 212.5,349.0 L 209.6,345.9 L 208.6,350.0 L 204.8,351.0 L 209.6,353.1 L 201.9,351.0 L 199.0,354.1 L 186.6,355.1 L 178.9,359.2 L 173.1,358.2 L 171.2,362.3 L 166.4,364.3 L 163.5,362.3 L 157.8,367.4 L 152.0,367.4 L 153.0,370.5 L 146.3,372.5 L 144.4,370.5 L 139.6,375.6 L 125.2,378.6 L 97.4,396.0 L 93.5,396.0 L 92.6,390.9 L 91.6,395.0 L 93.5,387.8 L 90.6,367.4 L 94.5,365.4 L 96.4,345.9 L 99.3,347.0 L 102.2,342.9 L 101.2,335.7 L 98.3,335.7 L 102.2,327.5 L 98.3,310.2 L 90.6,309.1 L 90.6,306.1 L 85.8,303.0 L 80.1,303.0 L 82.0,297.9 L 80.1,293.8 L 77.2,295.9 L 76.2,292.8 L 78.2,294.8 L 79.1,291.8 L 74.3,284.6 L 59.9,281.5 L 57.1,283.6 L 49.4,276.4 L 47.5,278.5 L 48.4,276.4 L 43.6,272.3 L 36.0,271.3 L 41.7,265.2 L 47.5,264.2 L 45.6,262.1 L 52.3,250.9 L 50.3,247.8 L 53.2,234.5 L 48.4,227.4 L 48.4,214.1 L 44.6,212.0 L 49.4,212.0 L 49.4,209.0 L 57.1,212.0 L 63.8,197.7 L 63.8,192.6 L 60.9,191.6 L 65.7,183.4 L 66.7,186.5 L 71.5,183.4 L 65.7,171.2 L 57.1,170.1 L 55.1,158.9 L 68.6,155.8 L 72.4,162.0 L 76.2,157.9 L 80.1,163.0 L 86.8,162.0 L 86.8,150.7 L 84.9,150.7 L 82.0,139.5 L 70.5,135.4 L 72.4,125.2 L 81.0,122.1 L 82.0,119.0 L 76.2,112.9 L 72.4,112.9 L 75.3,99.6 L 63.8,100.6 L 59.9,94.5 L 59.9,83.3 L 62.8,76.1 L 59.9,66.9 L 64.7,64.9 L 63.8,62.8 L 66.7,63.8 L 67.6,59.8 L 70.5,60.8 L 71.5,56.7 L 77.2,56.7 L 86.8,41.4 L 95.4,41.4 L 96.4,47.5 L 101.2,48.5 L 102.2,52.6 L 113.7,53.6 L 113.7,56.7 L 116.5,55.7 L 122.3,60.8 L 121.3,58.7 L 125.2,56.7 L 124.2,47.5 L 133.8,45.4 L 139.6,48.5 L 140.5,44.4 L 144.4,43.4 L 139.6,33.2 L 140.5,28.1 L 152.0,37.3 L 155.9,33.2 L 154.0,27.0 Z"
+                    fill="#FAF8F5" stroke="#D4D4D8" stroke-width="2.2" stroke-linejoin="round" />
+
+              <!-- Repère discret du Siège Social SODEXAM (Port-Bouët) -->
+              <g id="marker-siege-abidjan" transform="translate(265, 340)">
+                <circle r="6" fill="#A8A29E" opacity="0.4" />
+                <circle r="3" fill="#57534E" />
+                <text x="8" y="3.5" style="font-size:9px; fill:#78716C; font-weight:600;">Siège SODEXAM</text>
+              </g>
+
+              <!-- Lignes de liaisons intérieures en pointillés élégants -->
+              <g stroke="rgba(242,106,33,0.3)" stroke-width="1.2" stroke-dasharray="3,3">
+                <line x1="265" y1="340" x2="160" y2="350" />
+                <line x1="265" y1="340" x2="205" y2="245" />
+                <line x1="265" y1="340" x2="195" y2="105" />
+                <line x1="265" y1="340" x2="110" y2="240" />
+                <line x1="265" y1="340" x2="115" y2="95" />
+                <line x1="265" y1="340" x2="235" y2="85" />
+                <line x1="265" y1="340" x2="195" y2="275" />
+              </g>
+
+              <!-- SVG Markers pour chaque aéroport intérieur -->
+              <g id="svgAirportMarkers">
+                <!-- San Pedro (Actif par défaut) -->
+                <g class="airport-marker active" id="marker-sanpedro" onclick="selectAirport('sanpedro')">
+                  <circle cx="160" cy="350" r="10" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="160" cy="350" r="5" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="110" y="365">San Pedro</text>
+                </g>
+
+                <!-- Bouaké -->
+                <g class="airport-marker" id="marker-bouake" onclick="selectAirport('bouake')">
+                  <circle cx="205" cy="245" r="10" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="205" cy="245" r="5.5" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="216" y="248">Bouaké</text>
+                </g>
+
+                <!-- Korhogo -->
+                <g class="airport-marker" id="marker-korhogo" onclick="selectAirport('korhogo')">
+                  <circle cx="195" cy="105" r="10" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="195" cy="105" r="5" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="206" y="108">Korhogo</text>
+                </g>
+
+                <!-- Yamoussoukro — Positionnement et nom soigné -->
+                <g class="airport-marker" id="marker-yamoussoukro" onclick="selectAirport('yamoussoukro')">
+                  <circle cx="195" cy="275" r="10" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="195" cy="275" r="5" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="208" y="279">Yamoussoukro</text>
+                </g>
+
+                <!-- Man -->
+                <g class="airport-marker" id="marker-man" onclick="selectAirport('man')">
+                  <circle cx="110" cy="240" r="10" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="110" cy="240" r="5" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="76" y="244">Man</text>
+                </g>
+
+                <!-- Odienné -->
+                <g class="airport-marker" id="marker-odienne" onclick="selectAirport('odienne')">
+                  <circle cx="115" cy="95" r="10" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="115" cy="95" r="5" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="68" y="98">Odienné</text>
+                </g>
+
+                <!-- Kong -->
+                <g class="airport-marker" id="marker-kong" onclick="selectAirport('kong')">
+                  <circle cx="235" cy="85" r="9" fill="rgba(30,122,60,0.2)" class="marker-halo" />
+                  <circle cx="235" cy="85" r="4.5" fill="#1E7A3C" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="245" y="88">Kong</text>
+                </g>
+
+                <!-- Daloa -->
+                <g class="airport-marker" id="marker-daloa" onclick="selectAirport('daloa')">
+                  <circle cx="155" cy="255" r="8" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="155" cy="255" r="4.5" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="148" y="270">Daloa</text>
+                </g>
+
+                <!-- Bondoukou -->
+                <g class="airport-marker" id="marker-bondoukou" onclick="selectAirport('bondoukou')">
+                  <circle cx="330" cy="195" r="8" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="330" cy="195" r="4.5" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="264" y="198">Bondoukou</text>
+                </g>
+
+                <!-- Sassandra -->
+                <g class="airport-marker" id="marker-sassandra" onclick="selectAirport('sassandra')">
+                  <circle cx="175" cy="360" r="8" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="175" cy="360" r="4" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="184" y="364">Sassandra</text>
+                </g>
+
+                <!-- Tabou -->
+                <g class="airport-marker" id="marker-tabou" onclick="selectAirport('tabou')">
+                  <circle cx="100" cy="380" r="8" fill="rgba(242,106,33,0.18)" class="marker-halo" />
+                  <circle cx="100" cy="380" r="4" fill="#F26A21" class="base-dot" stroke="#fff" stroke-width="1.5" />
+                  <text x="58" y="385">Tabou</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Detail Inspector Panel (Updated dynamically upon clicking) -->
+        <article class="aero-inspector" id="airportInspector">
+          <!-- Populated by JS -->
+        </article>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER UNIFORME SODEXAM -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="margin-bottom:20px;">
+          <a href="index.html" title="SODEXAM — Retour à l'accueil">
+            <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
+          </a>
+        </div>
+        <p style="line-height:1.7; margin-bottom:20px; color:#A8A29E; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire (Décret n°97-228 du 16 avril 1997). Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        </p>
+        <div style="display:flex; gap:12px; font-size:15px;">
+          <a href="https://www.facebook.com/sodexam.ci" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation Institutionnelle</div>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="presentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation &amp; Film SODEXAM</a></li>
+          <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
+          <li><a href="gouvernance.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Conseil d'Administration</a></li>
+          <li><a href="comite-direction.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Comité de Direction (CODIR)</a></li>
+          <li><a href="navigation-aeroports.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Aéroports de Côte d'Ivoire</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Météorologie &amp; Médecine</div>
+        <ul class="footer-links">
+          <li><a href="meteo.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météo Prévisions &amp; Vigilance</a></li>
+          <li><a href="nos-stations.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Nos stations d'observation</a></li>
+          <li><a href="documentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Notre documentation officielle</a></li>
+          <li><a href="presentation-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation du CERMA</a></li>
+          <li><a href="prestations-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Prestations médicales navigants</a></li>
+          <li><a href="documentation.html#iso9001"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Certification ISO 9001:2015</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Actualités &amp; Contacts</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Dernières Actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a></li>
+          <li><a href="documentation.html#feux"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Feux de Brousse</a></li>
+          <li><a href="documentation.html#decades"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Décadaires Agrométéo</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Contact &amp; Service Presse</a></li>
+          <li><a href="contact.html#urgence"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Urgences Aéronautiques SSLIA</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="presentation.html">Mentions Légales</a>
+        <a href="documentation.html">Réglementation &amp; Qualité</a>
+        <a href="contact.html">Plan d'Accès</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+// Mobile drawer toggle
+const burgerToggle = document.getElementById('burgerToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerClose = document.getElementById('drawerClose');
+
+if (burgerToggle && mobileDrawer) {
+  burgerToggle.addEventListener('click', () => {
+    mobileDrawer.classList.add('open');
+  });
+}
+if (drawerClose && mobileDrawer) {
+  drawerClose.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+  });
+}
+
+
+<script>
+// Base de données des 11 Aéroports Intérieurs de Côte d'Ivoire gérés par la SODEXAM
+const ciAirportsDatabase = {
+  'sanpedro': {
+    id: 'sanpedro',
+    name: "Aéroport Régional de San Pedro",
+    shortName: "Aéroport de San Pedro",
+    region: "Région de San-Pédro • Sud-Ouest Littoral",
+    oaci: "DISP",
+    iata: "SPY",
+    status: "Plateforme Commerciale Active",
+    type: "Aéroport Régional Commercial",
+    runwayLength: "2 100 m x 30 m",
+    runwaySurface: "Asphalte réhabilité",
+    runwayOrientation: "03 / 21",
+    pcn: "PCN 42 / F / B / W / T",
+    sslia: "Catégorie 5 (Véhicules mousse haute pression)",
+    radioFreq: "AFIS / TWR 118.5 MHz",
+    navAids: "VOR/DME (113.5 MHz) • PAPI • Balisage nocturne",
+    meteoService: "Station Synoptique DMN côtière • Bulletins METAR / TAF",
+    airlines: "Air Côte d'Ivoire (desserte quotidienne depuis Abidjan)",
+    passengers: "Plus de 45 000 passagers / an",
+    terminalDesc: "Aérogare rénovée avec salon VIP, salle d'embarquement climatisée, inspection filtrage bagages RX et accès direct au deuxième port de Côte d'Ivoire."
+  },
+  'bouake': {
+    id: 'bouake',
+    name: "Aéroport de Bouaké",
+    shortName: "Aéroport de Bouaké",
+    region: "Région du Gbêkê • Centre de la Côte d'Ivoire",
+    oaci: "DIBK",
+    iata: "BYK",
+    status: "Plateforme Stratégique Réhabilitée",
+    type: "Aéroport Régional & Militaire Mixte",
+    runwayLength: "3 300 m x 45 m",
+    runwaySurface: "Béton Bitumineux lourd",
+    runwayOrientation: "04 / 22",
+    pcn: "PCN 65 / F / A / W / T",
+    sslia: "Catégorie 6",
+    radioFreq: "TWR 119.7 MHz",
+    navAids: "VOR/DME (114.1 MHz) • PAPI • Rampe d'approche lumineuse",
+    meteoService: "Station Synoptique DMN centrale • Relevés horaires complets",
+    airlines: "Air Côte d'Ivoire (vols réguliers)",
+    passengers: "Capacité 100 000 passagers / an",
+    terminalDesc: "Plus longue piste de l'intérieur du pays capable d'accueillir tous types de porteurs. Nouvelle aérogare inaugurée pour la CAN 2023."
+  },
+  'korhogo': {
+    id: 'korhogo',
+    name: "Aéroport Régional de Korhogo",
+    shortName: "Aéroport de Korhogo",
+    region: "Région du Poro • Grand Nord",
+    oaci: "DIKO",
+    iata: "HGO",
+    status: "Nouvelle Aérogare Internationale",
+    type: "Aéroport Régional Modernisé",
+    runwayLength: "2 100 m x 30 m",
+    runwaySurface: "Enrobé bitumineux neuf",
+    runwayOrientation: "08 / 26",
+    pcn: "PCN 45 / F / B / W / T",
+    sslia: "Catégorie 5",
+    radioFreq: "AFIS / TWR 118.3 MHz",
+    navAids: "VOR/DME (116.7 MHz) • PAPI • Balisage LED moderne",
+    meteoService: "Station Synoptique DMN Nord • Suivi de l'harmattan et alertes poussières",
+    airlines: "Air Côte d'Ivoire (liaisons pluri-hebdomadaires)",
+    passengers: "+ 30 000 passagers / an",
+    terminalDesc: "Aérogare ultra-moderne livrée en 2024, architecture contemporaine avec salon d'honneur présidentiel et commerces de terroir."
+  },
+  'yamoussoukro': {
+    id: 'yamoussoukro',
+    name: "Aéroport International de Yamoussoukro",
+    shortName: "Aéroport de Yamoussoukro",
+    region: "District Autonome de Yamoussoukro • Bélier",
+    oaci: "DIYO",
+    iata: "ASK",
+    status: "Plateforme Internationale Stratégique",
+    type: "Aéroport International",
+    runwayLength: "3 000 m x 45 m",
+    runwaySurface: "Béton Bitumineux lourd",
+    runwayOrientation: "05 / 23",
+    pcn: "PCN 70 / F / A / W / T",
+    sslia: "Catégorie 7",
+    radioFreq: "TWR 118.8 MHz",
+    navAids: "ILS • VOR/DME (117.1 MHz) • PAPI • Rampe d'approche",
+    meteoService: "Station Synoptique DMN • Observations 24h/24",
+    airlines: "Vols gouvernementaux, charters officiels, évacuations sanitaires",
+    passengers: "Aérogare dimensionnée pour vols long-courriers",
+    terminalDesc: "Aérogare monumentale de la capitale politique, capable d'accueillir les plus gros aéronefs présidentiels et gros porteurs commerciaux."
+  },
+  'man': {
+    id: 'man',
+    name: "Aéroport Régional de Man",
+    shortName: "Aéroport de Man",
+    region: "Région du Tonkpi • District des Montagnes",
+    oaci: "DIMO",
+    iata: "MXX",
+    status: "Plateforme Régionale Ouverte",
+    type: "Aéroport Régional",
+    runwayLength: "2 100 m x 30 m",
+    runwaySurface: "Asphalte",
+    runwayOrientation: "03 / 21",
+    pcn: "PCN 35 / F / B / W / T",
+    sslia: "Catégorie 5",
+    radioFreq: "AFIS 118.7 MHz",
+    navAids: "NDB • Balisage diurne et nocturne",
+    meteoService: "Station Synoptique DMN Montagne • Surveillance microclimat et orages orographiques",
+    airlines: "Air Côte d'Ivoire",
+    passengers: "18 000 passagers / an",
+    terminalDesc: "Desserte vitale pour le désenclavement du Grand Ouest minier et agricole. Aérogare rénovée et sécurisée."
+  },
+  'odienne': {
+    id: 'odienne',
+    name: "Aéroport d'Odienné (Lamine Diabaté)",
+    shortName: "Aéroport d'Odienné",
+    region: "Région du Kabadougou • Nord-Ouest",
+    oaci: "DIOD",
+    iata: "KEO",
+    status: "Plateforme Active",
+    type: "Aéroport Régional",
+    runwayLength: "2 000 m x 30 m",
+    runwaySurface: "Bitume",
+    runwayOrientation: "06 / 24",
+    pcn: "PCN 38 / F / B / W / T",
+    sslia: "Catégorie 5",
+    radioFreq: "AFIS 118.1 MHz",
+    navAids: "VOR/DME (112.5 MHz) • PAPI",
+    meteoService: "Station Synoptique DMN Savane • Suivi des flux sahéliens",
+    airlines: "Air Côte d'Ivoire",
+    passengers: "15 000 passagers / an",
+    terminalDesc: "Infrastructure clé du Nord-Ouest reliant la capitale au bassin transfrontalier guinéo-malien."
+  },
+  'kong': {
+    id: 'kong',
+    name: "Aérodrome de Kong",
+    shortName: "Aérodrome de Kong",
+    region: "Région du Tchologo • Nord-Est",
+    oaci: "DIKG",
+    iata: "KNX",
+    status: "Piste Récente en Exploitation",
+    type: "Aérodrome Régional",
+    runwayLength: "1 900 m x 30 m",
+    runwaySurface: "Enrobé bitumineux moderne",
+    runwayOrientation: "05 / 23",
+    pcn: "PCN 35 / F / C / W / T",
+    sslia: "Catégorie 4 / 5",
+    radioFreq: "AFIS 118.9 MHz",
+    navAids: "Balisage lumineux de piste • PAPI",
+    meteoService: "Station Automatique DMN reliée par satellite",
+    airlines: "Liaisons privées, étatiques et vols sanitaires",
+    passengers: "Desserte administrative et patrimoniale",
+    terminalDesc: "Ouvrage aéroportuaire moderne construit pour le désenclavement de la cité historique de Kong."
+  },
+  'daloa': {
+    id: 'daloa',
+    name: "Aérodrome de Daloa",
+    shortName: "Aérodrome de Daloa",
+    region: "Région du Haut-Sassandra • Centre-Ouest",
+    oaci: "DIDL",
+    iata: "DJO",
+    status: "Plateforme Centrale Active",
+    type: "Aérodrome Régional",
+    runwayLength: "1 600 m x 30 m",
+    runwaySurface: "Bitume",
+    runwayOrientation: "04 / 22",
+    pcn: "PCN 30 / F / C / W / T",
+    sslia: "Catégorie 3",
+    radioFreq: "AFIS 118.1 MHz",
+    navAids: "PAPI • Balisage diurne",
+    meteoService: "Station Synoptique DMN N° 65562",
+    airlines: "Aviation d'affaires, missions d'inspection cacaoyère",
+    passengers: "Pôle de la boucle du cacao",
+    terminalDesc: "Dessert la 3ème ville du pays et le premier bassin producteur de cacao de Côte d'Ivoire."
+  },
+  'bondoukou': {
+    id: 'bondoukou',
+    name: "Aérodrome de Bondoukou (Soko)",
+    shortName: "Aérodrome de Bondoukou",
+    region: "Région du Gontougo • Grand Est",
+    oaci: "DIBU",
+    iata: "BDO",
+    status: "Plateforme de l'Est Ouverte",
+    type: "Aérodrome Régional",
+    runwayLength: "1 500 m x 30 m",
+    runwaySurface: "Asphalte",
+    runwayOrientation: "04 / 22",
+    pcn: "PCN 28 / F / C / W / T",
+    sslia: "Catégorie 3",
+    radioFreq: "AFIS 118.1 MHz",
+    navAids: "Balisage diurne",
+    meteoService: "Station Synoptique DMN Est N° 65548",
+    airlines: "Vols charters, missions administratives et sanitaires",
+    passengers: "Désenclavement de la région aux mille mosquées",
+    terminalDesc: "Aérodrome clé de l'Est ivoirien avec station météo synoptique et agrométéo de premier plan."
+  },
+  'sassandra': {
+    id: 'sassandra',
+    name: "Aérodrome de Sassandra",
+    shortName: "Aérodrome de Sassandra",
+    region: "Région du Gbôklè • Littoral Ouest",
+    oaci: "DISS",
+    iata: "ZSS",
+    status: "Plateforme Littorale Ouverte",
+    type: "Aérodrome Secondaire",
+    runwayLength: "1 250 m x 25 m",
+    runwaySurface: "Bitume",
+    runwayOrientation: "02 / 20",
+    pcn: "Aviation générale",
+    sslia: "Catégorie 2",
+    radioFreq: "VHF 118.1 MHz",
+    navAids: "Balisage diurne",
+    meteoService: "Station Synoptique DMN Marine N° 65582",
+    airlines: "Tourisme littoral, liaisons privées, surveillance maritime",
+    passengers: "Usage régional",
+    terminalDesc: "Aérodrome touristique surplombant l'embouchure du fleuve Sassandra."
+  },
+  'tabou': {
+    id: 'tabou',
+    name: "Aérodrome de Tabou",
+    shortName: "Aérodrome de Tabou",
+    region: "Région de San-Pédro • Extrême Sud-Ouest",
+    oaci: "DITB",
+    iata: "TXU",
+    status: "Plateforme Frontalière",
+    type: "Aérodrome Secondaire",
+    runwayLength: "1 400 m x 25 m",
+    runwaySurface: "Latérite stabilisée",
+    runwayOrientation: "04 / 22",
+    pcn: "Aviation générale",
+    sslia: "Catégorie 2",
+    radioFreq: "AFIS 118.1 MHz",
+    navAids: "Manche à air éclairée",
+    meteoService: "Station Synoptique Côtière OMM N° 65592",
+    airlines: "Vols humanitaires, surveillance frontière, aviation légère",
+    passengers: "Usage d'utilité publique",
+    terminalDesc: "Plateforme stratégique à la frontière ivoiro-libérienne abritant une station météo côtière historique."
+  }
+};
+
+// Affichage de la liste latérale
+function renderAirportList(searchTerm = '') {
+  const container = document.getElementById('aeroListContainer');
+  const term = searchTerm.toLowerCase().trim();
+  const airports = Object.values(ciAirportsDatabase);
+  
+  const filtered = airports.filter(a => {
+    return !term || 
+      a.name.toLowerCase().includes(term) ||
+      a.shortName.toLowerCase().includes(term) ||
+      a.region.toLowerCase().includes(term) ||
+      a.oaci.toLowerCase().includes(term) ||
+      a.iata.toLowerCase().includes(term);
+  });
+
+  document.getElementById('aeroCountBadge').textContent = `${filtered.length} aéroports`;
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div style="font-size:12px; color:var(--text-muted); text-align:center; padding:20px;">Aucun aéroport ne correspond à la recherche.</div>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(a => `
+    <div class="aero-list-item" id="item-${a.id}" onclick="selectAirport('${a.id}')">
+      <div>
+        <div class="aero-item-name">${a.shortName || a.name}</div>
+        <div class="aero-item-sub">${a.region.split('•')[0].trim()}</div>
+      </div>
+      <div class="aero-item-codes">${a.oaci} / ${a.iata}</div>
+    </div>
+  `).join('');
+}
+
+// Sélection d'un aéroport et mise à jour du panneau de détails sur la même page
+function selectAirport(airportId) {
+  const data = ciAirportsDatabase[airportId];
+  if (!data) return;
+
+  // Mise à jour de la classe active sur la liste
+  document.querySelectorAll('.aero-list-item').forEach(el => el.classList.remove('active'));
+  const activeListItem = document.getElementById('item-' + airportId);
+  if (activeListItem) {
+    activeListItem.classList.add('active');
+    activeListItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Mise à jour de la classe active sur la carte SVG
+  document.querySelectorAll('.airport-marker').forEach(el => el.classList.remove('active'));
+  const activeMarker = document.getElementById('marker-' + airportId);
+  if (activeMarker) activeMarker.classList.add('active');
+
+  // Rendu complet dans le panneau d'inspection in-page
+  const inspector = document.getElementById('airportInspector');
+  inspector.innerHTML = `
+    <div class="inspector-top-row">
+      <div>
+        <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px; margin-bottom:4px;">
+          <i class="fa-solid fa-plane"></i> ${data.type}
+        </div>
+        <h2 class="inspector-title">${data.name}</h2>
+        <div class="inspector-subtitle"><i class="fa-solid fa-location-dot" style="color:var(--orange);"></i> ${data.region}</div>
+      </div>
+      <div class="inspector-badge-row">
+        <span class="badge-code">${data.oaci} • ${data.iata}</span>
+        <span class="badge-status"><i class="fa-solid fa-circle-check"></i> ${data.status}</span>
+      </div>
+    </div>
+
+    <!-- 4 Specs Boxes -->
+    <div class="inspector-specs-grid">
+      <div class="spec-box">
+        <div class="spec-box-label"><i class="fa-solid fa-ruler-horizontal"></i> Dimensions Piste</div>
+        <div class="spec-box-val">${data.runwayLength}</div>
+        <div class="spec-box-sub">${data.runwaySurface} • QFU ${data.runwayOrientation}</div>
+      </div>
+
+      <div class="spec-box">
+        <div class="spec-box-label"><i class="fa-solid fa-fire-extinguisher"></i> Sécurité SSLIA</div>
+        <div class="spec-box-val">${data.sslia.split('(')[0].trim()}</div>
+        <div class="spec-box-sub">${data.sslia.includes('(') ? data.sslia.split('(')[1].replace(')', '') : 'Véhicules de secours conformes OACI'}</div>
+      </div>
+
+      <div class="spec-box">
+        <div class="spec-box-label"><i class="fa-solid fa-tower-broadcast"></i> Fréquence Radio</div>
+        <div class="spec-box-val">${data.radioFreq.split('•')[0].trim()}</div>
+        <div class="spec-box-sub">${data.navAids.split('•')[0].trim()}</div>
+      </div>
+
+      <div class="spec-box">
+        <div class="spec-box-label"><i class="fa-solid fa-cloud-sun"></i> Météorologie DMN</div>
+        <div class="spec-box-val">Station Synoptique</div>
+        <div class="spec-box-sub">Capteurs temps réel & METAR</div>
+      </div>
+    </div>
+
+    <!-- Detailed 2 Columns -->
+    <div class="inspector-details-grid">
+      <div class="detail-card">
+        <div class="detail-card-title"><i class="fa-solid fa-road"></i> Caractéristiques Techniques & Piste</div>
+        <ul class="detail-card-list">
+          <li><i class="fa-solid fa-check"></i> <strong>Longueur & Largeur :</strong> ${data.runwayLength}</li>
+          <li><i class="fa-solid fa-check"></i> <strong>Revêtement :</strong> ${data.runwaySurface}</li>
+          <li><i class="fa-solid fa-check"></i> <strong>Orientation QFU :</strong> Piste ${data.runwayOrientation}</li>
+          <li><i class="fa-solid fa-check"></i> <strong>Résistance de chaussée :</strong> ${data.pcn}</li>
+          <li><i class="fa-solid fa-check"></i> <strong>Aides radio & balisage :</strong> ${data.navAids}</li>
+        </ul>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-card-title"><i class="fa-solid fa-users-line"></i> Exploitation & Services Passagers</div>
+        <ul class="detail-card-list">
+          <li><i class="fa-solid fa-check"></i> <strong>Compagnies desservantes :</strong> ${data.airlines}</li>
+          <li><i class="fa-solid fa-check"></i> <strong>Trafic / Capacité :</strong> ${data.passengers}</li>
+          <li><i class="fa-solid fa-check"></i> <strong>Fréquences VHF :</strong> ${data.radioFreq}</li>
+          <li><i class="fa-solid fa-check"></i> <strong>Infrastructures :</strong> ${data.terminalDesc}</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+// Recherche en direct
+document.getElementById('aeroSearchInput').addEventListener('input', (e) => {
+  renderAirportList(e.target.value);
+});
+
+// Initialisation au chargement : San Pedro sélectionné par défaut
+renderAirportList();
+selectAirport('sanpedro');
+</script>
+</body>
+</html>

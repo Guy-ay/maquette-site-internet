@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Présentation Générale & Missions — SODEXAM Côte d'Ivoire</title>
+<meta name="description" content="Présentation officielle de la SODEXAM : création par décret n°97-228 du 16 avril 1997, capital social, siège Général Abdoulaye Coulibaly, missions régaliennes et film institutionnel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+
+/* ============================================================
+   DESIGN SYSTEM & CHARTE GRAPHIQUE UNIFORME — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #2FA95B;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #E8631C;
+  --blue-navy: #1C1917;
+  
+  --bg-page: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3EFEA;
+  
+  --text-main: #1C1917;
+  --text-muted: #57534E;
+  --text-light: #A8A29E;
+  
+  --border-light: rgba(231, 229, 228, 0.85);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 16px 36px -12px rgba(28, 25, 23, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(28, 25, 23, 0.06);
+  --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
+}
+
+/* ============================================================
+   FLASH BAR UNIFORME
+   ============================================================ */
+.flash-bar {
+  background: #18181B;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  background: #EF4444;
+  color: white;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+  z-index: 2;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.25);
+}
+.flash-pulse {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: flashDot 1.4s infinite ease-in-out;
+}
+@keyframes flashDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  white-space: nowrap;
+  animation: flashTicker 42s linear infinite;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #F4F4F5;
+}
+.flash-track:hover { animation-play-state: paused; }
+.flash-track span {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 48px;
+}
+.flash-track span::before {
+  content: "•";
+  color: var(--orange);
+  font-size: 18px;
+  margin-right: 12px;
+}
+@keyframes flashTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   HEADER & NAVIGATION UNIFORME
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -4px rgba(28, 25, 23, 0.05);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px !important;
+  gap: 20px;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.header-logo-img {
+  height: 30px !important;
+  max-width: 164px !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 260px;
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 40px -10px rgba(28, 25, 23, 0.12);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all var(--dur-fast) var(--ease-spring);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dropdown-panel a {
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dropdown-panel a:hover, .dropdown-panel a.active-item {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(3px);
+}
+.chev {
+  font-size: 9px;
+  transition: transform var(--dur-fast);
+  opacity: 0.6;
+}
+.nav-item-dropdown:hover .chev {
+  transform: rotate(180deg);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  padding: 8px;
+}
+.burger-btn span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: all var(--dur-fast);
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(85vw, 360px);
+  height: 100vh;
+  background: white;
+  z-index: 2000;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s var(--ease-spring);
+  padding: 24px;
+  overflow-y: auto;
+}
+.mobile-drawer.open {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.drawer-close {
+  background: var(--bg-subtle);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.drawer-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.drawer-links a.active, .drawer-links a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+
+/* ============================================================
+   FOOTER UNIFORME
+   ============================================================ */
+.footer {
+  background: #18181B;
+  color: #A8A29E;
+  padding: 64px 0 28px;
+  font-size: 14px;
+  border-top: 3px solid var(--orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.footer-links a {
+  color: #A8A29E;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #57534E;
+}
+.footer-bottom a {
+  color: #A8A29E;
+  transition: color var(--dur-fast);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 991px) {
+  .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-page);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero Presentation */
+.pres-hero {
+  background: linear-gradient(135deg, #18181B 0%, #2A1F1B 60%, #1C1917 100%);
+  color: white;
+  padding: 46px 0 38px;
+  border-bottom: 3px solid var(--orange);
+  position: relative;
+  overflow: hidden;
+}
+.pres-hero::before {
+  content: "";
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 440px; height: 440px;
+  background: radial-gradient(circle, rgba(242,106,33,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pres-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #A1A1AA;
+  margin-bottom: 14px;
+}
+.pres-breadcrumb a { color: #D4D4D8; text-decoration: none; transition: color 0.2s; }
+.pres-breadcrumb a:hover { color: var(--orange); }
+.pres-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(242,106,33,0.15);
+  border: 1px solid rgba(242,106,33,0.3);
+  color: var(--orange);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 12px;
+}
+.pres-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  color: #FFFFFF;
+}
+.pres-hero-title span { color: var(--orange); }
+.pres-hero-subtitle {
+  color: #D4D4D8;
+  font-size: 15px;
+  max-width: 820px;
+  line-height: 1.6;
+}
+
+/* Video Section */
+.video-section {
+  background: #121110;
+  color: white;
+  padding: 50px 0 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.video-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 34px;
+}
+.video-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--orange);
+  background: rgba(242,106,33,0.15);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+}
+.video-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.3;
+}
+.video-sub {
+  color: #A1A1AA;
+  font-size: 14.5px;
+  margin-top: 8px;
+}
+.video-frame-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.15);
+  position: relative;
+  padding-top: 56.25%;
+  background: #000;
+}
+.video-frame-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Content Section */
+.pres-section {
+  padding: 52px 0;
+}
+.pres-grid-2 {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 36px;
+  align-items: start;
+}
+.pres-card-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+}
+.pres-card-box h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 18px;
+  line-height: 1.3;
+}
+.pres-card-box p {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* Key figures strip */
+.key-figures-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+.key-figure-card {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: center;
+}
+.key-figure-val {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--orange);
+  line-height: 1.2;
+}
+.key-figure-lbl {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Missions Grid */
+.missions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 32px;
+}
+.mission-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.25s ease;
+}
+.mission-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--orange);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+.mission-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(242,106,33,0.1);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+.mission-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+.mission-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Timeline */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin-top: 30px;
+}
+.timeline-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--orange);
+  border-radius: 12px;
+  padding: 20px;
+}
+.timeline-card.green-top { border-top-color: var(--green); }
+.timeline-year {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--orange);
+}
+.timeline-card.green-top .timeline-year { color: var(--green); }
+.timeline-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 6px 0;
+}
+.timeline-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 992px) {
+  .pres-grid-2 { grid-template-columns: 1fr; }
+  .missions-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .missions-grid { grid-template-columns: 1fr; }
+  .key-figures-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar Alertes Flash -->
+<div class="flash-bar">
+  <div class="flash-label">
+    <span class="flash-pulse"></span>
+    SODEXAM FLASH
+  </div>
+  <div class="flash-track">
+    <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
+    <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins météo quotidiens</span>
+    <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
+    <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
+  </div>
+</div>
+
+<!-- Header Principal -->
+<header class="main-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+      <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">
+        <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
+      </a>
+      
+      <!-- Qui sommes-nous -->
+      <div class="nav-item-dropdown">
+        <a href="presentation.html" class="nav-link active">
+          Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation.html" class="active-item">Présentation de la SODEXAM</a>
+          <a href="mot-du-dg.html">Mot du Directeur Général</a>
+          <a href="gouvernance.html">Conseil d'Administration</a>
+          <a href="comite-direction.html">Comité de Direction</a>
+        </div>
+      </div>
+
+      <!-- Aéroports -->
+      <a href="navigation-aeroports.html" class="nav-link">
+        Aéroports
+      </a>
+
+      <!-- Météorologie -->
+      <div class="nav-item-dropdown">
+        <a href="meteo.html" class="nav-link">
+          Météorologie <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="meteo.html">Météo (Prévisions &amp; Vigilance)</a>
+          <a href="nos-stations.html">Nos stations</a>
+          <a href="documentation.html">Notre documentation</a>
+        </div>
+      </div>
+
+      <!-- Médecine (ex-CERMA) -->
+      <div class="nav-item-dropdown">
+        <a href="presentation-cerma.html" class="nav-link">
+          Médecine <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation-cerma.html">Présentation du CERMA</a>
+          <a href="prestations-cerma.html">Nos prestations</a>
+        </div>
+      </div>
+
+      <!-- Actualités -->
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link">
+          Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="actualites.html">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html">Magazine L'Aérien (Presse &amp; Vidéo)</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <a href="contact.html" class="nav-link">
+        Contact
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="burger-btn" id="burgerToggle" aria-label="Menu Mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" class="header-logo-img">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Qui sommes-nous</div>
+    <a href="presentation.html" class="active" style="padding-left:28px;"><i class="fa-solid fa-building"></i> Présentation de la SODEXAM</a>
+    <a href="mot-du-dg.html" style="padding-left:28px;"><i class="fa-solid fa-user-tie"></i> Mot du Directeur Général</a>
+    <a href="gouvernance.html" style="padding-left:28px;"><i class="fa-solid fa-users-gear"></i> Conseil d'Administration</a>
+    <a href="comite-direction.html" style="padding-left:28px;"><i class="fa-solid fa-sitemap"></i> Comité de Direction</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Aviation &amp; Navigation</div>
+    <a href="navigation-aeroports.html"><i class="fa-solid fa-plane-departure"></i> Aéroports de Côte d'Ivoire</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Météorologie</div>
+    <a href="meteo.html" style="padding-left:28px;"><i class="fa-solid fa-cloud-sun-rain"></i> Météo (Prévisions &amp; Vigilance)</a>
+    <a href="nos-stations.html" style="padding-left:28px;"><i class="fa-solid fa-tower-broadcast"></i> Nos stations</a>
+    <a href="documentation.html" style="padding-left:28px;"><i class="fa-solid fa-book"></i> Notre documentation</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Médecine (CERMA)</div>
+    <a href="presentation-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-heart-pulse"></i> Présentation du CERMA</a>
+    <a href="prestations-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-stethoscope"></i> Nos prestations</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Actualités &amp; Médias</div>
+    <a href="actualites.html" style="padding-left:28px;"><i class="fa-regular fa-newspaper"></i> Toutes les actualités</a>
+    <a href="magazine-aerien.html" style="padding-left:28px;"><i class="fa-solid fa-video"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a>
+
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+
+<!-- Hero Presentation -->
+<section class="pres-hero">
+  <div class="container">
+    <div class="pres-breadcrumb">
+      <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+      <span><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></span>
+      <span style="color:#D4D4D8;">Qui sommes-nous</span>
+      <span><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></span>
+      <span style="color:#FFFFFF; font-weight:600;">Présentation de la SODEXAM</span>
+    </div>
+    <div class="pres-hero-badge"><i class="fa-solid fa-building-columns"></i> Société d'État — République de Côte d'Ivoire</div>
+    <h1 class="pres-hero-title">Présentation Générale & Missions de la <span>SODEXAM</span></h1>
+    <p class="pres-hero-subtitle">
+      Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique — Créée par décret n°97-228 du 16 avril 1997 pour garantir l'excellence, la sécurité et la souveraineté du ciel ivoirien.
+    </p>
+  </div>
+</section>
+
+<!-- Video Presentation Section (Film Institutionnel) -->
+<section class="video-section">
+  <div class="container">
+    <div class="video-header">
+      <span class="video-tag"><i class="fa-solid fa-film"></i> Film Institutionnel Officiel</span>
+      <h2 class="video-title">Au Cœur de la SODEXAM</h2>
+      <p class="video-sub">Visionnez le film de présentation retraçant nos engagements opérationnels, nos infrastructures de pointe et la passion de nos équipes au service de la nation.</p>
+    </div>
+
+    <div class="video-frame-wrap">
+      <iframe 
+        src="https://www.youtube.com/embed/J6e_fO9LjsU" 
+        title="Film de présentation de la SODEXAM" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Main Text Content (tiré de sodexam.com/presentation) -->
+<section class="pres-section">
+  <div class="container">
+    <div class="pres-grid-2">
+      <div class="pres-card-box">
+        <h3>Une Société d'État Stratégique au Cœur de l'Émergence Ivoirienne</h3>
+        
+        <p>
+          La <strong>Société d’Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique (SODEXAM)</strong> est une Société d’État régie par le <strong>décret n°97-228 du 16 avril 1997</strong>. Elle est née de la volonté du Gouvernement ivoirien de rationaliser et de moderniser le secteur aéronautique, suite à la dissolution de l’Agence Nationale de l’Aviation Civile et de la Météorologie (ANAM) et à la mise en concession de l'exploitation commerciale de l’Aéroport International d’Abidjan à la société AERIA.
+        </p>
+
+        <p>
+          Entrée en activité effective en <strong>janvier 1998</strong>, la SODEXAM est dotée d'une personnalité morale, d’une autonomie de gestion financière et d'un capital social de <strong>1 000 000 000 de Francs CFA</strong> (porté à 1,4 milliard FCFA).
+        </p>
+
+        <p>
+          Elle opère sous la <strong>tutelle technique du Ministère des Transports</strong> et la <strong>tutelle financière du Ministère du Budget et du Portefeuille de l'État</strong>.
+        </p>
+
+        <p>
+          Son siège social est implanté à Abidjan Port-Bouët, en bordure du boulevard de l’Aéroport International Félix Houphouët-Boigny, dans le complexe moderne baptisé <em>« Immeuble Général Abdoulaye Coulibaly »</em>.
+        </p>
+
+        <div style="display:flex; gap:12px; margin-top:20px; flex-wrap:wrap;">
+          <a href="comite-direction.html" class="doc-btn doc-btn-download" style="width:auto; text-decoration:none; padding:10px 20px;">
+            <i class="fa-solid fa-users-gear"></i> Voir le Comité de Direction
+          </a>
+          <a href="gouvernance.html" class="doc-btn doc-btn-preview" style="width:auto; text-decoration:none; padding:10px 20px;">
+            <i class="fa-solid fa-sitemap"></i> Voir le Conseil d'Administration
+          </a>
+        </div>
+      </div>
+
+      <div class="pres-card-box" style="background:#FAF8F5;">
+        <h4 style="font-size:18px; font-weight:700; color:var(--text-main); margin-bottom:14px;"><i class="fa-solid fa-shield-halved" style="color:var(--orange);"></i> Chiffres Clés & Rôle Fédérateur</h4>
+        <p style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">
+          La SODEXAM incarne le trait d'union entre l'expertise aéroportuaire, la vigilance météorologique nationale et la médecine aéronautique de pointe. Elle veille 24h/24 à la sécurité de l'espace aérien souverain de la République de Côte d'Ivoire.
+        </p>
+
+        <div class="key-figures-grid">
+          <div class="key-figure-card">
+            <div class="key-figure-val">1997</div>
+            <div class="key-figure-lbl">Année de création</div>
+          </div>
+          <div class="key-figure-card">
+            <div class="key-figure-val">14+</div>
+            <div class="key-figure-lbl">Aérodromes nationaux</div>
+          </div>
+          <div class="key-figure-card">
+            <div class="key-figure-val">227</div>
+            <div class="key-figure-lbl">Stations météo</div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px; padding:16px; background:white; border-radius:10px; border:1px solid var(--border);">
+          <div style="font-size:13px; font-weight:700; color:var(--text-main); margin-bottom:6px;"><i class="fa-solid fa-award" style="color:var(--orange);"></i> Certification de Management ISO 9001:2015</div>
+          <div style="font-size:12px; color:var(--text-muted); line-height:1.5;">Système certifié par AFAQ AFNOR International pour l'ensemble des activités d'assistance météorologique et de gestion aéroportuaire.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Missions Fondamentales -->
+    <div style="margin-top:60px;">
+      <div style="text-align:center; max-width:720px; margin:0 auto 30px;">
+        <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--orange);">Attributions Régaliennes</span>
+        <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:28px; font-weight:700; margin-top:4px;">Les 6 Missions Fondamentales de la SODEXAM</h2>
+      </div>
+
+      <div class="missions-grid">
+        <div class="mission-card">
+          <div class="mission-icon"><i class="fa-solid fa-tower-observation"></i></div>
+          <h3 class="mission-title">1. Circulation Aérienne & SSLIA</h3>
+          <p class="mission-desc">Gestion des services de contrôle de la circulation aérienne d'aérodrome, sauvetage et lutte contre l'incendie des aéronefs (SSLIA), télécommunications et aides radio à la navigation.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon"><i class="fa-solid fa-plane-arrival"></i></div>
+          <h3 class="mission-title">2. Gestion du Domaine Aéroportuaire</h3>
+          <p class="mission-desc">Gestion, entretien, réhabilitation et valorisation du patrimoine aéroportuaire public pour le compte de l'État de Côte d'Ivoire sur l'ensemble du territoire.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon"><i class="fa-solid fa-cloud-sun-rain"></i></div>
+          <h3 class="mission-title">3. Météorologie Nationale</h3>
+          <p class="mission-desc">Veille synoptique, climatologie, agrométéorologie, prévisions marines et alertes précoces aux phénomènes météorologiques dangereux au standard OMM.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+          <h3 class="mission-title">4. Maîtrise d'Ouvrage & Grands Projets</h3>
+          <p class="mission-desc">Pilotage des projets de modernisation, réfection de pistes, allongements et constructions de nouvelles aérogares (Bouaké, Korhogo, San Pedro, Kong).</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon"><i class="fa-solid fa-cart-flatbed-suitcase"></i></div>
+          <h3 class="mission-title">5. Exploitation Commerciale & Escale</h3>
+          <p class="mission-desc">Coordination de l'assistance en escale, gestion des terminaux passagers, redevances d'aérodromes et concessions de services sur les plateformes intérieures.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h3 class="mission-title">6. Médecine Aéronautique (CERMA)</h3>
+          <p class="mission-desc">Expertises médicales réglementaires d'aptitude pour pilotes, contrôleurs et PNC, soins de santé aux usagers aéroportuaires et médecine du travail.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline Historique -->
+    <div style="margin-top:60px;">
+      <div style="text-align:center; max-width:720px; margin:0 auto 30px;">
+        <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--orange);">Chronologie</span>
+        <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:28px; font-weight:700; margin-top:4px;">De 1959 à Aujourd'hui : L'Histoire de la SODEXAM</h2>
+      </div>
+
+      <div class="timeline-grid">
+        <div class="timeline-card">
+          <div class="timeline-year">1959</div>
+          <h3 class="timeline-title">Convention ASECNA</h3>
+          <p class="timeline-desc">Création de l'Agence pour la Sécurité de la Navigation Aérienne en Afrique et à Madagascar.</p>
+        </div>
+
+        <div class="timeline-card green-top">
+          <div class="timeline-year">1969</div>
+          <h3 class="timeline-title">Création de l'ANAM</h3>
+          <p class="timeline-desc">L'Agence Nationale de l'Aviation Civile et de la Météorologie gère l'ensemble des aérodromes ivoiriens.</p>
+        </div>
+
+        <div class="timeline-card">
+          <div class="timeline-year">16 Avril 1997</div>
+          <h3 class="timeline-title">Naissance SODEXAM</h3>
+          <p class="timeline-desc">Signature du décret n°97-228 instituant la SODEXAM en tant que Société d'État.</p>
+        </div>
+
+        <div class="timeline-card green-top">
+          <div class="timeline-year">2015 – 2023</div>
+          <h3 class="timeline-title">Modernisation Intérieure</h3>
+          <p class="timeline-desc">Grand plan de modernisation des aéroports de Bouaké, Korhogo, San Pedro, Man et Odienné.</p>
+        </div>
+
+        <div class="timeline-card">
+          <div class="timeline-year">2024 – 2026</div>
+          <h3 class="timeline-title">Nouvelle Dynamique</h3>
+          <p class="timeline-desc">Siège Général Abdoulaye Coulibaly, aéroport de Kong, IA météo et Direction Générale Abdul Adam SYLLA.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER UNIFORME SODEXAM -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="margin-bottom:20px;">
+          <a href="index.html" title="SODEXAM — Retour à l'accueil">
+            <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
+          </a>
+        </div>
+        <p style="line-height:1.7; margin-bottom:20px; color:#A8A29E; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire (Décret n°97-228 du 16 avril 1997). Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        </p>
+        <div style="display:flex; gap:12px; font-size:15px;">
+          <a href="https://www.facebook.com/sodexam.ci" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation Institutionnelle</div>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="presentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation &amp; Film SODEXAM</a></li>
+          <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
+          <li><a href="gouvernance.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Conseil d'Administration</a></li>
+          <li><a href="comite-direction.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Comité de Direction (CODIR)</a></li>
+          <li><a href="navigation-aeroports.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Aéroports de Côte d'Ivoire</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Météorologie &amp; Médecine</div>
+        <ul class="footer-links">
+          <li><a href="meteo.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météo Prévisions &amp; Vigilance</a></li>
+          <li><a href="nos-stations.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Nos stations d'observation</a></li>
+          <li><a href="documentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Notre documentation officielle</a></li>
+          <li><a href="presentation-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation du CERMA</a></li>
+          <li><a href="prestations-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Prestations médicales navigants</a></li>
+          <li><a href="documentation.html#iso9001"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Certification ISO 9001:2015</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Actualités &amp; Contacts</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Dernières Actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a></li>
+          <li><a href="documentation.html#feux"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Feux de Brousse</a></li>
+          <li><a href="documentation.html#decades"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Décadaires Agrométéo</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Contact &amp; Service Presse</a></li>
+          <li><a href="contact.html#urgence"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Urgences Aéronautiques SSLIA</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="presentation.html">Mentions Légales</a>
+        <a href="documentation.html">Réglementation &amp; Qualité</a>
+        <a href="contact.html">Plan d'Accès</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+// Mobile drawer toggle
+const burgerToggle = document.getElementById('burgerToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerClose = document.getElementById('drawerClose');
+
+if (burgerToggle && mobileDrawer) {
+  burgerToggle.addEventListener('click', () => {
+    mobileDrawer.classList.add('open');
+  });
+}
+if (drawerClose && mobileDrawer) {
+  drawerClose.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+  });
+}
+
+
+</body>
+</html>

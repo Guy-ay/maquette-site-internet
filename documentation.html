@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centre de Documentation & Publications — SODEXAM Côte d'Ivoire</title>
+<meta name="description" content="Consultez et téléchargez les publications officielles de la SODEXAM : Bulletins agrométéorologiques, surveillance des feux de brousse, certification ISO 9001:2015, rapports d'activités.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+
+/* ============================================================
+   DESIGN SYSTEM & CHARTE GRAPHIQUE UNIFORME — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #2FA95B;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #E8631C;
+  --blue-navy: #1C1917;
+  
+  --bg-page: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3EFEA;
+  
+  --text-main: #1C1917;
+  --text-muted: #57534E;
+  --text-light: #A8A29E;
+  
+  --border-light: rgba(231, 229, 228, 0.85);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 16px 36px -12px rgba(28, 25, 23, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(28, 25, 23, 0.06);
+  --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
+}
+
+/* ============================================================
+   FLASH BAR UNIFORME
+   ============================================================ */
+.flash-bar {
+  background: #18181B;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  background: #EF4444;
+  color: white;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+  z-index: 2;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.25);
+}
+.flash-pulse {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: flashDot 1.4s infinite ease-in-out;
+}
+@keyframes flashDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  white-space: nowrap;
+  animation: flashTicker 42s linear infinite;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #F4F4F5;
+}
+.flash-track:hover { animation-play-state: paused; }
+.flash-track span {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 48px;
+}
+.flash-track span::before {
+  content: "•";
+  color: var(--orange);
+  font-size: 18px;
+  margin-right: 12px;
+}
+@keyframes flashTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   HEADER & NAVIGATION UNIFORME
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -4px rgba(28, 25, 23, 0.05);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px !important;
+  gap: 20px;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.header-logo-img {
+  height: 30px !important;
+  max-width: 164px !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 260px;
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 40px -10px rgba(28, 25, 23, 0.12);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all var(--dur-fast) var(--ease-spring);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dropdown-panel a {
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dropdown-panel a:hover, .dropdown-panel a.active-item {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(3px);
+}
+.chev {
+  font-size: 9px;
+  transition: transform var(--dur-fast);
+  opacity: 0.6;
+}
+.nav-item-dropdown:hover .chev {
+  transform: rotate(180deg);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  padding: 8px;
+}
+.burger-btn span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: all var(--dur-fast);
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(85vw, 360px);
+  height: 100vh;
+  background: white;
+  z-index: 2000;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s var(--ease-spring);
+  padding: 24px;
+  overflow-y: auto;
+}
+.mobile-drawer.open {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.drawer-close {
+  background: var(--bg-subtle);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.drawer-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.drawer-links a.active, .drawer-links a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+
+/* ============================================================
+   FOOTER UNIFORME
+   ============================================================ */
+.footer {
+  background: #18181B;
+  color: #A8A29E;
+  padding: 64px 0 28px;
+  font-size: 14px;
+  border-top: 3px solid var(--orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.footer-links a {
+  color: #A8A29E;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #57534E;
+}
+.footer-bottom a {
+  color: #A8A29E;
+  transition: color var(--dur-fast);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 991px) {
+  .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-page);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero Documentation */
+.doc-hero {
+  background: linear-gradient(135deg, #18181B 0%, #27201C 60%, #1C1917 100%);
+  color: white;
+  padding: 46px 0 38px;
+  border-bottom: 3px solid var(--orange);
+  position: relative;
+  overflow: hidden;
+}
+.doc-hero::before {
+  content: "";
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(242,106,33,0.14) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.doc-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #A1A1AA;
+  margin-bottom: 14px;
+}
+.doc-breadcrumb a { color: #D4D4D8; text-decoration: none; transition: color 0.2s; }
+.doc-breadcrumb a:hover { color: var(--orange); }
+.doc-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+}
+.doc-hero-title span { color: var(--orange); }
+.doc-hero-subtitle {
+  color: #D4D4D8;
+  font-size: 15px;
+  max-width: 780px;
+  line-height: 1.6;
+}
+
+/* Stats bar */
+.doc-stats-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+}
+.doc-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.doc-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+}
+.doc-stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(242,106,33,0.1);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.doc-stat-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+.doc-stat-lbl {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Main layout */
+.doc-main-section {
+  padding: 36px 0 60px;
+}
+.doc-controls-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.doc-search-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.doc-search-box {
+  flex: 1;
+  position: relative;
+}
+.doc-search-box i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #A1A1AA;
+  font-size: 15px;
+}
+.doc-search-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-page);
+  color: var(--text-main);
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.doc-search-input:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(242,106,33,0.15);
+}
+.doc-year-select {
+  padding: 12px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-page);
+  color: var(--text-main);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.doc-year-select:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+.doc-cat-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.doc-filter-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-page);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.doc-filter-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.doc-filter-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+.doc-filter-count {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.08);
+}
+.doc-filter-btn.active .doc-filter-count {
+  background: rgba(255,255,255,0.25);
+  color: white;
+}
+
+/* Grid of docs */
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 22px;
+}
+.doc-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.doc-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(242,106,33,0.4);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+.doc-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  width: fit-content;
+}
+.badge-agrometeo { background: rgba(30,122,60,0.12); color: #1E7A3C; }
+.badge-feux { background: rgba(239,68,68,0.12); color: #DC2626; }
+.badge-iso { background: rgba(242,106,33,0.12); color: var(--orange); }
+.badge-climat { background: rgba(13,148,136,0.12); color: #0D9488; }
+.badge-reglement { background: rgba(107,114,128,0.12); color: #4B5563; }
+
+.doc-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+.doc-card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+.doc-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.doc-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.doc-card-actions {
+  display: flex;
+  gap: 10px;
+}
+.doc-btn {
+  flex: 1;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.doc-btn-preview {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+}
+.doc-btn-preview:hover {
+  background: var(--surface);
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.doc-btn-download {
+  background: var(--orange);
+  border: 1px solid var(--orange);
+  color: white;
+}
+.doc-btn-download:hover {
+  background: #E05A13;
+}
+
+/* Empty state */
+.doc-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+.doc-empty-state i {
+  font-size: 42px;
+  color: #A1A1AA;
+  margin-bottom: 14px;
+}
+.doc-empty-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.doc-empty-sub {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* Preview Modal */
+.doc-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.doc-modal-overlay.active { display: flex; }
+.doc-modal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  animation: modalIn 0.25s ease-out;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.doc-modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.doc-modal-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.doc-modal-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+.doc-modal-close:hover {
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+.doc-modal-body {
+  padding: 24px;
+}
+.doc-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-page);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+/* Toast notification */
+.doc-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #18181B;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  border-left: 4px solid var(--orange);
+}
+.doc-toast.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .doc-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .doc-grid { grid-template-columns: 1fr; }
+  .doc-search-row { flex-direction: column; }
+}
+@media (max-width: 600px) {
+  .doc-stats-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar Alertes Flash -->
+<div class="flash-bar">
+  <div class="flash-label">
+    <span class="flash-pulse"></span>
+    SODEXAM FLASH
+  </div>
+  <div class="flash-track">
+    <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
+    <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins météo quotidiens</span>
+    <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
+    <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
+  </div>
+</div>
+
+<!-- Header Principal -->
+<header class="main-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+      <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">
+        <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
+      </a>
+      
+      <!-- Qui sommes-nous -->
+      <div class="nav-item-dropdown">
+        <a href="presentation.html" class="nav-link">
+          Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation.html">Présentation de la SODEXAM</a>
+          <a href="mot-du-dg.html">Mot du Directeur Général</a>
+          <a href="gouvernance.html">Conseil d'Administration</a>
+          <a href="comite-direction.html">Comité de Direction</a>
+        </div>
+      </div>
+
+      <!-- Aéroports -->
+      <a href="navigation-aeroports.html" class="nav-link">
+        Aéroports
+      </a>
+
+      <!-- Météorologie -->
+      <div class="nav-item-dropdown">
+        <a href="meteo.html" class="nav-link active">
+          Météorologie <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="meteo.html">Météo (Prévisions &amp; Vigilance)</a>
+          <a href="nos-stations.html">Nos stations</a>
+          <a href="documentation.html" class="active-item">Notre documentation</a>
+        </div>
+      </div>
+
+      <!-- Médecine (ex-CERMA) -->
+      <div class="nav-item-dropdown">
+        <a href="presentation-cerma.html" class="nav-link">
+          Médecine <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation-cerma.html">Présentation du CERMA</a>
+          <a href="prestations-cerma.html">Nos prestations</a>
+        </div>
+      </div>
+
+      <!-- Actualités -->
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link">
+          Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="actualites.html">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html">Magazine L'Aérien (Presse &amp; Vidéo)</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <a href="contact.html" class="nav-link">
+        Contact
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="burger-btn" id="burgerToggle" aria-label="Menu Mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" class="header-logo-img">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Qui sommes-nous</div>
+    <a href="presentation.html" style="padding-left:28px;"><i class="fa-solid fa-building"></i> Présentation de la SODEXAM</a>
+    <a href="mot-du-dg.html" style="padding-left:28px;"><i class="fa-solid fa-user-tie"></i> Mot du Directeur Général</a>
+    <a href="gouvernance.html" style="padding-left:28px;"><i class="fa-solid fa-users-gear"></i> Conseil d'Administration</a>
+    <a href="comite-direction.html" style="padding-left:28px;"><i class="fa-solid fa-sitemap"></i> Comité de Direction</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Aviation &amp; Navigation</div>
+    <a href="navigation-aeroports.html"><i class="fa-solid fa-plane-departure"></i> Aéroports de Côte d'Ivoire</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Météorologie</div>
+    <a href="meteo.html" style="padding-left:28px;"><i class="fa-solid fa-cloud-sun-rain"></i> Météo (Prévisions &amp; Vigilance)</a>
+    <a href="nos-stations.html" style="padding-left:28px;"><i class="fa-solid fa-tower-broadcast"></i> Nos stations</a>
+    <a href="documentation.html" class="active" style="padding-left:28px;"><i class="fa-solid fa-book"></i> Notre documentation</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Médecine (CERMA)</div>
+    <a href="presentation-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-heart-pulse"></i> Présentation du CERMA</a>
+    <a href="prestations-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-stethoscope"></i> Nos prestations</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Actualités &amp; Médias</div>
+    <a href="actualites.html" style="padding-left:28px;"><i class="fa-regular fa-newspaper"></i> Toutes les actualités</a>
+    <a href="magazine-aerien.html" style="padding-left:28px;"><i class="fa-solid fa-video"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a>
+
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+
+<!-- Hero Documentation -->
+<section class="doc-hero">
+  <div class="container">
+    <div class="doc-breadcrumb">
+      <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+      <span><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></span>
+      <a href="meteorologie.html">Météorologie</a>
+      <span><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></span>
+      <span style="color:#FFFFFF; font-weight:600;">Notre Documentation</span>
+    </div>
+    <h1 class="doc-hero-title">Centre de Documentation & <span>Publications</span></h1>
+    <p class="doc-hero-subtitle">
+      Accédez en libre consultation aux bulletins agrométéorologiques décadaires, alertes feux de brousse, rapports climatiques annuels, certifications de management de la qualité ISO 9001:2015 et documents réglementaires publiés par la SODEXAM.
+    </p>
+  </div>
+</section>
+
+<!-- Stats strip -->
+<section class="doc-stats-strip">
+  <div class="container">
+    <div class="doc-stats-grid">
+      <div class="doc-stat-card">
+        <div class="doc-stat-icon"><i class="fa-solid fa-file-lines"></i></div>
+        <div>
+          <div class="doc-stat-val">18 Publications</div>
+          <div class="doc-stat-lbl">Documents officiels vérifiés</div>
+        </div>
+      </div>
+      <div class="doc-stat-card">
+        <div class="doc-stat-icon"><i class="fa-solid fa-award"></i></div>
+        <div>
+          <div class="doc-stat-val">ISO 9001:2015</div>
+          <div class="doc-stat-lbl">Certification AFAQ AFNOR</div>
+        </div>
+      </div>
+      <div class="doc-stat-card">
+        <div class="doc-stat-icon"><i class="fa-solid fa-seedling"></i></div>
+        <div>
+          <div class="doc-stat-val">Agrométéo & Feux</div>
+          <div class="doc-stat-lbl">Suivi décadaire et satellite</div>
+        </div>
+      </div>
+      <div class="doc-stat-card">
+        <div class="doc-stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <div class="doc-stat-val">Décret N° 97-228</div>
+          <div class="doc-stat-lbl">Textes d'utilité publique</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Documentation Main Content -->
+<section class="doc-main-section">
+  <div class="container">
+    
+    <!-- Controls (Search & Filters) -->
+    <div class="doc-controls-bar">
+      <div class="doc-search-row">
+        <div class="doc-search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="docSearchInput" class="doc-search-input" placeholder="Rechercher un document par titre, mot-clé, code ou thème (ex: feu de brousse, décade, ISO, PRESAGG)...">
+        </div>
+        <select id="docYearFilter" class="doc-year-select">
+          <option value="all">Toutes les années</option>
+          <option value="2024">Année 2024</option>
+          <option value="2023">Année 2023</option>
+          <option value="2022">Année 2022</option>
+          <option value="officiel">Textes Fondateurs</option>
+        </select>
+      </div>
+
+      <div class="doc-cat-filters" id="catFilterContainer">
+        <button class="doc-filter-btn active" data-cat="all">
+          <i class="fa-solid fa-layer-group"></i> Tous les documents <span class="doc-filter-count" id="count-all">18</span>
+        </button>
+        <button class="doc-filter-btn" data-cat="agrometeo">
+          <i class="fa-solid fa-wheat-awn"></i> Décades Agrométéo <span class="doc-filter-count" id="count-agrometeo">5</span>
+        </button>
+        <button class="doc-filter-btn" data-cat="feux">
+          <i class="fa-solid fa-fire-flame-curved"></i> Feux de Brousse <span class="doc-filter-count" id="count-feux">4</span>
+        </button>
+        <button class="doc-filter-btn" data-cat="iso">
+          <i class="fa-solid fa-certificate"></i> Certification ISO 9001 <span class="doc-filter-count" id="count-iso">3</span>
+        </button>
+        <button class="doc-filter-btn" data-cat="climat">
+          <i class="fa-solid fa-cloud-sun-rain"></i> Climatologie & PRESAGG <span class="doc-filter-count" id="count-climat">3</span>
+        </button>
+        <button class="doc-filter-btn" data-cat="reglement">
+          <i class="fa-solid fa-scale-balanced"></i> Textes & Rapports <span class="doc-filter-count" id="count-reglement">3</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Document Grid -->
+    <div class="doc-grid" id="docGridContainer">
+      <!-- Generated by JS -->
+    </div>
+
+  </div>
+</section>
+
+<!-- Modal Aperçu Document -->
+<div class="doc-modal-overlay" id="docModalOverlay">
+  <div class="doc-modal-card">
+    <div class="doc-modal-header">
+      <div class="doc-modal-title" id="modalTitle">Aperçu du document</div>
+      <button class="doc-modal-close" id="modalCloseBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="doc-modal-body" id="modalBody">
+      <!-- Dynamic modal content -->
+    </div>
+    <div class="doc-modal-footer">
+      <button class="doc-btn doc-btn-preview" id="modalCloseActionBtn">Fermer</button>
+      <button class="doc-btn doc-btn-download" id="modalDownloadBtn"><i class="fa-solid fa-download"></i> Télécharger le PDF officiel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="doc-toast" id="docToast">
+  <i class="fa-solid fa-circle-check" style="color:var(--orange); font-size:18px;"></i>
+  <span id="docToastText">Téléchargement lancé avec succès.</span>
+</div>
+
+<!-- FOOTER UNIFORME SODEXAM -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="margin-bottom:20px;">
+          <a href="index.html" title="SODEXAM — Retour à l'accueil">
+            <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
+          </a>
+        </div>
+        <p style="line-height:1.7; margin-bottom:20px; color:#A8A29E; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire (Décret n°97-228 du 16 avril 1997). Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        </p>
+        <div style="display:flex; gap:12px; font-size:15px;">
+          <a href="https://www.facebook.com/sodexam.ci" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation Institutionnelle</div>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="presentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation &amp; Film SODEXAM</a></li>
+          <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
+          <li><a href="gouvernance.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Conseil d'Administration</a></li>
+          <li><a href="comite-direction.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Comité de Direction (CODIR)</a></li>
+          <li><a href="navigation-aeroports.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Aéroports de Côte d'Ivoire</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Météorologie &amp; Médecine</div>
+        <ul class="footer-links">
+          <li><a href="meteo.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météo Prévisions &amp; Vigilance</a></li>
+          <li><a href="nos-stations.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Nos stations d'observation</a></li>
+          <li><a href="documentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Notre documentation officielle</a></li>
+          <li><a href="presentation-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation du CERMA</a></li>
+          <li><a href="prestations-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Prestations médicales navigants</a></li>
+          <li><a href="documentation.html#iso9001"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Certification ISO 9001:2015</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Actualités &amp; Contacts</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Dernières Actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a></li>
+          <li><a href="documentation.html#feux"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Feux de Brousse</a></li>
+          <li><a href="documentation.html#decades"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Décadaires Agrométéo</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Contact &amp; Service Presse</a></li>
+          <li><a href="contact.html#urgence"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Urgences Aéronautiques SSLIA</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="presentation.html">Mentions Légales</a>
+        <a href="documentation.html">Réglementation &amp; Qualité</a>
+        <a href="contact.html">Plan d'Accès</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+// Mobile drawer toggle
+const burgerToggle = document.getElementById('burgerToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerClose = document.getElementById('drawerClose');
+
+if (burgerToggle && mobileDrawer) {
+  burgerToggle.addEventListener('click', () => {
+    mobileDrawer.classList.add('open');
+  });
+}
+if (drawerClose && mobileDrawer) {
+  drawerClose.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+  });
+}
+
+
+<script>
+// Base de données des documents SODEXAM
+const sodexamDocuments = [
+  {
+    id: "doc-feux-2024-02",
+    title: "Bulletin Spécial de Surveillance des Feux de Brousse — Saison Sèche 2023-2024",
+    cat: "feux",
+    badgeLabel: "Surveillance Feux",
+    badgeClass: "badge-feux",
+    year: "2024",
+    date: "15 Février 2024",
+    size: "4.8 Mo",
+    pages: 28,
+    ref: "DMN/BFF-2024-02",
+    desc: "Analyse spatio-temporelle des foyers de chaleur par imagerie satellitaire MODIS/VIIRS. Cartographie des zones à haut risque dans le Nord et le Centre (Savanes, Vallée du Bandama, Zanzan, Worodougou) et directives de prévention.",
+    summary: "Ce bulletin dresse le bilan d'alerte précoce pour la période de vulnérabilité accrue aux incendies de végétation. Il comprend la cartographie détaillée des indices de danger météorologique (Indice Forêt-Météo IFM), l'historique décennal des départs de feux et les recommandations opérationnelles destinées aux ministères techniques, aux collectivités territoriales et aux comités villageois de surveillance."
+  },
+  {
+    id: "doc-feux-2023-01",
+    title: "Rapport d'Évaluation des Feux de Brousse & Indices de Sécheresse",
+    cat: "feux",
+    badgeLabel: "Surveillance Feux",
+    badgeClass: "badge-feux",
+    year: "2023",
+    date: "10 Décembre 2023",
+    size: "3.2 Mo",
+    pages: 22,
+    ref: "DMN/BFF-2023-12",
+    desc: "Cartographie satellitaire des zones à risque d'embrasement spontané sous l'influence de l'harmattan dans les régions du Denguélé, Bafing et Poro.",
+    summary: "Rapport technique analysant la corrélation entre les flux d'Harmattan desséchant venus du Sahara et la recrudescence des départs de feux de brousse en Côte d'Ivoire septentrionale. Données satellitaires haute résolution et indices thermiques."
+  },
+  {
+    id: "doc-feux-guide",
+    title: "Guide Pratique d'Alerte & Prévention des Feux de Végétation",
+    cat: "feux",
+    badgeLabel: "Surveillance Feux",
+    badgeClass: "badge-feux",
+    year: "2023",
+    date: "05 Novembre 2023",
+    size: "2.1 Mo",
+    pages: 16,
+    ref: "DMN/GP-FEUX-01",
+    desc: "Manuel méthodologique d'interprétation des cartes d'alertes feux diffusées quotidiennement par le centre de veille météorologique de la SODEXAM.",
+    summary: "Outil pédagogique à l'usage des agents de vulgarisation agricole de l'ANADER, des forestiers des Eaux et Forêts et des sapeurs-pompiers militaires (GSPM) pour anticiper et circonscrire les départs d'incendies ruraux."
+  },
+  {
+    id: "doc-feux-historique",
+    title: "Atlas Historique de Vulnérabilité aux Feux de Brousse en Côte d'Ivoire (2010-2022)",
+    cat: "feux",
+    badgeLabel: "Surveillance Feux",
+    badgeClass: "badge-feux",
+    year: "2022",
+    date: "18 Août 2022",
+    size: "8.5 Mo",
+    pages: 64,
+    ref: "DMN/ATLAS-FB-1022",
+    desc: "Monographie climatologique rétrospective sur 12 ans identifiant les corridors d'inflammabilité et les couloirs de propagation des feux en zone de savane.",
+    summary: "Étude rétrospective approfondie combinant séries pluviométriques décennales, données thermiques et relevés d'humidité relative à 12h UTC pour modéliser le comportement pluriannuel du feu rural en Côte d'Ivoire."
+  },
+  {
+    id: "doc-agro-2024-oct",
+    title: "Bulletin Agrométéorologique Décadaire — 3ème Décade d'Octobre 2024",
+    cat: "agrometeo",
+    badgeLabel: "Décade Agrométéo",
+    badgeClass: "badge-agrometeo",
+    year: "2024",
+    date: "31 Octobre 2024",
+    size: "2.6 Mo",
+    pages: 14,
+    ref: "DMN/AGRO-DEC-2430",
+    desc: "Cumuls pluviométriques décadaires, bilan hydrique des sols agricoles, état d'avancement des récoltes de cacao, café, maïs et riz. Recommandations aux producteurs.",
+    summary: "Ce bulletin décadaire présente la synthèse nationale des précipitations enregistrées sur les 227 stations et postes pluviométriques du réseau SODEXAM. Il intègre le calcul de la Réserve Utile (RU) en eau du sol et les conseils phytosanitaires adaptés."
+  },
+  {
+    id: "doc-agro-2024-sep",
+    title: "Bulletin Agrométéorologique Décadaire — 2ème Décade de Septembre 2024",
+    cat: "agrometeo",
+    badgeLabel: "Décade Agrométéo",
+    badgeClass: "badge-agrometeo",
+    year: "2024",
+    date: "20 Septembre 2024",
+    size: "2.4 Mo",
+    pages: 14,
+    ref: "DMN/AGRO-DEC-2426",
+    desc: "Suivi des précipitations de la petite saison des pluies dans le Sud et le Centre. Évaluation des disponibilités en eau pour la floraison cacaoyère.",
+    summary: "Synthèse agrométéorologique régionale décrivant les anomalies de pluviométrie par rapport à la normale 1991-2020 et leurs incidences sur les grands bassins de production agro-industriels ivoiriens."
+  },
+  {
+    id: "doc-agro-2024-jul",
+    title: "Bulletin Agrométéorologique Décadaire — 1ère Décade de Juillet 2024",
+    cat: "agrometeo",
+    badgeLabel: "Décade Agrométéo",
+    badgeClass: "badge-agrometeo",
+    year: "2024",
+    date: "10 Juillet 2024",
+    size: "2.5 Mo",
+    pages: 14,
+    ref: "DMN/AGRO-DEC-2419",
+    desc: "Bilan du pic de la grande saison des pluies sur le littoral ivoirien. Impacts des inondations sur les cultures vivrières et maraîchères périurbaines.",
+    summary: "Revue détaillée des extrêmes pluviométriques mesurés sur Abidjan, San Pedro, Sassandra et Dabou, assortie des cartes de saturation des sols et des avis agronomiques de drainage."
+  },
+  {
+    id: "doc-agro-2023-bilan",
+    title: "Bilan Agrométéorologique Annuel de la Campagne Agricole 2023",
+    cat: "agrometeo",
+    badgeLabel: "Décade Agrométéo",
+    badgeClass: "badge-agrometeo",
+    year: "2023",
+    date: "28 Janvier 2024",
+    size: "6.1 Mo",
+    pages: 48,
+    ref: "DMN/AGRO-ANN-2023",
+    desc: "Analyse globale de l'incidence du régime des pluies sur la production vivrière et de rente en Côte d'Ivoire. Comparaison avec les normales climatologiques.",
+    summary: "Rapport de référence de la Direction de la Météorologie Nationale synthétisant 36 décades d'observations pluviométriques et thermiques sur l'ensemble des 31 régions ivoiriennes."
+  },
+  {
+    id: "doc-agro-guide-methodo",
+    title: "Méthodologie d'Élaboration des Bulletins Décadaires Agrométéorologiques",
+    cat: "agrometeo",
+    badgeLabel: "Décade Agrométéo",
+    badgeClass: "badge-agrometeo",
+    year: "2022",
+    date: "15 Juin 2022",
+    size: "3.7 Mo",
+    pages: 32,
+    ref: "DMN/METH-AGRO-01",
+    desc: "Cadre méthodologique conforme aux normes de l'Organisation Météorologique Mondiale (OMM) pour le traitement des données agro-climatiques.",
+    summary: "Protocole technique formalisant la collecte des données décadaires, l'interpolation spatiale par krigeage et l'étalonnage des modèles d'évapotranspiration potentielle (ETP Penman-Monteith)."
+  },
+  {
+    id: "doc-iso-9001-certif",
+    title: "Certificat de Management de la Qualité ISO 9001:2015 — AFAQ AFNOR",
+    cat: "iso",
+    badgeLabel: "Certification ISO",
+    badgeClass: "badge-iso",
+    year: "2024",
+    date: "12 Mars 2024",
+    size: "1.4 Mo",
+    pages: 4,
+    ref: "AFNOR-QUAL-9001-2024",
+    desc: "Attestation officielle de renouvellement de la certification ISO 9001:2015 pour l'exploitation aéroportuaire, la météorologie aéronautique et le CERMA.",
+    summary: "Certificat délivré par le groupe AFNOR International attestant que le système de management de la qualité déployé par la SODEXAM est conforme à 100% aux exigences de la norme internationale ISO 9001:2015."
+  },
+  {
+    id: "doc-iso-politique-qualite",
+    title: "Déclaration de la Politique Qualité & Engagements de la Direction Générale",
+    cat: "iso",
+    badgeLabel: "Certification ISO",
+    badgeClass: "badge-iso",
+    year: "2024",
+    date: "05 Janvier 2024",
+    size: "1.1 Mo",
+    pages: 6,
+    ref: "DG/DIR-QUAL-2024",
+    desc: "Feuille de route stratégique qualité : satisfaction client, conformité aux normes OACI et OMM, sécurité aéronautique et amélioration continue.",
+    summary: "Document d'orientation signé par le Directeur Général définissant les axes stratégiques du management de la qualité, les indicateurs d'efficacité opérationnelle et les engagements sociétaux de la SODEXAM."
+  },
+  {
+    id: "doc-iso-manuel-qualite",
+    title: "Manuel du Système de Management Intégré Qualité-Sécurité-Environnement",
+    cat: "iso",
+    badgeLabel: "Certification ISO",
+    badgeClass: "badge-iso",
+    year: "2023",
+    date: "22 Septembre 2023",
+    size: "5.3 Mo",
+    pages: 56,
+    ref: "SMI/MAN-QUAL-V4",
+    desc: "Description exhaustive de l'architecture des processus, des responsabilités managériales et des procédures de veille réglementaire de la SODEXAM.",
+    summary: "Document cadre régissant le fonctionnement de tous les départements opérationnels (Aérodromes, Météorologie, CERMA, Direction Administrative et Financière) sous référentiel ISO 9001."
+  },
+  {
+    id: "doc-presagg-2024",
+    title: "Prévisions Saisonnières PRESAGG 2024 — Caractéristiques Agro-Hydro-Climatiques",
+    cat: "climat",
+    badgeLabel: "Climat & PRESAGG",
+    badgeClass: "badge-climat",
+    year: "2024",
+    date: "24 Avril 2024",
+    size: "4.5 Mo",
+    pages: 26,
+    ref: "DMN/PRESAGG-2024",
+    desc: "Consensus des prévisions saisonnières pour la zone soudano-sahélienne et le golfe de Guinée : dates de début et fin de saison, cumuls pluviométriques attendus.",
+    summary: "Publication issue des ateliers régionaux de prévision climatique associant l'ACMAD, le Centre AGRHYMET et la SODEXAM. Détermination des tendances pluviométriques et des durées probables des séquences sèches."
+  },
+  {
+    id: "doc-presagg-2023",
+    title: "Bilan de la Saison des Pluies & Validation des Prévisions PRESAGG 2023",
+    cat: "climat",
+    badgeLabel: "Climat & PRESAGG",
+    badgeClass: "badge-climat",
+    year: "2023",
+    date: "14 Décembre 2023",
+    size: "3.9 Mo",
+    pages: 24,
+    ref: "DMN/PRESAGG-VERIF-23",
+    desc: "Confrontation entre les projections saisonnières annoncées et les observations in-situ mesurées par le réseau météorologique national ivoirien.",
+    summary: "Rapport d'évaluation scientifique de la justesse des modèles climatiques mondiaux (ECMWF, NOAA, Météo-France) appliqués au domaine tropical ivoirien au cours de l'année 2023."
+  },
+  {
+    id: "doc-climat-normales",
+    title: "Normales Climatologiques Officielles de Côte d'Ivoire (1991 - 2020)",
+    cat: "climat",
+    badgeLabel: "Climat & PRESAGG",
+    badgeClass: "badge-climat",
+    year: "2022",
+    date: "30 Mars 2022",
+    size: "9.2 Mo",
+    pages: 80,
+    ref: "DMN/NORM-CLIM-9120",
+    desc: "Recueil officiel des normales de température, précipitations, humidité, insolation et vent sur 30 ans pour toutes les stations synoptiques ivoiriennes.",
+    summary: "Ouvrage de référence météorologique conforme aux standards OMM-N° 1203, indispensable aux bureaux d'études, aménageurs du territoire, universités et investisseurs agricoles."
+  },
+  {
+    id: "doc-reg-decret-97228",
+    title: "Décret N° 97-228 du 16 Avril 1997 portant création de la SODEXAM",
+    cat: "reglement",
+    badgeLabel: "Textes Fondateurs",
+    badgeClass: "badge-reglement",
+    year: "officiel",
+    date: "16 Avril 1997",
+    size: "1.8 Mo",
+    pages: 12,
+    ref: "JO-RCI-1997-228",
+    desc: "Texte législatif fondateur instituant la Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique sous forme de Société d'État.",
+    summary: "Journal Officiel de la République de Côte d'Ivoire portant statuts constitutifs, délimitation des missions d'utilité publique, gouvernance et attributions régaliennes déléguées par l'État à la SODEXAM."
+  },
+  {
+    id: "doc-reg-loi-aviation",
+    title: "Code de l'Aviation Civile de Côte d'Ivoire — Extraits SODEXAM",
+    cat: "reglement",
+    badgeLabel: "Réglementation",
+    badgeClass: "badge-reglement",
+    year: "officiel",
+    date: "20 Juillet 2018",
+    size: "3.4 Mo",
+    pages: 36,
+    ref: "ANAC/CAC-RCI-EXT",
+    desc: "Dispositions législatives et réglementaires fixant les obligations d'assistance météorologique aux vols, sécurité incendie SSLIA et gestion d'aérodromes.",
+    summary: "Recueil des articles régissant la coordination entre l'Autorité Nationale de l'Aviation Civile (ANAC), l'ASECNA et la SODEXAM pour la sécurité de l'espace aérien souverain ivoirien."
+  },
+  {
+    id: "doc-reg-rapport-activites",
+    title: "Rapport Annuel d'Activités & Bilan d'Exploitation SODEXAM 2023",
+    cat: "reglement",
+    badgeLabel: "Rapport Officiel",
+    badgeClass: "badge-reglement",
+    year: "2023",
+    date: "28 Mai 2024",
+    size: "7.1 Mo",
+    pages: 72,
+    ref: "DG/RAPPORT-ACT-2023",
+    desc: "Bilan opérationnel et financier complet : trafic aéroportuaire national, modernisations d'aérogares, investissements radar et synoptiques, bilan médical CERMA.",
+    summary: "Document institutionnel présenté au Conseil d'Administration et aux ministères de tutelle (Transports, Budget et Portefeuille de l'État), détaillant l'exécution des projets stratégiques d'infrastructure."
+  }
+];
+
+// État d'affichage
+let currentCatFilter = 'all';
+let currentYearFilter = 'all';
+let currentSearchTerm = '';
+
+// Rendu des cartes de documents
+function renderDocuments() {
+  const container = document.getElementById('docGridContainer');
+  const term = currentSearchTerm.toLowerCase().trim();
+  
+  const filtered = sodexamDocuments.filter(doc => {
+    const matchCat = (currentCatFilter === 'all' || doc.cat === currentCatFilter);
+    const matchYear = (currentYearFilter === 'all' || doc.year === currentYearFilter);
+    const matchSearch = (!term || 
+      doc.title.toLowerCase().includes(term) ||
+      doc.desc.toLowerCase().includes(term) ||
+      doc.ref.toLowerCase().includes(term) ||
+      doc.badgeLabel.toLowerCase().includes(term)
+    );
+    return matchCat && matchYear && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="doc-empty-state">
+        <i class="fa-regular fa-folder-open"></i>
+        <div class="doc-empty-title">Aucun document ne correspond à votre recherche</div>
+        <div class="doc-empty-sub">Essayez de modifier vos mots-clés ou réinitialisez les filtres par catégorie.</div>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = filtered.map(doc => `
+    <article class="doc-card" data-id="${doc.id}">
+      <span class="doc-card-badge ${doc.badgeClass}">
+        <i class="fa-solid fa-tag"></i> ${doc.badgeLabel}
+      </span>
+      <h3 class="doc-card-title">${doc.title}</h3>
+      <p class="doc-card-desc">${doc.desc}</p>
+      
+      <div class="doc-card-meta">
+        <span class="doc-meta-item"><i class="fa-regular fa-calendar"></i> ${doc.date}</span>
+        <span class="doc-meta-item"><i class="fa-regular fa-file-pdf"></i> ${doc.size}</span>
+        <span class="doc-meta-item"><i class="fa-solid fa-barcode"></i> ${doc.ref}</span>
+      </div>
+
+      <div class="doc-card-actions">
+        <button class="doc-btn doc-btn-preview" onclick="openDocPreview('${doc.id}')">
+          <i class="fa-regular fa-eye"></i> Aperçu
+        </button>
+        <button class="doc-btn doc-btn-download" onclick="triggerDownload('${doc.title}')">
+          <i class="fa-solid fa-download"></i> PDF
+        </button>
+      </div>
+    </article>
+  `).join('');
+}
+
+// Gestion des filtres
+document.querySelectorAll('.doc-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.doc-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCatFilter = btn.dataset.cat;
+    renderDocuments();
+  });
+});
+
+document.getElementById('docYearFilter').addEventListener('change', (e) => {
+  currentYearFilter = e.target.value;
+  renderDocuments();
+});
+
+document.getElementById('docSearchInput').addEventListener('input', (e) => {
+  currentSearchTerm = e.target.value;
+  renderDocuments();
+});
+
+// Modal Aperçu
+function openDocPreview(docId) {
+  const doc = sodexamDocuments.find(d => d.id === docId);
+  if (!doc) return;
+
+  document.getElementById('modalTitle').textContent = doc.title;
+  document.getElementById('modalBody').innerHTML = `
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+      <span class="doc-card-badge ${doc.badgeClass}">${doc.badgeLabel}</span>
+      <span style="font-size:12px; color:var(--text-muted);"><i class="fa-regular fa-clock"></i> Publié le ${doc.date}</span>
+      <span style="font-size:12px; color:var(--text-muted);"><i class="fa-solid fa-barcode"></i> Réf : ${doc.ref}</span>
+    </div>
+    <div style="background:var(--bg-page); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:18px;">
+      <h4 style="font-size:14px; font-weight:700; margin-bottom:8px; color:var(--text-main);"><i class="fa-solid fa-align-left" style="color:var(--orange);"></i> Résumé officiel & Notice technique :</h4>
+      <p style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">${doc.summary}</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; text-align:center;">
+      <div style="background:var(--surface); border:1px solid var(--border); padding:12px; border-radius:8px;">
+        <div style="font-size:11px; color:var(--text-muted);">Format</div>
+        <div style="font-size:14px; font-weight:700; color:var(--text-main);"><i class="fa-solid fa-file-pdf" style="color:#DC2626;"></i> PDF Numérique</div>
+      </div>
+      <div style="background:var(--surface); border:1px solid var(--border); padding:12px; border-radius:8px;">
+        <div style="font-size:11px; color:var(--text-muted);">Pagination</div>
+        <div style="font-size:14px; font-weight:700; color:var(--text-main);">${doc.pages} pages</div>
+      </div>
+      <div style="background:var(--surface); border:1px solid var(--border); padding:12px; border-radius:8px;">
+        <div style="font-size:11px; color:var(--text-muted);">Poids archive</div>
+        <div style="font-size:14px; font-weight:700; color:var(--text-main);">${doc.size}</div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('modalDownloadBtn').onclick = () => {
+    triggerDownload(doc.title);
+  };
+
+  document.getElementById('docModalOverlay').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('docModalOverlay').classList.remove('active');
+}
+document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+document.getElementById('modalCloseActionBtn').addEventListener('click', closeModal);
+document.getElementById('docModalOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'docModalOverlay') closeModal();
+});
+
+// Notification Toast de téléchargement
+function triggerDownload(docTitle) {
+  const toast = document.getElementById('docToast');
+  const text = document.getElementById('docToastText');
+  text.textContent = `Téléchargement de : "${docTitle.substring(0, 42)}..." lancé.`;
+  toast.classList.add('visible');
+  setTimeout(() => {
+    toast.classList.remove('visible');
+  }, 4000);
+}
+
+// Initialisation
+renderDocuments();
+</script>
+</body>
+</html>

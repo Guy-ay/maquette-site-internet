@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Météo &amp; Prévisions Nationales — SODEXAM Côte d'Ivoire</title>
+<meta name="description" content="Bulletin météorologique officiel de la Côte d'Ivoire par la SODEXAM (DMN). Prévisions heure par heure, météo à 10 jours, qualité de l'air, vigilance et radar de précipitations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+
+/* ============================================================
+   DESIGN SYSTEM & CHARTE GRAPHIQUE UNIFORME — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #2FA95B;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #E8631C;
+  --blue-navy: #1C1917;
+  
+  --bg-page: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3EFEA;
+  
+  --text-main: #1C1917;
+  --text-muted: #57534E;
+  --text-light: #A8A29E;
+  
+  --border-light: rgba(231, 229, 228, 0.85);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 16px 36px -12px rgba(28, 25, 23, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(28, 25, 23, 0.06);
+  --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
+}
+
+/* ============================================================
+   FLASH BAR UNIFORME
+   ============================================================ */
+.flash-bar {
+  background: #18181B;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  background: #EF4444;
+  color: white;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+  z-index: 2;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.25);
+}
+.flash-pulse {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: flashDot 1.4s infinite ease-in-out;
+}
+@keyframes flashDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  white-space: nowrap;
+  animation: flashTicker 42s linear infinite;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #F4F4F5;
+}
+.flash-track:hover { animation-play-state: paused; }
+.flash-track span {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 48px;
+}
+.flash-track span::before {
+  content: "•";
+  color: var(--orange);
+  font-size: 18px;
+  margin-right: 12px;
+}
+@keyframes flashTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   HEADER & NAVIGATION UNIFORME
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -4px rgba(28, 25, 23, 0.05);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px !important;
+  gap: 20px;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.header-logo-img {
+  height: 30px !important;
+  max-width: 164px !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 260px;
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 40px -10px rgba(28, 25, 23, 0.12);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all var(--dur-fast) var(--ease-spring);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dropdown-panel a {
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dropdown-panel a:hover, .dropdown-panel a.active-item {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(3px);
+}
+.chev {
+  font-size: 9px;
+  transition: transform var(--dur-fast);
+  opacity: 0.6;
+}
+.nav-item-dropdown:hover .chev {
+  transform: rotate(180deg);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  padding: 8px;
+}
+.burger-btn span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: all var(--dur-fast);
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(85vw, 360px);
+  height: 100vh;
+  background: white;
+  z-index: 2000;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s var(--ease-spring);
+  padding: 24px;
+  overflow-y: auto;
+}
+.mobile-drawer.open {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.drawer-close {
+  background: var(--bg-subtle);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.drawer-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.drawer-links a.active, .drawer-links a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+
+/* ============================================================
+   FOOTER UNIFORME
+   ============================================================ */
+.footer {
+  background: #18181B;
+  color: #A8A29E;
+  padding: 64px 0 28px;
+  font-size: 14px;
+  border-top: 3px solid var(--orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.footer-links a {
+  color: #A8A29E;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #57534E;
+}
+.footer-bottom a {
+  color: #A8A29E;
+  transition: color var(--dur-fast);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 991px) {
+  .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-page);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero Météo */
+.meteo-hero {
+  background: linear-gradient(135deg, #18181B 0%, #27201C 60%, #1C1917 100%);
+  color: white;
+  padding: 44px 0 36px;
+  border-bottom: 3px solid var(--orange);
+  position: relative;
+  overflow: hidden;
+}
+.meteo-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 20%, rgba(242, 106, 33, 0.25) 0%, transparent 55%),
+              radial-gradient(circle at 15% 80%, rgba(30, 122, 60, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Sélecteur de ville */
+.city-selector-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 28px;
+  scrollbar-width: none;
+}
+.city-pill {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s var(--ease-spring);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.city-pill:hover, .city-pill.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(242, 106, 33, 0.3);
+}
+
+/* Carte météo principale style MSN Météo */
+.msn-weather-board {
+  background: white;
+  border-radius: 24px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-bezel);
+  padding: 36px 40px;
+  margin-top: -24px;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 48px;
+}
+
+.weather-header-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 36px;
+  align-items: center;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.current-temp-huge {
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #1C1917;
+  letter-spacing: -2px;
+}
+.current-temp-unit {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--orange);
+  vertical-align: top;
+}
+
+.weather-condition-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1C1917;
+  margin-bottom: 6px;
+}
+.weather-feels-like {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Frise horaire 24h */
+.hourly-scroll-container {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.hourly-title {
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hourly-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: thin;
+}
+.hourly-item {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 16px 14px;
+  min-width: 90px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s var(--ease-spring);
+  flex-shrink: 0;
+}
+.hourly-item.now {
+  background: var(--orange-subtle);
+  border-color: rgba(242, 106, 33, 0.4);
+}
+.hourly-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--orange);
+}
+.hourly-time { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+.hourly-icon { font-size: 22px; color: var(--orange); }
+.hourly-temp { font-size: 16px; font-weight: 800; color: #1C1917; }
+.hourly-rain { font-size: 11px; font-weight: 700; color: #0284C7; }
+
+/* Grille des indicateurs environnementaux */
+.metrics-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 32px;
+}
+.metric-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.metric-box:hover {
+  border-color: rgba(242, 106, 33, 0.3);
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+}
+.metric-box-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.metric-box-val {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1C1917;
+}
+.metric-box-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Prévisions à 10 jours */
+.daily-forecast-section {
+  margin: 48px 0;
+}
+.forecast-table-card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 24px 32px;
+  box-shadow: var(--shadow-card);
+}
+.daily-row {
+  display: grid;
+  grid-template-columns: 160px 80px 1fr 140px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.daily-row:last-child { border-bottom: none; }
+.daily-day { font-size: 14px; font-weight: 700; color: #1C1917; }
+.daily-icon { font-size: 20px; color: var(--orange); }
+.daily-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+.daily-temp-bar {
+  flex-grow: 1;
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #38BDF8 0%, #FB923C 60%, #EF4444 100%);
+  position: relative;
+}
+.daily-rain-prob {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0284C7;
+  text-align: right;
+}
+
+/* ÉCHELLE DE VIGILANCE MÉTÉO (Transférée depuis Accueil) */
+.vigilance-widget-section {
+  margin: 56px 0;
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 36px 40px;
+  box-shadow: var(--shadow-card);
+}
+.vigilance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+.vigilance-box {
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-left: 5px solid;
+}
+.vig-vert { background: rgba(30, 122, 60, 0.08); border-color: #1E7A3C; }
+.vig-jaune { background: rgba(234, 179, 8, 0.1); border-color: #EAB308; }
+.vig-orange { background: rgba(242, 106, 33, 0.1); border-color: #F26A21; }
+.vig-rouge { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; }
+
+.vig-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  width: fit-content;
+}
+.vig-vert .vig-badge { background: #1E7A3C; color: white; }
+.vig-jaune .vig-badge { background: #CA8A04; color: white; }
+.vig-orange .vig-badge { background: #EA580C; color: white; }
+.vig-rouge .vig-badge { background: #DC2626; color: white; }
+
+.vig-title { font-size: 15px; font-weight: 800; color: #1C1917; }
+.vig-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+
+@media (max-width: 991px) {
+  .weather-header-grid { grid-template-columns: 1fr; }
+  .metrics-bento-grid { grid-template-columns: 1fr 1fr; }
+  .vigilance-grid { grid-template-columns: 1fr 1fr; }
+  .daily-row { grid-template-columns: 110px 40px 1fr 80px; }
+}
+@media (max-width: 640px) {
+  .metrics-bento-grid { grid-template-columns: 1fr; }
+  .vigilance-grid { grid-template-columns: 1fr; }
+  .msn-weather-board { padding: 24px 20px; }
+  .vigilance-widget-section { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar Alertes Flash -->
+<div class="flash-bar">
+  <div class="flash-label">
+    <span class="flash-pulse"></span>
+    SODEXAM FLASH
+  </div>
+  <div class="flash-track">
+    <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
+    <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins météo quotidiens</span>
+    <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
+    <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
+  </div>
+</div>
+
+<!-- Header Principal -->
+<header class="main-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+      <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">
+        <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
+      </a>
+      
+      <!-- Qui sommes-nous -->
+      <div class="nav-item-dropdown">
+        <a href="presentation.html" class="nav-link">
+          Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation.html">Présentation de la SODEXAM</a>
+          <a href="mot-du-dg.html">Mot du Directeur Général</a>
+          <a href="gouvernance.html">Conseil d'Administration</a>
+          <a href="comite-direction.html">Comité de Direction</a>
+        </div>
+      </div>
+
+      <!-- Aéroports -->
+      <a href="navigation-aeroports.html" class="nav-link">
+        Aéroports
+      </a>
+
+      <!-- Météorologie -->
+      <div class="nav-item-dropdown">
+        <a href="meteo.html" class="nav-link active">
+          Météorologie <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="meteo.html" class="active-item">Météo (Prévisions &amp; Vigilance)</a>
+          <a href="nos-stations.html">Nos stations</a>
+          <a href="documentation.html">Notre documentation</a>
+        </div>
+      </div>
+
+      <!-- Médecine (ex-CERMA) -->
+      <div class="nav-item-dropdown">
+        <a href="presentation-cerma.html" class="nav-link">
+          Médecine <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation-cerma.html">Présentation du CERMA</a>
+          <a href="prestations-cerma.html">Nos prestations</a>
+        </div>
+      </div>
+
+      <!-- Actualités -->
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link">
+          Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="actualites.html">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html">Magazine L'Aérien (Presse &amp; Vidéo)</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <a href="contact.html" class="nav-link">
+        Contact
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="burger-btn" id="burgerToggle" aria-label="Menu Mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" class="header-logo-img">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Qui sommes-nous</div>
+    <a href="presentation.html" style="padding-left:28px;"><i class="fa-solid fa-building"></i> Présentation de la SODEXAM</a>
+    <a href="mot-du-dg.html" style="padding-left:28px;"><i class="fa-solid fa-user-tie"></i> Mot du Directeur Général</a>
+    <a href="gouvernance.html" style="padding-left:28px;"><i class="fa-solid fa-users-gear"></i> Conseil d'Administration</a>
+    <a href="comite-direction.html" style="padding-left:28px;"><i class="fa-solid fa-sitemap"></i> Comité de Direction</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Aviation &amp; Navigation</div>
+    <a href="navigation-aeroports.html"><i class="fa-solid fa-plane-departure"></i> Aéroports de Côte d'Ivoire</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Météorologie</div>
+    <a href="meteo.html" class="active" style="padding-left:28px;"><i class="fa-solid fa-cloud-sun-rain"></i> Météo (Prévisions &amp; Vigilance)</a>
+    <a href="nos-stations.html" style="padding-left:28px;"><i class="fa-solid fa-tower-broadcast"></i> Nos stations</a>
+    <a href="documentation.html" style="padding-left:28px;"><i class="fa-solid fa-book"></i> Notre documentation</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Médecine (CERMA)</div>
+    <a href="presentation-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-heart-pulse"></i> Présentation du CERMA</a>
+    <a href="prestations-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-stethoscope"></i> Nos prestations</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Actualités &amp; Médias</div>
+    <a href="actualites.html" style="padding-left:28px;"><i class="fa-regular fa-newspaper"></i> Toutes les actualités</a>
+    <a href="magazine-aerien.html" style="padding-left:28px;"><i class="fa-solid fa-video"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a>
+
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+
+<section class="meteo-hero">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+      <div>
+        <span style="display:inline-block; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:#FDBA74; background:rgba(242,106,33,0.22); padding:5px 14px; border-radius:9999px; margin-bottom:12px; border:1px solid rgba(242,106,33,0.4);">
+          <i class="fa-solid fa-satellite-dish" style="margin-right:6px;"></i> Direction de la Météorologie Nationale (DMN)
+        </span>
+        <h1 style="font-size:clamp(1.9rem, 3.4vw, 2.8rem); font-weight:800; letter-spacing:-0.5px;">Prévisions Météo &amp; Climat en Direct</h1>
+      </div>
+      <div style="font-size:13px; color:#D6D3D1; text-align:right;">
+        <span><i class="fa-regular fa-clock"></i> Relevé synoptique officiel : <strong id="liveUpdateTime">Aujourd'hui à 12:00 UTC</strong></span>
+      </div>
+    </div>
+
+    <!-- Sélecteur de ville -->
+    <div class="city-selector-bar">
+      <button type="button" class="city-pill active" onclick="selectCity('abidjan')"><i class="fa-solid fa-location-dot"></i> Abidjan (Hub)</button>
+      <button type="button" class="city-pill" onclick="selectCity('yamoussoukro')"><i class="fa-solid fa-location-dot"></i> Yamoussoukro</button>
+      <button type="button" class="city-pill" onclick="selectCity('bouake')"><i class="fa-solid fa-location-dot"></i> Bouaké</button>
+      <button type="button" class="city-pill" onclick="selectCity('korhogo')"><i class="fa-solid fa-location-dot"></i> Korhogo</button>
+      <button type="button" class="city-pill" onclick="selectCity('sanpedro')"><i class="fa-solid fa-location-dot"></i> San Pedro</button>
+      <button type="button" class="city-pill" onclick="selectCity('man')"><i class="fa-solid fa-location-dot"></i> Man</button>
+      <button type="button" class="city-pill" onclick="selectCity('daloa')"><i class="fa-solid fa-location-dot"></i> Daloa</button>
+      <button type="button" class="city-pill" onclick="selectCity('odienne')"><i class="fa-solid fa-location-dot"></i> Odienné</button>
+      <button type="button" class="city-pill" onclick="selectCity('bondoukou')"><i class="fa-solid fa-location-dot"></i> Bondoukou</button>
+      <button type="button" class="city-pill" onclick="selectCity('tabou')"><i class="fa-solid fa-location-dot"></i> Tabou</button>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+  <!-- Tableau de bord Météo style MSN -->
+  <div class="msn-weather-board">
+    <div class="weather-header-grid">
+      <div>
+        <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:8px;">
+          <span class="current-temp-huge" id="cityTemp">29</span>
+          <span class="current-temp-unit">°C</span>
+          <div style="font-size:38px; color:var(--orange);" id="cityMainIcon">
+            <i class="fa-solid fa-cloud-sun"></i>
+          </div>
+        </div>
+        <div class="weather-condition-title" id="cityCondition">Éclaircies &amp; Brume côtière</div>
+        <div class="weather-feels-like">
+          Ressenti : <strong id="cityFeels">33°C</strong> • Min : <span id="cityMin">24°C</span> / Max : <span id="cityMax">31°C</span> • Ville : <strong id="cityName" style="color:var(--orange);">Abidjan Port-Bouët</strong>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-subtle); border-radius:18px; padding:20px; border:1px solid var(--border-light);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span style="font-size:12px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:0.8px;">
+            <i class="fa-solid fa-shield-halved"></i> Statut Vigilance Vigiclim
+          </span>
+          <span class="vig-badge" id="vigBadge" style="background:#1E7A3C; color:white; font-size:10px;">VERT • NORMALE</span>
+        </div>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.5;" id="vigSummary">
+          Aucun phénomène dangereux. Activité orageuse locale possible en fin d'après-midi.
+        </p>
+        <div style="margin-top:14px; font-size:12px; color:var(--text-muted); display:flex; justify-content:space-between;">
+          <span>Indice de confiance DMN : <strong>95%</strong></span>
+          <a href="#vigilance-detail" style="color:var(--orange); font-weight:700;">Voir les clés de vigilance →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frise horaire 24h -->
+    <div class="hourly-scroll-container">
+      <div class="hourly-title">
+        <i class="fa-solid fa-clock-rotate-left" style="color:var(--orange);"></i> Prévisions heure par heure (Prochaines 24 heures)
+      </div>
+      <div class="hourly-track" id="hourlyTrack">
+        <!-- Rempli dynamiquement en JS -->
+      </div>
+    </div>
+
+    <!-- Grille des 8 indicateurs environnementaux -->
+    <div class="metrics-bento-grid">
+      <div class="metric-box">
+        <span class="metric-box-label"><i class="fa-solid fa-wind" style="color:var(--orange);"></i> Vent &amp; Direction</span>
+        <span class="metric-box-val" id="metricWind">14 km/h</span>
+        <span class="metric-box-sub" id="metricWindDir">Sud-Ouest (210°) • Rafales 22 km/h</span>
+      </div>
+
+      <div class="metric-box">
+        <span class="metric-box-label"><i class="fa-solid fa-droplet" style="color:#0284C7;"></i> Humidité Relative</span>
+        <span class="metric-box-val" id="metricHumidity">82%</span>
+        <span class="metric-box-sub" id="metricDew">Point de rosée : 25°C</span>
+      </div>
+
+      <div class="metric-box">
+        <span class="metric-box-label"><i class="fa-solid fa-sun" style="color:#EAB308;"></i> Indice UV</span>
+        <span class="metric-box-val" id="metricUV">9 sur 11</span>
+        <span class="metric-box-sub" style="color:#EA580C; font-weight:600;">Très élevé • Protection requise</span>
+      </div>
+
+      <div class="metric-box">
+        <span class="metric-box-label"><i class="fa-solid fa-leaf" style="color:var(--green);"></i> Qualité de l'Air (IQA)</span>
+        <span class="metric-box-val" id="metricAQI">42 • Bon</span>
+        <span class="metric-box-sub">Particules PM2.5 : 10.4 µg/m³</span>
+      </div>
+
+      <div class="metric-box">
+        <span class="metric-box-label"><i class="fa-solid fa-gauge-high" style="color:var(--text-muted);"></i> Pression Atmosphérique</span>
+        <span class="metric-box-val" id="metricPressure">1012 hPa</span>
+        <span class="metric-box-sub">Stable au niveau de la mer</span>
+      </div>
+
+      <div class="metric-box">
+        <span class="metric-box-label"><i class="fa-solid fa-eye" style="color:var(--orange);"></i> Visibilité Horizontale</span>
+        <span class="metric-box-val" id="metricVisibility">10 km</span>
+        <span class="metric-box-sub">Conditions CAVOK idéales</span>
+      </div>
+
+      <div class="metric-box">
+        <span class="metric-box-label"><i class="fa-solid fa-cloud-rain" style="color:#0284C7;"></i> Précipitations (24h)</span>
+        <span class="metric-box-val" id="metricRain">0.8 mm</span>
+        <span class="metric-box-sub">Probabilité de pluie : 20%</span>
+      </div>
+
+      <div class="metric-box">
+        <span class="metric-box-label"><i class="fa-solid fa-sun-plant-wilt" style="color:#F59E0B;"></i> Éphéméride &amp; Soleil</span>
+        <span class="metric-box-val" style="font-size:16px;">Lever : 06h02 • Coucher : 18h14</span>
+        <span class="metric-box-sub">Phase lunaire : Premier quartier</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prévisions à 10 jours -->
+  <section class="daily-forecast-section">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+      <div>
+        <h2 style="font-size:22px; font-weight:800; color:#1C1917;">Prévisions sur 10 Jours (Tendance Nationale)</h2>
+        <p style="font-size:13.5px; color:var(--text-muted);">Calculé par les modèles météorologiques opérationnels de la SODEXAM / DMN</p>
+      </div>
+      <a href="documentation.html" class="city-pill" style="background:var(--bg-subtle); color:var(--text-main); border-color:var(--border-light);">
+        <i class="fa-solid fa-file-pdf" style="color:var(--orange);"></i> Consulter les bulletins décadaires
+      </a>
+    </div>
+
+    <div class="forecast-table-card" id="dailyForecastTable">
+      <!-- Rempli dynamiquement en JS -->
+    </div>
+  </section>
+
+  <!-- ÉCHELLE DE VIGILANCE MÉTÉO SODEXAM (Déplacée d'accueil) -->
+  <section class="vigilance-widget-section" id="vigilance-detail">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:12px;">
+      <div>
+        <span style="font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--orange); background:var(--orange-subtle); padding:4px 12px; border-radius:9999px;">
+          Réglementation &amp; Protection Civile
+        </span>
+        <h2 style="font-size:24px; font-weight:800; color:#1C1917; margin-top:8px;">Échelle de Vigilance &amp; Clés de Lecture Météo</h2>
+      </div>
+      <span style="font-size:13px; color:var(--text-muted);">Protocole officiel SODEXAM / ONPC (Office National de la Protection Civile)</span>
+    </div>
+    <p style="font-size:14px; color:var(--text-muted); max-width:850px; line-height:1.6;">
+      L'échelle de vigilance météorologique nationale informe les citoyens, les opérateurs aéroportuaires et les services de secours de l'intensité des risques climatiques prévus sur les prochaines 24 à 48 heures.
+    </p>
+
+    <div class="vigilance-grid">
+      <div class="vigilance-box vig-vert">
+        <span class="vig-badge">NIVEAU 1 • VERT</span>
+        <div class="vig-title">Pas de vigilance particulière</div>
+        <p class="vig-desc">Les conditions météorologiques sont normales. Aucune précaution spéciale n'est requise pour les activités courantes ou les transports.</p>
+      </div>
+
+      <div class="vigilance-box vig-jaune">
+        <span class="vig-badge">NIVEAU 2 • JAUNE</span>
+        <div class="vig-title">Soyez attentif</div>
+        <p class="vig-desc">Des phénomènes habituels dans la région mais occasionnellement dangereux (orages modérés, vents soutenus) sont prévus. Tenez-vous informé.</p>
+      </div>
+
+      <div class="vigilance-box vig-orange">
+        <span class="vig-badge">NIVEAU 3 • ORANGE</span>
+        <div class="vig-title">Soyez très vigilant</div>
+        <p class="vig-desc">Des phénomènes météorologiques dangereux sont prévus (fortes pluies diluviennes, inondations subites). Limitez vos déplacements et suivez les consignes.</p>
+      </div>
+
+      <div class="vigilance-box vig-rouge">
+        <span class="vig-badge">NIVEAU 4 • ROUGE</span>
+        <div class="vig-title">Vigilance absolue</div>
+        <p class="vig-desc">Phénomène d'une intensité exceptionnelle. Menace majeure pour la sécurité des personnes et des biens. Restez chez vous et conformez-vous aux instructions.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER UNIFORME SODEXAM -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="margin-bottom:20px;">
+          <a href="index.html" title="SODEXAM — Retour à l'accueil">
+            <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
+          </a>
+        </div>
+        <p style="line-height:1.7; margin-bottom:20px; color:#A8A29E; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire (Décret n°97-228 du 16 avril 1997). Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        </p>
+        <div style="display:flex; gap:12px; font-size:15px;">
+          <a href="https://www.facebook.com/sodexam.ci" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation Institutionnelle</div>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="presentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation &amp; Film SODEXAM</a></li>
+          <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
+          <li><a href="gouvernance.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Conseil d'Administration</a></li>
+          <li><a href="comite-direction.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Comité de Direction (CODIR)</a></li>
+          <li><a href="navigation-aeroports.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Aéroports de Côte d'Ivoire</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Météorologie &amp; Médecine</div>
+        <ul class="footer-links">
+          <li><a href="meteo.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météo Prévisions &amp; Vigilance</a></li>
+          <li><a href="nos-stations.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Nos stations d'observation</a></li>
+          <li><a href="documentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Notre documentation officielle</a></li>
+          <li><a href="presentation-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation du CERMA</a></li>
+          <li><a href="prestations-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Prestations médicales navigants</a></li>
+          <li><a href="documentation.html#iso9001"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Certification ISO 9001:2015</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Actualités &amp; Contacts</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Dernières Actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a></li>
+          <li><a href="documentation.html#feux"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Feux de Brousse</a></li>
+          <li><a href="documentation.html#decades"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Décadaires Agrométéo</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Contact &amp; Service Presse</a></li>
+          <li><a href="contact.html#urgence"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Urgences Aéronautiques SSLIA</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="presentation.html">Mentions Légales</a>
+        <a href="documentation.html">Réglementation &amp; Qualité</a>
+        <a href="contact.html">Plan d'Accès</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+
+// Mobile drawer toggle
+const burgerToggle = document.getElementById('burgerToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerClose = document.getElementById('drawerClose');
+
+if (burgerToggle && mobileDrawer) {
+  burgerToggle.addEventListener('click', () => {
+    mobileDrawer.classList.add('open');
+  });
+}
+if (drawerClose && mobileDrawer) {
+  drawerClose.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+  });
+}
+
+
+// Données Météorologiques pour les Villes Ivoiriennes (Format Style MSN Météo)
+const cityWeatherData = {
+  'abidjan': {
+    name: 'Abidjan Port-Bouët',
+    temp: 29, feels: 33, min: 24, max: 31,
+    condition: 'Éclaircies & Brume côtière', icon: 'fa-cloud-sun',
+    vigBadge: 'VERT • NORMALE', vigColor: '#1E7A3C',
+    vigSummary: 'Aucun phénomène dangereux. Activité orageuse locale possible en fin d\'après-midi.',
+    wind: '14 km/h', windDir: 'Sud-Ouest (210°) • Rafales 22 km/h',
+    humidity: '82%', dew: 'Point de rosée : 25°C',
+    uv: '9 sur 11', uvState: 'Très élevé • Protection requise',
+    aqi: '42 • Bon', aqiSub: 'Particules PM2.5 : 10.4 µg/m³',
+    pressure: '1012 hPa', vis: '10 km', rain: '0.8 mm'
+  },
+  'yamoussoukro': {
+    name: 'Yamoussoukro (Capitale)',
+    temp: 32, feels: 36, min: 23, max: 34,
+    condition: 'Ensoleillé & Ciel voilé', icon: 'fa-sun',
+    vigBadge: 'VERT • NORMALE', vigColor: '#1E7A3C',
+    vigSummary: 'Temps chaud et stable sur le district des Lacs. Faible brise de sud.',
+    wind: '10 km/h', windDir: 'Sud (180°) • Brise légère',
+    humidity: '68%', dew: 'Point de rosée : 22°C',
+    uv: '10 sur 11', uvState: 'Très élevé • Éviter exposition 12h-15h',
+    aqi: '55 • Modéré', aqiSub: 'Poussières désertiques résiduelles',
+    pressure: '1010 hPa', vis: '9 km', rain: '0.0 mm'
+  },
+  'bouake': {
+    name: 'Bouaké (Gbêkê)',
+    temp: 31, feels: 34, min: 22, max: 33,
+    condition: 'Nuages épars & Éclaircies', icon: 'fa-cloud-sun',
+    vigBadge: 'VERT • NORMALE', vigColor: '#1E7A3C',
+    vigSummary: 'Ciel changeant avec passages nuageux sans précipitation notable.',
+    wind: '12 km/h', windDir: 'Sud-Sud-Est (160°)',
+    humidity: '72%', dew: 'Point de rosée : 23°C',
+    uv: '8 sur 11', uvState: 'Élevé • Chapeau et lunettes recommandés',
+    aqi: '48 • Bon', aqiSub: 'Indice atmosphérique satisfaisant',
+    pressure: '1011 hPa', vis: '10 km', rain: '0.0 mm'
+  },
+  'korhogo': {
+    name: 'Korhogo (Savanes)',
+    temp: 35, feels: 38, min: 24, max: 37,
+    condition: 'Chaud & Ciel dégagé', icon: 'fa-sun',
+    vigBadge: 'JAUNE • VIGILANCE CHALEUR', vigColor: '#CA8A04',
+    vigSummary: 'Chaleur intense dans le district des Savanes. Risque de déshydratation.',
+    wind: '16 km/h', windDir: 'Nord-Est / Harmattan doux',
+    humidity: '42%', dew: 'Point de rosée : 16°C',
+    uv: '11 sur 11', uvState: 'Extrême • Hydratation fréquente requise',
+    aqi: '68 • Modéré', aqiSub: 'Particules PM10 modérées',
+    pressure: '1008 hPa', vis: '8 km', rain: '0.0 mm'
+  },
+  'sanpedro': {
+    name: 'San Pedro (Bas-Sassandra)',
+    temp: 28, feels: 32, min: 24, max: 30,
+    condition: 'Averses orageuses côtières', icon: 'fa-cloud-showers-heavy',
+    vigBadge: 'JAUNE • ORAGES CÔTIERS', vigColor: '#CA8A04',
+    vigSummary: 'Ondes orageuses marines touchant la côte Sud-Ouest. Mer peu agitée.',
+    wind: '20 km/h', windDir: 'Sud-Ouest (225°) • Rafales 35 km/h',
+    humidity: '88%', dew: 'Point de rosée : 26°C',
+    uv: '6 sur 11', uvState: 'Modéré sous averses',
+    aqi: '32 • Excellent', aqiSub: 'Air purifié par les pluies',
+    pressure: '1013 hPa', vis: '7 km', rain: '14.2 mm'
+  },
+  'man': {
+    name: 'Man (Région des Montagnes)',
+    temp: 26, feels: 28, min: 20, max: 28,
+    condition: 'Brouillard matinal & Averses', icon: 'fa-smog',
+    vigBadge: 'JAUNE • BROUILLARD & RELIEF', vigColor: '#CA8A04',
+    vigSummary: 'Visibilité réduite sur les cols montagneux. Prudence sur les axes routiers.',
+    wind: '8 km/h', windDir: 'Ouest (270°)',
+    humidity: '92%', dew: 'Point de rosée : 22°C',
+    uv: '5 sur 11', uvState: 'Modéré',
+    aqi: '28 • Excellent', aqiSub: 'Très bonne qualité de l\'air',
+    pressure: '1014 hPa', vis: '4 km', rain: '6.5 mm'
+  },
+  'daloa': {
+    name: 'Daloa (Haut-Sassandra)',
+    temp: 30, feels: 33, min: 22, max: 32,
+    condition: 'Ciel variable & Risque d\'orage', icon: 'fa-cloud-bolt',
+    vigBadge: 'VERT • NORMALE', vigColor: '#1E7A3C',
+    vigSummary: 'Temps lourd en journée, orages isolés probables en début de nuit.',
+    wind: '11 km/h', windDir: 'Sud-Ouest (200°)',
+    humidity: '76%', dew: 'Point de rosée : 24°C',
+    uv: '8 sur 11', uvState: 'Élevé',
+    aqi: '45 • Bon', aqiSub: 'Particules dans les normes OMM',
+    pressure: '1011 hPa', vis: '9 km', rain: '1.2 mm'
+  },
+  'odienne': {
+    name: 'Odienné (Denguélé)',
+    temp: 34, feels: 37, min: 23, max: 36,
+    condition: 'Soleil & Vent sec', icon: 'fa-sun',
+    vigBadge: 'VERT • NORMALE', vigColor: '#1E7A3C',
+    vigSummary: 'Conditions stables et sèches typiques du Nord-Ouest ivoirien.',
+    wind: '14 km/h', windDir: 'Nord-Est (050°)',
+    humidity: '48%', dew: 'Point de rosée : 17°C',
+    uv: '10 sur 11', uvState: 'Très élevé',
+    aqi: '58 • Modéré', aqiSub: 'Brume sèche légère',
+    pressure: '1009 hPa', vis: '8 km', rain: '0.0 mm'
+  },
+  'bondoukou': {
+    name: 'Bondoukou (Gontougo)',
+    temp: 31, feels: 34, min: 22, max: 33,
+    condition: 'Ensoleillé avec passages nuageux', icon: 'fa-cloud-sun',
+    vigBadge: 'VERT • NORMALE', vigColor: '#1E7A3C',
+    vigSummary: 'Beau temps d\'ensemble dans l\'Est. Brise agréable.',
+    wind: '10 km/h', windDir: 'Sud-Est (130°)',
+    humidity: '65%', dew: 'Point de rosée : 21°C',
+    uv: '9 sur 11', uvState: 'Très élevé',
+    aqi: '42 • Bon', aqiSub: 'Qualité de l\'air bonne',
+    pressure: '1011 hPa', vis: '10 km', rain: '0.0 mm'
+  },
+  'tabou': {
+    name: 'Tabou (Bas-Sassandra Sud)',
+    temp: 27, feels: 30, min: 24, max: 29,
+    condition: 'Bruine & Humidité maritime', icon: 'fa-cloud-rain',
+    vigBadge: 'VERT • NORMALE', vigColor: '#1E7A3C',
+    vigSummary: 'Vents océaniques soutenus et petites pluies éparses.',
+    wind: '22 km/h', windDir: 'Sud-Sud-Ouest (210°)',
+    humidity: '90%', dew: 'Point de rosée : 25°C',
+    uv: '6 sur 11', uvState: 'Modéré',
+    aqi: '25 • Excellent', aqiSub: 'Air océanique iodé',
+    pressure: '1013 hPa', vis: '8 km', rain: '3.4 mm'
+  }
+};
+
+// Génération Frise 24h
+function renderHourlyTrack(baseTemp) {
+  const track = document.getElementById('hourlyTrack');
+  if (!track) return;
+  track.innerHTML = '';
+  
+  const now = new Date();
+  const currentHour = now.getHours();
+
+  for (let i = 0; i < 24; i++) {
+    const h = (currentHour + i) % 24;
+    const hourLabel = i === 0 ? 'Maint.' : (h < 10 ? '0' + h : h) + ':00';
+    
+    const offset = Math.round(Math.sin((h - 5) * Math.PI / 12) * 4);
+    const temp = baseTemp + offset;
+    
+    let icon = 'fa-sun';
+    let rain = '0%';
+    if (h >= 19 || h <= 6) {
+      icon = (h % 3 === 0) ? 'fa-cloud-moon' : 'fa-moon';
+    } else if (h >= 13 && h <= 17) {
+      icon = (i % 2 === 0) ? 'fa-cloud-sun' : 'fa-cloud-showers-heavy';
+      rain = (i % 2 === 0) ? '15%' : '45%';
+    } else {
+      icon = 'fa-sun';
+    }
+
+    const div = document.createElement('div');
+    div.className = 'hourly-item' + (i === 0 ? ' now' : '');
+    div.innerHTML = `
+      <span class="hourly-time">${hourLabel}</span>
+      <i class="fa-solid ${icon} hourly-icon"></i>
+      <span class="hourly-temp">${temp}°</span>
+      <span class="hourly-rain">${rain}</span>
+    `;
+    track.appendChild(div);
+  }
+}
+
+// Génération Tableau 10 Jours
+function renderDailyTable(baseMin, baseMax) {
+  const table = document.getElementById('dailyForecastTable');
+  if (!table) return;
+  table.innerHTML = '';
+
+  const days = ['Aujourd\'hui', 'Demain', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche', 'Lundi prochain', 'Mardi prochain', 'Mercredi prochain'];
+  const conditions = [
+    { icon: 'fa-cloud-sun', label: 'Éclaircies', rain: '20%' },
+    { icon: 'fa-sun', label: 'Ensoleillé', rain: '10%' },
+    { icon: 'fa-cloud-showers-heavy', label: 'Orages isolés', rain: '65%' },
+    { icon: 'fa-cloud-rain', label: 'Pluie modérée', rain: '50%' },
+    { icon: 'fa-cloud-sun', label: 'Nuages et soleil', rain: '25%' },
+    { icon: 'fa-sun', label: 'Ciel bleu', rain: '5%' },
+    { icon: 'fa-sun', label: 'Chaud et sec', rain: '5%' },
+    { icon: 'fa-cloud-sun', label: 'Brume matinale', rain: '20%' },
+    { icon: 'fa-cloud-showers-heavy', label: 'Averses éparses', rain: '40%' },
+    { icon: 'fa-cloud', label: 'Très nuageux', rain: '30%' }
+  ];
+
+  for (let i = 0; i < 10; i++) {
+    const min = baseMin + (i % 3) - 1;
+    const max = baseMax + (i % 4) - 1;
+    const cond = conditions[i];
+
+    const row = document.createElement('div');
+    row.className = 'daily-row';
+    row.innerHTML = `
+      <div class="daily-day">${days[i]}</div>
+      <div class="daily-icon"><i class="fa-solid ${cond.icon}"></i></div>
+      <div class="daily-bar-wrap">
+        <span style="color:var(--text-muted); width:28px;">${min}°</span>
+        <div class="daily-temp-bar"></div>
+        <span style="color:#1C1917; width:28px;">${max}°</span>
+      </div>
+      <div class="daily-rain-prob"><i class="fa-solid fa-droplet" style="font-size:10px;"></i> ${cond.rain}</div>
+    `;
+    table.appendChild(row);
+  }
+}
+
+// Sélection d'une ville
+function selectCity(cityKey) {
+  const data = cityWeatherData[cityKey];
+  if (!data) return;
+
+  document.querySelectorAll('.city-pill').forEach(btn => btn.classList.remove('active'));
+  const targetBtn = Array.from(document.querySelectorAll('.city-pill')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(cityKey));
+  if (targetBtn) targetBtn.classList.add('active');
+
+  const setT = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  setT('cityTemp', data.temp);
+  setT('cityCondition', data.condition);
+  setT('cityFeels', data.feels + '°C');
+  setT('cityMin', data.min + '°C');
+  setT('cityMax', data.max + '°C');
+  setT('cityName', data.name);
+  setT('vigSummary', data.vigSummary);
+  
+  const badge = document.getElementById('vigBadge');
+  if (badge) {
+    badge.textContent = data.vigBadge;
+    badge.style.background = data.vigColor;
+  }
+
+  const iconEl = document.getElementById('cityMainIcon');
+  if (iconEl) iconEl.innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
+
+  setT('metricWind', data.wind);
+  setT('metricWindDir', data.windDir);
+  setT('metricHumidity', data.humidity);
+  setT('metricDew', data.dew);
+  setT('metricUV', data.uv);
+  setT('metricAQI', data.aqi);
+  setT('metricPressure', data.pressure);
+  setT('metricVisibility', data.vis);
+  setT('metricRain', data.rain);
+
+  renderHourlyTrack(data.temp);
+  renderDailyTable(data.min, data.max);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  selectCity('abidjan');
+});
+</script>
+</body>
+</html>

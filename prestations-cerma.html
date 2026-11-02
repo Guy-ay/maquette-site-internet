@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Prestations Médicales & Tarifs — CERMA SODEXAM</title>
+<meta name="description" content="Découvrez les prestations médicales du CERMA SODEXAM : visites d'aptitude aéronautique Classe 1, 2, 3, PNC, médecine du travail, consultations de spécialistes et laboratoire d'analyses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+
+/* ============================================================
+   DESIGN SYSTEM & CHARTE GRAPHIQUE UNIFORME — SODEXAM
+   ============================================================ */
+:root {
+  --orange: #F26A21;
+  --orange-hover: #D4551A;
+  --orange-subtle: rgba(242, 106, 33, 0.08);
+  --green: #1E7A3C;
+  --green-light: #2FA95B;
+  --green-subtle: rgba(30, 122, 60, 0.08);
+  --blue-sky: #E8631C;
+  --blue-navy: #1C1917;
+  
+  --bg-page: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3EFEA;
+  
+  --text-main: #1C1917;
+  --text-muted: #57534E;
+  --text-light: #A8A29E;
+  
+  --border-light: rgba(231, 229, 228, 0.85);
+  --border-focus: rgba(242, 106, 33, 0.4);
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 220ms;
+  --dur-base: 360ms;
+  
+  --shadow-bezel: 0 16px 36px -12px rgba(28, 25, 23, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8);
+  --shadow-card: 0 10px 30px -10px rgba(28, 25, 23, 0.06);
+  --shadow-hover: 0 20px 40px -10px rgba(242, 106, 33, 0.16);
+}
+
+/* ============================================================
+   FLASH BAR UNIFORME
+   ============================================================ */
+.flash-bar {
+  background: #18181B;
+  color: white;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1002;
+  border-bottom: 2px solid #EF4444;
+}
+.flash-label {
+  background: #EF4444;
+  color: white;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+  z-index: 2;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.25);
+}
+.flash-pulse {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: flashDot 1.4s infinite ease-in-out;
+}
+@keyframes flashDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+.flash-track {
+  display: flex;
+  white-space: nowrap;
+  animation: flashTicker 42s linear infinite;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #F4F4F5;
+}
+.flash-track:hover { animation-play-state: paused; }
+.flash-track span {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 48px;
+}
+.flash-track span::before {
+  content: "•";
+  color: var(--orange);
+  font-size: 18px;
+  margin-right: 12px;
+}
+@keyframes flashTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   HEADER & NAVIGATION UNIFORME
+   ============================================================ */
+.main-header {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px -4px rgba(28, 25, 23, 0.05);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px !important;
+  gap: 20px;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.header-logo-img {
+  height: 30px !important;
+  max-width: 164px !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  background: var(--orange-subtle);
+}
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 260px;
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 20px 40px -10px rgba(28, 25, 23, 0.12);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all var(--dur-fast) var(--ease-spring);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dropdown-panel a {
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dropdown-panel a:hover, .dropdown-panel a.active-item {
+  background: var(--orange-subtle);
+  color: var(--orange);
+  transform: translateX(3px);
+}
+.chev {
+  font-size: 9px;
+  transition: transform var(--dur-fast);
+  opacity: 0.6;
+}
+.nav-item-dropdown:hover .chev {
+  transform: rotate(180deg);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  padding: 8px;
+}
+.burger-btn span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: all var(--dur-fast);
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(85vw, 360px);
+  height: 100vh;
+  background: white;
+  z-index: 2000;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s var(--ease-spring);
+  padding: 24px;
+  overflow-y: auto;
+}
+.mobile-drawer.open {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.drawer-close {
+  background: var(--bg-subtle);
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.drawer-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  transition: all var(--dur-fast) var(--ease-spring);
+}
+.drawer-links a.active, .drawer-links a:hover {
+  background: var(--orange-subtle);
+  color: var(--orange);
+}
+
+/* ============================================================
+   FOOTER UNIFORME
+   ============================================================ */
+.footer {
+  background: #18181B;
+  color: #A8A29E;
+  padding: 64px 0 28px;
+  font-size: 14px;
+  border-top: 3px solid var(--orange);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--orange);
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.footer-links a {
+  color: #A8A29E;
+  transition: all var(--dur-fast) var(--ease-spring);
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #57534E;
+}
+.footer-bottom a {
+  color: #A8A29E;
+  transition: color var(--dur-fast);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
+
+@media (max-width: 991px) {
+  .main-nav { display: none; }
+  .burger-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-page);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero Prestations */
+.prest-hero {
+  background: linear-gradient(135deg, #18181B 0%, #2A1F1B 60%, #1C1917 100%);
+  color: white;
+  padding: 46px 0 38px;
+  border-bottom: 3px solid var(--orange);
+  position: relative;
+  overflow: hidden;
+}
+.prest-hero::before {
+  content: "";
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 440px; height: 440px;
+  background: radial-gradient(circle, rgba(242,106,33,0.16) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.prest-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #A1A1AA;
+  margin-bottom: 14px;
+}
+.prest-breadcrumb a { color: #D4D4D8; text-decoration: none; transition: color 0.2s; }
+.prest-breadcrumb a:hover { color: var(--orange); }
+.prest-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+}
+.prest-hero-title span { color: var(--orange); }
+.prest-hero-subtitle {
+  color: #D4D4D8;
+  font-size: 15px;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+/* Filter Tabs */
+.prest-tabs-wrap {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  position: sticky;
+  top: 68px;
+  z-index: 100;
+}
+.prest-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.prest-tabs::-webkit-scrollbar { display: none; }
+.prest-tab-btn {
+  padding: 10px 18px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: var(--bg-page);
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.prest-tab-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.prest-tab-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+/* Sections */
+.prest-section {
+  padding: 44px 0 60px;
+}
+.prest-category-block {
+  margin-bottom: 50px;
+}
+.prest-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(242,106,33,0.2);
+}
+.prest-cat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(242,106,33,0.1);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.prest-cat-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Cards Grid */
+.prest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.prest-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  position: relative;
+}
+.prest-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--orange);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+}
+.prest-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(242,106,33,0.1);
+  color: var(--orange);
+  width: fit-content;
+  margin-bottom: 12px;
+}
+.prest-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+.prest-desc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+.prest-items-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 18px;
+}
+.prest-items-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+.prest-items-list li i {
+  color: var(--orange);
+  font-size: 12px;
+  margin-top: 3px;
+}
+.prest-footer {
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.prest-period {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.prest-btn-rdv {
+  padding: 7px 14px;
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.prest-btn-rdv:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+/* RDV Banner */
+.prest-rdv-box {
+  background: linear-gradient(135deg, #1C1917 0%, #2A1F1B 100%);
+  border-radius: 14px;
+  padding: 36px 40px;
+  color: white;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 30px;
+  align-items: center;
+  margin-top: 30px;
+  border: 1px solid rgba(242,106,33,0.3);
+}
+.prest-rdv-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: white;
+}
+.prest-rdv-desc {
+  font-size: 14px;
+  color: #D4D4D8;
+  line-height: 1.6;
+}
+.prest-rdv-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.prest-rdv-btn-primary {
+  background: var(--orange);
+  color: white;
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+.prest-rdv-btn-primary:hover { background: #E05A13; }
+.prest-rdv-btn-sec {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13.5px;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.prest-rdv-btn-sec:hover { background: rgba(255,255,255,0.16); }
+
+@media (max-width: 992px) {
+  .prest-grid { grid-template-columns: repeat(2, 1fr); }
+  .prest-rdv-box { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .prest-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar Alertes Flash -->
+<div class="flash-bar">
+  <div class="flash-label">
+    <span class="flash-pulse"></span>
+    SODEXAM FLASH
+  </div>
+  <div class="flash-track">
+    <span>Monsieur Abdul Adam SYLLA officiellement confirmé Directeur Général de la SODEXAM par le Conseil d'Administration</span>
+    <span>Inauguration du nouveau siège « Général Abdoulaye Coulibaly » : 28 ans d'excellence aéroportuaire et météorologique</span>
+    <span>Avis de fortes pluies orageuses sur le Littoral et le Sud-Forestier — Suivez les bulletins météo quotidiens</span>
+    <span>Modernisation des plates-formes aéroportuaires régionales : focus sur l'Aéroport de San Pedro et de Kong</span>
+    <span>Programme de bourses Dominique Ouattara : la SODEXAM accompagne 20 nouvelles bachelières vers l'aviation civile</span>
+  </div>
+</div>
+
+<!-- Header Principal -->
+<header class="main-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-wrap" title="SODEXAM — Retour à l'accueil">
+      <img src="images/logo-sodexam.png" alt="SODEXAM Logo Officiel" class="header-logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">
+        <i class="fa-solid fa-house" style="font-size:12px;"></i> Accueil
+      </a>
+      
+      <!-- Qui sommes-nous -->
+      <div class="nav-item-dropdown">
+        <a href="presentation.html" class="nav-link">
+          Qui sommes-nous <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation.html">Présentation de la SODEXAM</a>
+          <a href="mot-du-dg.html">Mot du Directeur Général</a>
+          <a href="gouvernance.html">Conseil d'Administration</a>
+          <a href="comite-direction.html">Comité de Direction</a>
+        </div>
+      </div>
+
+      <!-- Aéroports -->
+      <a href="navigation-aeroports.html" class="nav-link">
+        Aéroports
+      </a>
+
+      <!-- Météorologie -->
+      <div class="nav-item-dropdown">
+        <a href="meteo.html" class="nav-link">
+          Météorologie <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="meteo.html">Météo (Prévisions &amp; Vigilance)</a>
+          <a href="nos-stations.html">Nos stations</a>
+          <a href="documentation.html">Notre documentation</a>
+        </div>
+      </div>
+
+      <!-- Médecine (ex-CERMA) -->
+      <div class="nav-item-dropdown">
+        <a href="presentation-cerma.html" class="nav-link active">
+          Médecine <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="presentation-cerma.html" class="active-item">Présentation du CERMA</a>
+          <a href="prestations-cerma.html">Nos prestations</a>
+        </div>
+      </div>
+
+      <!-- Actualités -->
+      <div class="nav-item-dropdown">
+        <a href="actualites.html" class="nav-link">
+          Actualités <span class="chev"><i class="fa-solid fa-chevron-down"></i></span>
+        </a>
+        <div class="dropdown-panel">
+          <a href="actualites.html">Toutes les actualités (15)</a>
+          <a href="magazine-aerien.html">Magazine L'Aérien (Presse &amp; Vidéo)</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <a href="contact.html" class="nav-link">
+        Contact
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="burger-btn" id="burgerToggle" aria-label="Menu Mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <img src="images/logo-sodexam.png" alt="SODEXAM" class="header-logo-img">
+    <button class="drawer-close" id="drawerClose" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-links">
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Qui sommes-nous</div>
+    <a href="presentation.html" style="padding-left:28px;"><i class="fa-solid fa-building"></i> Présentation de la SODEXAM</a>
+    <a href="mot-du-dg.html" style="padding-left:28px;"><i class="fa-solid fa-user-tie"></i> Mot du Directeur Général</a>
+    <a href="gouvernance.html" style="padding-left:28px;"><i class="fa-solid fa-users-gear"></i> Conseil d'Administration</a>
+    <a href="comite-direction.html" style="padding-left:28px;"><i class="fa-solid fa-sitemap"></i> Comité de Direction</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Aviation &amp; Navigation</div>
+    <a href="navigation-aeroports.html"><i class="fa-solid fa-plane-departure"></i> Aéroports de Côte d'Ivoire</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Météorologie</div>
+    <a href="meteo.html" style="padding-left:28px;"><i class="fa-solid fa-cloud-sun-rain"></i> Météo (Prévisions &amp; Vigilance)</a>
+    <a href="nos-stations.html" style="padding-left:28px;"><i class="fa-solid fa-tower-broadcast"></i> Nos stations</a>
+    <a href="documentation.html" style="padding-left:28px;"><i class="fa-solid fa-book"></i> Notre documentation</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Médecine (CERMA)</div>
+    <a href="presentation-cerma.html" class="active" style="padding-left:28px;"><i class="fa-solid fa-heart-pulse"></i> Présentation du CERMA</a>
+    <a href="prestations-cerma.html" style="padding-left:28px;"><i class="fa-solid fa-stethoscope"></i> Nos prestations</a>
+
+    <div style="padding: 8px 16px; font-size:11px; font-weight:800; text-transform:uppercase; color:var(--orange); letter-spacing:1px;">Actualités &amp; Médias</div>
+    <a href="actualites.html" style="padding-left:28px;"><i class="fa-regular fa-newspaper"></i> Toutes les actualités</a>
+    <a href="magazine-aerien.html" style="padding-left:28px;"><i class="fa-solid fa-video"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a>
+
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+
+<!-- Hero Prestations -->
+<section class="prest-hero">
+  <div class="container">
+    <div class="prest-breadcrumb">
+      <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+      <span><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></span>
+      <a href="presentation-cerma.html">Médecine</a>
+      <span><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></span>
+      <span style="color:#FFFFFF; font-weight:600;">Nos Prestations</span>
+    </div>
+    <h1 class="prest-hero-title">Catalogue des <span>Prestations Médicales</span> du CERMA</h1>
+    <p class="prest-hero-subtitle">
+      Visites d'aptitude médicale aéronautique réglementaires OACI/ANAC, suivi en santé au travail, bilans de santé pour cadres et consultations de spécialités ouvertes à la plateforme aéroportuaire et au public.
+    </p>
+  </div>
+</section>
+
+<!-- Tabs navigation -->
+<nav class="prest-tabs-wrap" aria-label="Catégories de prestations">
+  <div class="container">
+    <div class="prest-tabs">
+      <button class="prest-tab-btn active" onclick="filterCat('all')"><i class="fa-solid fa-layer-group"></i> Toutes les prestations</button>
+      <button class="prest-tab-btn" onclick="filterCat('aero')"><i class="fa-solid fa-plane-up"></i> Expertises Aéronautiques</button>
+      <button class="prest-tab-btn" onclick="filterCat('travail')"><i class="fa-solid fa-user-shield"></i> Médecine du Travail</button>
+      <button class="prest-tab-btn" onclick="filterCat('spe')"><i class="fa-solid fa-stethoscope"></i> Consultations de Spécialités</button>
+      <button class="prest-tab-btn" onclick="filterCat('labo')"><i class="fa-solid fa-vial"></i> Analyses & Imagerie</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Prestations Section -->
+<section class="prest-section">
+  <div class="container">
+
+    <!-- Cat 1 : Aéronautique -->
+    <div class="prest-category-block" data-section-cat="aero">
+      <div class="prest-cat-header">
+        <div class="prest-cat-icon"><i class="fa-solid fa-plane-circle-check"></i></div>
+        <h2 class="prest-cat-title">Expertises Médicales Aéronautiques Réglementaires</h2>
+      </div>
+
+      <div class="prest-grid">
+        <div class="prest-card">
+          <span class="prest-badge">Licence Professionnelle</span>
+          <h3 class="prest-title">Visite d'Aptitude Classe 1 (Pilotes de Ligne)</h3>
+          <p class="prest-desc">Examen médical d'admission ou de révision périodique pour pilotes professionnels (CPL, ATPL) et mécaniciens navigants de l'aviation commerciale.</p>
+          <ul class="prest-items-list">
+            <li><i class="fa-solid fa-check"></i> Examen clinique général & neurologique</li>
+            <li><i class="fa-solid fa-check"></i> Bilan ophtalmologique complet avec lanterne de Beyne</li>
+            <li><i class="fa-solid fa-check"></i> Audiogramme tonal en cabine insonorisée</li>
+            <li><i class="fa-solid fa-check"></i> ECG 12 dérivations & épreuve d'effort</li>
+            <li><i class="fa-solid fa-check"></i> Biologie sanguine et dépistage toxicologique</li>
+          </ul>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Validité : 6 à 12 mois</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Classe 1')"><i class="fa-regular fa-calendar-check"></i> Réserver</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Personnel de Cabine</span>
+          <h3 class="prest-title">Visite Médicale PNC (Hôtesses & Stewards)</h3>
+          <p class="prest-desc">Certificat d'aptitude médicale pour personnels navigants commerciaux selon la réglementation ANAC / EASA / OACI.</p>
+          <ul class="prest-items-list">
+            <li><i class="fa-solid fa-check"></i> Acuité visuelle de près et de loin</li>
+            <li><i class="fa-solid fa-check"></i> Examen ORL, tympanométrie et équilibre</li>
+            <li><i class="fa-solid fa-check"></i> Bilan cardiopulmonaire et spirométrie</li>
+            <li><i class="fa-solid fa-check"></i> Évaluation de la résistance au décalage horaire</li>
+          </ul>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Validité : 24 à 60 mois</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('PNC')"><i class="fa-regular fa-calendar-check"></i> Réserver</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Contrôle de la Circulation</span>
+          <h3 class="prest-title">Visite d'Aptitude Classe 3 (Contrôleurs Aériens)</h3>
+          <p class="prest-desc">Évaluation médicale spécifique pour contrôleurs de la circulation aérienne (ATCO) et techniciens de sûreté radar de la SODEXAM / ASECNA.</p>
+          <ul class="prest-items-list">
+            <li><i class="fa-solid fa-check"></i> Audiométrie tonale fine haute fréquence</li>
+            <li><i class="fa-solid fa-check"></i> Vision des contrastes sur écrans radar</li>
+            <li><i class="fa-solid fa-check"></i> Tolérance au stress et bilan cardiovasculaire</li>
+            <li><i class="fa-solid fa-check"></i> Dépistage psycho-comportemental</li>
+          </ul>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Validité : 12 à 24 mois</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Classe 3')"><i class="fa-regular fa-calendar-check"></i> Réserver</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Aviation Générale</span>
+          <h3 class="prest-title">Visite d'Aptitude Classe 2 (Pilotes Privés)</h3>
+          <p class="prest-desc">Pour pilotes privés avion (PPL), ULM, planeur, ballon libre et élèves-pilotes d'aéro-clubs ivoiriens.</p>
+          <ul class="prest-items-list">
+            <li><i class="fa-solid fa-check"></i> Bilan médical complet standard</li>
+            <li><i class="fa-solid fa-check"></i> Contrôle vision des couleurs et champs visuels</li>
+            <li><i class="fa-solid fa-check"></i> Électrocardiogramme de référence</li>
+          </ul>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Validité : 24 à 60 mois</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Classe 2')"><i class="fa-regular fa-calendar-check"></i> Réserver</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Expertise Dérogatoire</span>
+          <h3 class="prest-title">Commission Médicale & Dérogations OACI</h3>
+          <p class="prest-desc">Constitution de dossiers et réévaluation médico-aéronautique après accident, intervention chirurgicale ou affection cardiovasculaire.</p>
+          <ul class="prest-items-list">
+            <li><i class="fa-solid fa-check"></i> Bilan spécialisé pluridisciplinaire</li>
+            <li><i class="fa-solid fa-check"></i> Rapport technique d'aptitude avec restrictions</li>
+            <li><i class="fa-solid fa-check"></i> Suivi auprès de l'Autorité Nationale ANAC</li>
+          </ul>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Sur dossier médical</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Dérogation')"><i class="fa-regular fa-calendar-check"></i> Réserver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cat 2 : Médecine du Travail -->
+    <div class="prest-category-block" data-section-cat="travail">
+      <div class="prest-cat-header">
+        <div class="prest-cat-icon"><i class="fa-solid fa-user-shield"></i></div>
+        <h2 class="prest-cat-title">Médecine du Travail & Santé en Entreprise</h2>
+      </div>
+
+      <div class="prest-grid">
+        <div class="prest-card">
+          <span class="prest-badge">Suivi Salarié</span>
+          <h3 class="prest-title">Visites Périodiques & d'Embauche</h3>
+          <p class="prest-desc">Contrats d'assistance médicale pour entreprises de la plateforme aéroportuaire (compagnies, handlers, sûreté, fret, sous-traitants).</p>
+          <ul class="prest-items-list">
+            <li><i class="fa-solid fa-check"></i> Visite médicale systématique d'embauche</li>
+            <li><i class="fa-solid fa-check"></i> Surveillance médicale renforcée (bruit piste, carburant JET-A1)</li>
+            <li><i class="fa-solid fa-check"></i> Fiche d'aptitude au poste de travail</li>
+          </ul>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Convention entreprise</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Medecine Travail')"><i class="fa-regular fa-calendar-check"></i> Contacter</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Cadres & Dirigeants</span>
+          <h3 class="prest-title">Check-Up Santé & Bilan de Cadres</h3>
+          <p class="prest-desc">Bilan de santé approfondi d'une demi-journée incluant consultations spécialisées, épreuve d'effort, imagerie et bilan biologique intégral.</p>
+          <ul class="prest-items-list">
+            <li><i class="fa-solid fa-check"></i> Échographie abdominale & radiographie thoracique</li>
+            <li><i class="fa-solid fa-check"></i> Bilan métabolique, rénal et hépatique étendu</li>
+            <li><i class="fa-solid fa-check"></i> Consultation cardiologique et rapport de synthèse</li>
+          </ul>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Formule demi-journée</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Checkup Cadre')"><i class="fa-regular fa-calendar-check"></i> Réserver</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Hygiène & Prévention</span>
+          <h3 class="prest-title">Ergonomie des Postes & Formations SST</h3>
+          <p class="prest-desc">Audit des risques professionnels sur le tarmac, formation des secouristes du travail et campagnes de dépistage en entreprise.</p>
+          <ul class="prest-items-list">
+            <li><i class="fa-solid fa-check"></i> Mesure sonométrique des nuisances sonores</li>
+            <li><i class="fa-solid fa-check"></i> Formation aux gestes et postures de manutention</li>
+            <li><i class="fa-solid fa-check"></i> Sensibilisation aux maladies métaboliques et cardiovasculaires</li>
+          </ul>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Sur mesure</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Audit Ergonomie')"><i class="fa-regular fa-calendar-check"></i> Devis</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cat 3 : Spécialités -->
+    <div class="prest-category-block" data-section-cat="spe">
+      <div class="prest-cat-header">
+        <div class="prest-cat-icon"><i class="fa-solid fa-stethoscope"></i></div>
+        <h2 class="prest-cat-title">Consultations Médicales Spécialisées</h2>
+      </div>
+
+      <div class="prest-grid">
+        <div class="prest-card">
+          <span class="prest-badge">Vision & Optique</span>
+          <h3 class="prest-title">Consultation d'Ophtalmologie</h3>
+          <p class="prest-desc">Mesure de réfraction, dépistage du glaucome, fond d'œil, prescription verres correcteurs et lentilles.</p>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Sur rendez-vous</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Ophtalmologie')"><i class="fa-regular fa-calendar-check"></i> RDV</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Cœur & Vaisseaux</span>
+          <h3 class="prest-title">Consultation de Cardiologie</h3>
+          <p class="prest-desc">Suivi de l'HTA, électrocardiogramme de repos et d'effort, échographie Doppler cardiaque et MAPA tensionnelle.</p>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Sur rendez-vous</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Cardiologie')"><i class="fa-regular fa-calendar-check"></i> RDV</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Voies Respiratoires</span>
+          <h3 class="prest-title">Consultation de Pneumologie</h3>
+          <p class="prest-desc">Diagnostic de l'asthme, exploration fonctionnelle respiratoire (spirométrie), dépistage des apnées du sommeil.</p>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Sur rendez-vous</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Pneumologie')"><i class="fa-regular fa-calendar-check"></i> RDV</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cat 4 : Labo & Imagerie -->
+    <div class="prest-category-block" data-section-cat="labo">
+      <div class="prest-cat-header">
+        <div class="prest-cat-icon"><i class="fa-solid fa-vial"></i></div>
+        <h2 class="prest-cat-title">Laboratoire Biomédical & Imagerie</h2>
+      </div>
+
+      <div class="prest-grid">
+        <div class="prest-card">
+          <span class="prest-badge">Analyses Express</span>
+          <h3 class="prest-title">Biologie Médicale & Toxicologie</h3>
+          <p class="prest-desc">Prélèvements sanguins et urinaires complets, dosages hormonaux, marqueurs inflammatoires et dépistage toxicologique conforme OACI.</p>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Sans RDV dès 07h30</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Laboratoire')"><i class="fa-regular fa-calendar-check"></i> Info</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Imagerie Médicale</span>
+          <h3 class="prest-title">Radiologie & Échographie Numérique</h3>
+          <p class="prest-desc">Radiographies osseuses et pulmonaires numériques, échographies pelviennes, abdominales, vasculaires et des tissus mous.</p>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Du lundi au vendredi</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Radiologie')"><i class="fa-regular fa-calendar-check"></i> Info</button>
+          </div>
+        </div>
+
+        <div class="prest-card">
+          <span class="prest-badge">Voyages & Prévention</span>
+          <h3 class="prest-title">Vaccinations Internationales & Conseils aux Voyageurs</h3>
+          <p class="prest-desc">Vaccination fièvre jaune, hépatites A et B, fièvre typhoïde, méningite et délivrance du carnet international de vaccination OMS.</p>
+          <div class="prest-footer">
+            <span class="prest-period"><i class="fa-regular fa-clock"></i> Ouvert tous les jours ouvrés</span>
+            <button class="prest-btn-rdv" onclick="selectPrestation('Vaccination')"><i class="fa-regular fa-calendar-check"></i> Info</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RDV Banner Block -->
+    <div class="prest-rdv-box">
+      <div>
+        <h3 class="prest-rdv-title">Prendre Rendez-vous au CERMA</h3>
+        <p class="prest-rdv-desc">
+          Nos équipes médicales vous accueillent sur la plateforme aéroportuaire de Port-Bouët. Contactez notre secrétariat médical pour caler votre créneau d'expertise aéronautique ou de consultation spécialisée.
+        </p>
+        <div style="margin-top:16px; font-size:13.5px; color:#FEF3C7;">
+          <i class="fa-solid fa-phone" style="color:var(--orange); margin-right:8px;"></i> Ligne directe : <strong>+225 27 21 58 73 00</strong> / <strong>+225 07 07 45 20 20</strong>
+        </div>
+      </div>
+      <div class="prest-rdv-actions">
+        <a href="mailto:cerma@sodexam.com?subject=Demande%20de%20Rendez-vous%20CERMA" class="prest-rdv-btn-primary">
+          <i class="fa-solid fa-envelope"></i> Demander un rendez-vous par email
+        </a>
+        <a href="presentation-cerma.html" class="prest-rdv-btn-sec">
+          <i class="fa-solid fa-hospital"></i> Voir les installations & l'accès
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER UNIFORME SODEXAM -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="margin-bottom:20px;">
+          <a href="index.html" title="SODEXAM — Retour à l'accueil">
+            <img src="images/logo-sodexam.png" alt="SODEXAM" style="height: 48px; width: auto; display: block; filter: brightness(0) invert(1);">
+          </a>
+        </div>
+        <p style="line-height:1.7; margin-bottom:20px; color:#A8A29E; font-size:14px;">
+          Société d'Exploitation et de Développement Aéroportuaire, Aéronautique et Météorologique de Côte d'Ivoire (Décret n°97-228 du 16 avril 1997). Établissement public garant de la sécurité aérienne et de la prévision météorologique nationale.
+        </p>
+        <div style="display:flex; gap:12px; font-size:15px;">
+          <a href="https://www.facebook.com/sodexam.ci" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/sodexam" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@sodexamci7057" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; color:#CBD5E1; transition:all 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation Institutionnelle</div>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Accueil</a></li>
+          <li><a href="presentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation &amp; Film SODEXAM</a></li>
+          <li><a href="mot-du-dg.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Mot du Directeur Général</a></li>
+          <li><a href="gouvernance.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Conseil d'Administration</a></li>
+          <li><a href="comite-direction.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Comité de Direction (CODIR)</a></li>
+          <li><a href="navigation-aeroports.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Aéroports de Côte d'Ivoire</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Météorologie &amp; Médecine</div>
+        <ul class="footer-links">
+          <li><a href="meteo.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Météo Prévisions &amp; Vigilance</a></li>
+          <li><a href="nos-stations.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Nos stations d'observation</a></li>
+          <li><a href="documentation.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Notre documentation officielle</a></li>
+          <li><a href="presentation-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Présentation du CERMA</a></li>
+          <li><a href="prestations-cerma.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Prestations médicales navigants</a></li>
+          <li><a href="documentation.html#iso9001"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Certification ISO 9001:2015</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Actualités &amp; Contacts</div>
+        <ul class="footer-links">
+          <li><a href="actualites.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Dernières Actualités</a></li>
+          <li><a href="magazine-aerien.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Magazine L'Aérien (Presse &amp; Vidéo)</a></li>
+          <li><a href="documentation.html#feux"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Feux de Brousse</a></li>
+          <li><a href="documentation.html#decades"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Bulletins Décadaires Agrométéo</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Contact &amp; Service Presse</a></li>
+          <li><a href="contact.html#urgence"><i class="fa-solid fa-angle-right" style="font-size:10px; margin-right:6px;"></i> Urgences Aéronautiques SSLIA</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 SODEXAM — Tous droits réservés. République de Côte d'Ivoire.</div>
+      <div style="display:flex; gap:20px;">
+        <a href="presentation.html">Mentions Légales</a>
+        <a href="documentation.html">Réglementation &amp; Qualité</a>
+        <a href="contact.html">Plan d'Accès</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+// Mobile drawer toggle
+const burgerToggle = document.getElementById('burgerToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerClose = document.getElementById('drawerClose');
+
+if (burgerToggle && mobileDrawer) {
+  burgerToggle.addEventListener('click', () => {
+    mobileDrawer.classList.add('open');
+  });
+}
+if (drawerClose && mobileDrawer) {
+  drawerClose.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+  });
+}
+
+
+<script>
+function filterCat(cat) {
+  document.querySelectorAll('.prest-tab-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  const blocks = document.querySelectorAll('.prest-category-block');
+  blocks.forEach(block => {
+    if (cat === 'all' || block.dataset.sectionCat === cat) {
+      block.style.display = 'block';
+    } else {
+      block.style.display = 'none';
+    }
+  });
+}
+
+function selectPrestation(prestName) {
+  window.location.href = `mailto:cerma@sodexam.com?subject=Prise%20de%20rendez-vous%20-%20${encodeURIComponent(prestName)}&body=Bonjour%20le%20secrétariat%20du%20CERMA,%0A%0AJe%20souhaite%20prendre%20rendez-vous%20pour%20la%20prestation%20:%20${encodeURIComponent(prestName)}.%0ANom%20:%20%0APrénom%20:%20%0ATéléphone%20:%20%0ADate%20souhaitée%20:%20`;
+}
+</script>
+</body>
+</html>
